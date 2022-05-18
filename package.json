@@ -4,9 +4,9 @@
   "description": "Front End Capstone",
   "main": "index.js",
   "scripts": {
-    "client-dev": "webpack serve",
+    "client-dev": "npx webpack --watch",
     "server-dev": "npx nodemon  server/server.js",
-    "build": "webpack"
+    "build": "npx webpack"
   },
   "author": "",
   "license": "ISC",
@@ -16,7 +16,8 @@
     "express": "^4.18.1",
     "nodemon": "^2.0.16",
     "react": "^18.1.0",
-    "react-dom": "^18.1.0"
+    "react-dom": "^18.1.0",
+    "styled-components": "^5.3.5"
   },
   "devDependencies": {
     "@babel/core": "^7.17.12",
