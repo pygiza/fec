@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
+import Header from '/client/src/Header.jsx';
 
-const Title = styled.h1`
+const Title = styled(Header)`
   font-size: 1.5em;
   text-align: center;
   color: red;
@@ -13,19 +14,16 @@ const Wrapper = styled.section`
   background: pink;
 `;
 
-var Header = () => (
-  <Wrapper>
-    <Title>
-      Hello World, We are coming for you!
-    </Title>
-  </Wrapper>
-)
 class App extends React.Component {
-
+  constructor (props) {
+    super(props)
+  }
 
   render () {
     return (
-      <Header />
+      <Wrapper>
+        <Title text={'Hello World, We are coming for you!'}/>
+      </Wrapper>
     );
   }
 }
