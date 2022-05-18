@@ -4,12 +4,17 @@
   "description": "Front End Capstone",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack serve",
+    "client-dev": "webpack serve",
+    "server-dev": "npx nodemon  server/server.js",
     "build": "webpack"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.27.2",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "nodemon": "^2.0.16",
     "react": "^18.1.0",
     "react-dom": "^18.1.0"
   },
