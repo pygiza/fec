@@ -1,11 +1,17 @@
 import React from "react";
 
-function ReviewEntry() {
+function ReviewEntry({ review }) {
   return (
     <>
       <hr />
       {/* Star Rating */}
-      This is a review entry
+      <span>
+        {review.reviewer_name}, {review.date}
+      </span>
+      <h3>{review.summary}</h3>
+      <p>{review.body}</p>
+      {review.recommend ? <p> I recommend this product </p> : <p> </p>}
+      {review.response ? <p>{review.response}</p> : <p> </p>}
       <hr />
     </>
   );
