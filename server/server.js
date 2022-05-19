@@ -12,15 +12,18 @@ app.use(express.json());
 // Routes
 app.all('/*', (req, res) => {
   console.log(`recieved ${req.method.toLowerCase()} request from ${req.url}`);
-
+  var url = "https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe" + req.url;
+  // console.log(url);
   axios({
-    url: "https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/products",
+    url: url,
     method: req.method.toLowerCase(),
-    headers: {Authorization: process.env.AUTH},
-    data: req.body
+    headers: {
+      Authorization: process.env.AUTH,
+    },
+    params: req.body
   })
     .then( (data) => {
-      console.log("inside then block");
+      console.log('data');
       res.status(200).send(data.data);
     })
     .catch( (err) => {
@@ -29,6 +32,7 @@ app.all('/*', (req, res) => {
     });
 
 });
+
 
 
 
