@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import CarouselCard from './CarouselCard/CarouselCard.jsx';
+import AddOutfitCard from './CarouselCard/AddOutfitCard.jsx';
 
 const Carousel = styled.div`
   height: 240px;
@@ -9,21 +10,29 @@ const Carousel = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
 `;
 
-let cards = ['hoodie', 'jeans', 'jacket', 'shoes', 'beanie']
-
 const CarouselList = function({ data }) {
+
+  let [cards, setCards] = useState(['hoodie', 'jeans', 'jacket', 'shoes', 'beanie']);
+
+  let addCard = function(card) {
+    this(cards.concat([card]));
+  }
+
+  addCard = addCard.bind(setCards);
+
   return (
     <Carousel className='carouselList'>
       {
         data === 'related products list' ?
         cards.map(card => {
-          return <CarouselCard cardData={{ productName: card }} />
+          return <CarouselCard key={card} cardData={{ productName: card }} />
         }) :
-        undefined
+        <AddOutfitCard addCard={() => addCard('Nikes')}/>
       }
+      <button onClick={() => addCard('socks')}>add socks</button>
     </Carousel>
   )
 }
