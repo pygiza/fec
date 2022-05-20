@@ -3,7 +3,7 @@ import ReviewList from './ReviewList.jsx';
 
 function RatingsReviews() {
   return (
-    <ReviewList />
+    <ReviewList productId={37311} />
   );
 }
 
