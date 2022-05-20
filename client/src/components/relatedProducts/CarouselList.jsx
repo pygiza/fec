@@ -12,14 +12,18 @@ const Carousel = styled.div`
   justify-content: space-around;
 `;
 
+let cards = ['hoodie', 'jeans', 'jacket', 'shoes', 'beanie']
+
 const CarouselList = function({ data }) {
   return (
     <Carousel className='carouselList'>
-      {data}
-      <CarouselCard />
-      <CarouselCard />
-      <CarouselCard />
-      <CarouselCard />
+      {
+        data === 'related products list' ?
+        cards.map(card => {
+          return <CarouselCard cardData={{ productName: card }} />
+        }) :
+        undefined
+      }
     </Carousel>
   )
 }
