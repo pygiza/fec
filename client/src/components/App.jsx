@@ -5,7 +5,6 @@ import RelatedProductsContainer from './relatedProducts/RelatedProductsContainer
 import Question from './qComponents/questions.jsx';
 import RatingsReviews from './ratings_and_reviews/RatingsReviews.jsx';
 
-
 function App(props) {
   return (
     <div>
