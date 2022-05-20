@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Overview from './overview/Overview.jsx';
-import Question from './questions.jsx'
+import Question from './qComponents/questions.jsx'
 var App = function (props) {
   return (
     <div>
