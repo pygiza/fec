@@ -1,8 +1,12 @@
 import React from 'react';
+import styled from 'styled-components';
 
+let CaroLabel = styled.p`
+  color: #787878;
+`
 const CarouselLabel = function({ label }) {
   return (
-    <h4>{label}</h4>
+    <CaroLabel>{label}</CaroLabel>
   )
 }
 
