@@ -4,7 +4,7 @@ import Answers from '/client/src/components/qComponents/answerCompontnts/answerL
 var Ind = (props) => (
   <div>
     <div>
-      <span>Q: {'placeholder'}</span>
+      <span>{'Q: ' + 'placeholder'}</span>
     </div>
   </div>
 );

@@ -1,12 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import Overview from './overview/Overview.jsx';
-
-function App(props) {
+import Question from './questions.jsx'
+var App = function (props) {
   return (
     <div>
       <h1>Hello World, we're coming for you!</h1>
       <Overview />
+      <Question />
     </div>
   );
 }
