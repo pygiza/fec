@@ -7,7 +7,7 @@
     "client-dev": "npx webpack --watch",
     "server-dev": "npx nodemon  server/server.js",
     "build": "npx webpack",
-    "test": "jest"
+    "test": "jest --coverage"
   },
   "author": "",
   "license": "ISC",

@@ -25,5 +25,6 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.join(__dirname, "client/src", "index.html"),
     }),
+    ['styled-components', { 'ssr': true }],
   ],
 }
