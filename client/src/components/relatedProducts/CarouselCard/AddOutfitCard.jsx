@@ -10,9 +10,9 @@ const Card = styled.div`
   align-items: center;
 `
 
-const AddOutfitCard = function({ addCard }) {
+const AddOutfitCard = function({ onClick }) {
   return (
-    <Card onClick={addCard}>Add To Outfit +</Card>
+    <Card onClick={onClick}>add to outfit</Card>
   )
 }
 

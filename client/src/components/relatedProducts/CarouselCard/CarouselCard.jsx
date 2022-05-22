@@ -7,10 +7,10 @@ const Card = styled.div`
   background-color: lightgreen;
 `
 
-const CarouselCard = function({ cardData }) {
+const CarouselCard = function({ card }) {
   return (
     <Card>
-      {cardData.productName}
+      {card}
     </Card>
   )
 }

@@ -13,26 +13,17 @@ const Carousel = styled.div`
   justify-content: space-between;
 `;
 
-const CarouselList = function({ data }) {
-
-  let [cards, setCards] = useState(['hoodie', 'jeans', 'jacket', 'shoes', 'beanie']);
-
-  let addCard = function(card) {
-    this(cards.concat([card]));
-  }
-
-  addCard = addCard.bind(setCards);
+const CarouselList = function({ data, cards, addCard }) {
 
   return (
     <Carousel className='carouselList'>
       {
         data === 'related products list' ?
         cards.map(card => {
-          return <CarouselCard key={card} cardData={{ productName: card }} />
+          return <CarouselCard key={card} card={card} />
         }) :
-        <AddOutfitCard addCard={() => addCard('Nikes')}/>
+        <AddOutfitCard onClick={addCard} />
       }
-      <button onClick={() => addCard('socks')}>add socks</button>
     </Carousel>
   )
 }
