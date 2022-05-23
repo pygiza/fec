@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import Content from './ContentBox.jsx';
 
 function Overview() {
   const [styles, setStyles] = useState('');
@@ -21,8 +22,8 @@ function Overview() {
     axios.get('http://localhost:3000/products')
       .then((data) => {
         console.log('DATA DATA => ', data.data);
-        setProducts(data.data[0]);
-        fetchStyles(data.data[0]);
+        setProducts(data.data[2]);
+        fetchStyles(data.data[3]);
       }).catch((err) => {
         console.log(err);
       });
@@ -34,16 +35,14 @@ function Overview() {
 
   return (
     <Container>
-       <NavBar>NavBar</NavBar>
+      <NavBar>
+        <Title>PyGiza</Title>
+      </NavBar>
       <Main>
-        <PhotoMain src={image.url} />
+        <PhotoMain src={image.thumbnail_url} />
       </Main>
-      <SideBar>SideBar</SideBar>
+      <Content products={products} />
       <Footer>Footer</Footer>
-      <ContentBox>
-        <h3>{products.name}</h3>
-        <Content1>ContentBox</Content1>
-      </ContentBox>
 
     </Container>
   );
@@ -51,16 +50,14 @@ function Overview() {
 
 const Container = styled.div`
   display: grid;
-  height: 90vh;
-  color: white;
-  grid-template-rows: 0.1fr 1fr 0.5fr 0.5fr;
-  grid-template-areas:
-    "nav nav nav nav nav nav"
-    "sidebar main main main content content"
-    "sidebar main main main content content"
-    "sidebar footer footer footer content content";
-  text-align: center;
+  height: 100vh;
+  grid-template-columns: repeat(12, minmax(0,1fr));
+  grid-template-rows: repeat(12, minmax(0,1fr));
   grid-gap: 0.25rem;
+`;
+
+const Title = styled.h1`
+  object-fit: contain;
 `;
 
 const PhotoMain = styled.img`
@@ -69,44 +66,24 @@ const PhotoMain = styled.img`
   object-fit: contain;
 `;
 
-const NavBar = styled.nav`
-  background: #3a3a55;
-  grid-area: nav;
-  padding: 0.25rem;
-`;
-const Main = styled.main`
-  border: solid;
-  color: white;
-  grid-area: main;
-  padding: 0.25rem;
-`;
-const SideBar = styled.div`
-  background: #9aaab7;
-  grid-area: sidebar;
-  padding: 0.25rem;
+const Main = styled.div`
+border: solid;
+grid-column: 3 / 8;
+grid-row: 2 / 11;
+padding: 0.25rem;
 `;
 
-const ContentBox = styled.div`
-  display: flex;
-  gap: 0.25rem;
-  padding: 0.25rem;
-  align-items: center;
-  grid-area: content;
-  justify-content: center;
-`;
-const Content1 = styled.div`
-  background: #a6b8b9;
-  padding: 0.25rem;
-  width: 100%;
-  height: 100%;
-`;
-const Content2 = styled(Content1)``;
-const Content3 = styled(Content1)``;
-const Footer = styled.footer`
-  background: #ff9637;
-  grid-area: footer;
-  padding: 0.25rem;
+const Footer = styled.div`
+padding: 0.25rem;
+border: solid;
+grid-column: 3 /11;
+grid-row: 11 / 13;
 `;
 
+const NavBar = styled.div`
+background: #e8e8e8;
+grid-column:  3 / 11;
+padding: 0.25rem;
+`;
 
 export default Overview;
