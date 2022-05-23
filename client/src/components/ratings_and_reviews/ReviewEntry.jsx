@@ -3,30 +3,32 @@ import PropTypes from 'prop-types';
 import { format, parseISO } from 'date-fns';
 import axios from 'axios';
 
-function ReviewEntry({ review }) {
-  const [helpfulVote, setHelpfulVote] = useState(false);
-  const [reportVote, setReportVote] = useState(false);
+function ReviewEntry({ review, getReviews }) {
+  const [votedHelpful, setVotedHelpful] = useState(false);
+  const [reported, setReported] = useState(false);
 
   function clickVote(e) {
+    let voteUrl = '';
+    let voteStateFunc;
     if (e.target.innerHTML === 'Yes') {
-      axios.put(`/reviews/${review.review_id}/helpful`)
-        .then(() => {
-          setHelpfulVote(true);
-        })
-        .catch((err) => {
-          console.log('error voting helpful in client', err);
-        });
+      voteUrl = `/reviews/${review.review_id}/helpful`;
+      voteStateFunc = setVotedHelpful;
+    }
+    if (e.target.innerHTML === 'Report') {
+      voteUrl = `/reviews/${review.review_id}/report`;
+      voteStateFunc = setReported;
     }
 
-    if (e.target.innerHTML === 'Report') {
-      axios.put(`/reviews/${review.review_id}/report`)
-        .then(() => {
-          setReportVote(true);
-        })
-        .catch((err) => {
-          console.log('error reporting review in client', err);
-        });
-    }
+    axios.put(voteUrl)
+      .then(() => {
+        getReviews()
+          .then(() => {
+            voteStateFunc(true);
+          });
+      })
+      .catch((err) => {
+        console.log(`error putting ${e.target.innerHTML} from client`, err);
+      });
   }
 
   return (
@@ -40,7 +42,13 @@ function ReviewEntry({ review }) {
       <p>{review.body}</p>
       {review.recommend ? <p> I recommend this product </p> : <p> </p>}
       {review.response ? <p>{review.response}</p> : <p> </p>}
-      <span>Helpful? <a href="" onClick={clickVote}>Yes</a> ({review.helpfulness}) | <a href="">Report</a></span>
+      <span>
+        Helpful?
+        {votedHelpful ? 'Yes ' : <a href="#" role="button" onClick={clickVote}>Yes</a>}
+        ({review.helpfulness})
+         |
+        {reported ? ' Report' : <a href="#" role="button" onClick={clickVote}>Report</a>}
+      </span>
       <hr />
     </>
   );
@@ -48,6 +56,7 @@ function ReviewEntry({ review }) {
 
 ReviewEntry.propTypes = {
   review: PropTypes.object.isRequired,
+  getReviews: PropTypes.func.isRequired,
 };
 
 export default ReviewEntry;
