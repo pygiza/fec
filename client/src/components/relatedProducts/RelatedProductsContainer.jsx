@@ -23,7 +23,7 @@ const RelatedProductsContainer = function() {
   }, [])
 
   let addOutfit = function(id) {
-    setRelated(related.concat(['id']));
+    setRelated(related.concat([37316]));
   }
 
   return (
