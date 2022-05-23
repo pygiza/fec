@@ -9,9 +9,9 @@ const Buttons = (props) => (
   <div className={props.className}>
     <span>Helpful? </span>
     <button>yes</button>
-    <span> (3) </span>
-    <span>    |    </span>
-    <button> Add Answer</button>
+    <span> {'(' + props.count + ')'} </span>
+    <span> | </span>
+    <button>{props.name}</button>
   </div>
 );
 

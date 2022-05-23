@@ -21,7 +21,7 @@ const Ques = styled.div`
 `;
 const Button = styled(Buttons)`
   grid-area: button;
-  margin-top: 2.5%;
+  margin-top: 25px;
 `;
 const Qw = styled.div`
   grid-area: qw;
@@ -34,7 +34,7 @@ var Ind = (props) => (
         <Qw>
           <h2>{'Q: ' + props.que.question_body}</h2>
         </Qw>
-        <Button />
+        <Button name={'Add answer'} count={props.que.question_helpfulness}/>
       </Ques>
       <Answers awn={props.que.answers}/>
   </Wraper>
