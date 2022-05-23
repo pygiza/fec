@@ -13,16 +13,16 @@ const Carousel = styled.div`
   justify-content: space-between;
 `;
 
-const CarouselList = function({ data, cards, addCard }) {
+const CarouselList = function({ data, related, addOutfit }) {
 
   return (
     <Carousel className='carouselList'>
       {
         data === 'related products list' ?
-        cards.map(card => {
-          return <CarouselCard key={card} card={card} />
+        related.map(product_id => {
+          return <CarouselCard key={product_id} product_id={product_id} />
         }) :
-        <AddOutfitCard onClick={addCard} />
+        <AddOutfitCard onClick={addOutfit} />
       }
     </Carousel>
   )
