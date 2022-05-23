@@ -1,8 +1,34 @@
-import React from "react";
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { format, parseISO } from "date-fns";
+import { format, parseISO } from 'date-fns';
+import axios from 'axios';
 
 function ReviewEntry({ review }) {
+  const [helpfulVote, setHelpfulVote] = useState(false);
+  const [reportVote, setReportVote] = useState(false);
+
+  function clickVote(e) {
+    if (e.target.innerHTML === 'Yes') {
+      axios.put(`/reviews/${review.review_id}/helpful`)
+        .then(() => {
+          setHelpfulVote(true);
+        })
+        .catch((err) => {
+          console.log('error voting helpful in client', err);
+        });
+    }
+
+    if (e.target.innerHTML === 'Report') {
+      axios.put(`/reviews/${review.review_id}/report`)
+        .then(() => {
+          setReportVote(true);
+        })
+        .catch((err) => {
+          console.log('error reporting review in client', err);
+        });
+    }
+  }
+
   return (
     <>
       <hr />
@@ -14,6 +40,7 @@ function ReviewEntry({ review }) {
       <p>{review.body}</p>
       {review.recommend ? <p> I recommend this product </p> : <p> </p>}
       {review.response ? <p>{review.response}</p> : <p> </p>}
+      <span>Helpful? <a href="" onClick={clickVote}>Yes</a> ({review.helpfulness}) | <a href="">Report</a></span>
       <hr />
     </>
   );
