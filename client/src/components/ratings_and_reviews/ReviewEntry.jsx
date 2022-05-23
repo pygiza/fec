@@ -1,4 +1,6 @@
 import React from "react";
+import PropTypes from 'prop-types';
+import { format, parseISO } from "date-fns";
 
 function ReviewEntry({ review }) {
   return (
@@ -6,7 +8,7 @@ function ReviewEntry({ review }) {
       <hr />
       {/* Star Rating */}
       <span>
-        {review.reviewer_name}, {review.date}
+        {review.reviewer_name}, {format(parseISO(review.date), 'MMMM do, yyyy')}
       </span>
       <h3>{review.summary}</h3>
       <p>{review.body}</p>
@@ -16,6 +18,10 @@ function ReviewEntry({ review }) {
     </>
   );
 }
+
+ReviewEntry.propTypes = {
+  review: PropTypes.object.isRequired,
+};
 
 export default ReviewEntry;
 
