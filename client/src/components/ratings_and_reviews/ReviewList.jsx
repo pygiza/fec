@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import ReviewEntry from './ReviewEntry.jsx';
+
+const ReviewListContainer = styled.div`
+  width: 66%;
+  margin: 2%;
+`;
 
 function ReviewList({ productId }) {
   const [reviews, setReviews] = useState([]);
@@ -40,11 +46,11 @@ function ReviewList({ productId }) {
   }, []);
 
   return (
-    <div>
+    <ReviewListContainer>
       {reviews.map((review) => (
         <ReviewEntry getReviews={getReviews} key={review.review_id} review={review} />
       ))}
-    </div>
+    </ReviewListContainer>
   );
 }
 

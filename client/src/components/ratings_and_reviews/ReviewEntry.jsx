@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { format, parseISO } from 'date-fns';
 import axios from 'axios';
+
+const ReviewEntryContainer = styled.div`
+  background-color: #F8F9F9;
+`;
 
 function ReviewEntry({ review, getReviews }) {
   const [votedHelpful, setVotedHelpful] = useState(false);
@@ -32,7 +37,7 @@ function ReviewEntry({ review, getReviews }) {
   }
 
   return (
-    <>
+    <ReviewEntryContainer>
       <hr />
       {/* Star Rating */}
       <span>
@@ -50,7 +55,7 @@ function ReviewEntry({ review, getReviews }) {
         {reported ? ' Report' : <a href="#" role="button" onClick={clickVote}>Report</a>}
       </span>
       <hr />
-    </>
+    </ReviewEntryContainer>
   );
 }
 
