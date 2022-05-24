@@ -31,12 +31,18 @@ const RelatedProductsContainer = function() {
     }
   }, [])
 
-  let addOutfit = function(id) {
+  const addOutfit = function(id) {
     let oldOutfit = JSON.parse(localStorage.getItem('outfit'));
-    console.log('our old outfit', oldOutfit);
     let newOutfit = oldOutfit.concat([37316]);
     localStorage.setItem('outfit', JSON.stringify(newOutfit));
     setOutfit(newOutfit);
+  }
+
+  const removeOutfit = function(id) {
+    let oldOutfit = JSON.parse(localStorage.getItem('outfit'));
+    oldOutfit.shift();
+    localStorage.setItem('outfit', JSON.stringify(oldOutfit));
+    setOutfit(oldOutfit);
   }
 
   return (
@@ -44,7 +50,7 @@ const RelatedProductsContainer = function() {
       <CarouselLabel label='RELATED PRODUCTS' />
       <CarouselList data='related products list' related={related} />
       <CarouselLabel label='YOUR OUTFIT' />
-      <CarouselList data='your outfit list' addOutfit={addOutfit} outfit={outfit} />
+      <CarouselList data='your outfit list' addOutfit={addOutfit} removeOutfit={removeOutfit} outfit={outfit} />
     </>
   );
 };

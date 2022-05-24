@@ -13,7 +13,7 @@ const Carousel = styled.div`
   justify-content: space-between;
 `;
 
-const CarouselList = function({ data, related, outfit, addOutfit }) {
+const CarouselList = function({ data, related, outfit, addOutfit, removeOutfit }) {
 
   const [listIndex, setListIndex] = useState({ start: 0, end: 2 });
 
@@ -44,7 +44,7 @@ const CarouselList = function({ data, related, outfit, addOutfit }) {
         outfit.map((product_id, index) => {
           return index === 0 ?
           <>
-            <AddOutfitCard onClick={addOutfit} />
+            <AddOutfitCard onClick={addOutfit} removeOutfit={removeOutfit} />
             <CarouselCard key={product_id} product_id={product_id} />
           </> :
             <CarouselCard key={product_id} product_id={product_id} />

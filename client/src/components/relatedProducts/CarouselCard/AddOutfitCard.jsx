@@ -9,9 +9,12 @@ const AddCard = styled(Card)`
   font-size: 30px;
 `
 
-const AddOutfitCard = function({ onClick }) {
+const AddOutfitCard = function({ onClick, removeOutfit }) {
   return (
-    <AddCard onClick={onClick}>add to outfit +</AddCard>
+    <AddCard>
+      <button onClick={onClick}>add to outfit +</button>
+      <button onClick={removeOutfit}>remove outfit -</button>
+    </AddCard>
   )
 }
 
