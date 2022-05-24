@@ -4,7 +4,7 @@ import CarouselCard from './CarouselCard/CarouselCard.jsx';
 import AddOutfitCard from './CarouselCard/AddOutfitCard.jsx';
 
 const Carousel = styled.div`
-  height: 240px;
+  height: 400px;
   width: 90%;
   background-color: lightgrey;
   display: flex;

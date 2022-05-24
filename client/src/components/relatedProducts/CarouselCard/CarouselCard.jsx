@@ -2,15 +2,17 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
+import CarouselTop from './CarouselTop/CarouselTop.jsx';
+import CarouselBot from './CarouselBot/CarouselBot.jsx';
 
 const Card = styled.div`
-  height: 240px;
-  width: 180px;
+  height: 400px;
+  width: 250px;
   background-color: lightgreen;
 `
 
 const Thumbnail = styled.img`
-  width: 180px;
+  -webkit-mask-image: -webkit-gradient(linear, left 50%, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));
 `
 
 const CarouselCard = function({ product_id }) {
@@ -49,11 +51,8 @@ const CarouselCard = function({ product_id }) {
 
   return (
     <Card>
-      <p>Category: {product.category}</p>
-      <p>Name: {product.name}</p>
-      <p>Price: {product.default_price ? '$' + product.default_price : undefined}</p>
-      <p>Rating: {product.rating}</p>
-      <Thumbnail src={product.image}></Thumbnail>
+      <CarouselTop image={product.image} characteristics={product.characteristics} />
+      <CarouselBot category={product.category} name={product.name} price={product.default_price} rating={product.rating} />
     </Card>
   )
 }
