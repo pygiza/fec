@@ -1,18 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
+import Card from '../Styles.jsx';
 
-const Card = styled.div`
-  height: 240px;
-  width: 180px;
-  background-color: lightgreen;
+const AddCard = styled(Card)`
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 30px;
 `
 
 const AddOutfitCard = function({ onClick }) {
   return (
-    <Card onClick={onClick}>add to outfit</Card>
+    <AddCard onClick={onClick}>add to outfit +</AddCard>
   )
 }
 

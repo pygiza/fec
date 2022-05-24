@@ -12,17 +12,21 @@ const Top = styled.div`
 `
 
 const Thumbnail = styled.img`
-object-fit: cover;
-min-height: 100%;
-height: auto;
-width: 100%;
+  border-radius: 2%;
+  object-fit: cover;
+  min-height: 100%;
+  height: auto;
+  width: 100%;
 `
 
 const CardTop = function({ image, characteristics }) {
   return (
     <Top>
       <CardButton />
+      {image === null ?
+      <div style={{'backgroundColor': 'grey', 'height': '100%', 'width': '100%'}}></div> :
       <Thumbnail src={image}></Thumbnail>
+      }
     </Top>
   )
 }

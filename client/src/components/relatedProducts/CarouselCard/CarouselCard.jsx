@@ -1,25 +1,14 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
-import styled from 'styled-components';
 import axios from 'axios';
+import Card from '../Styles.jsx';
 import CardTop from './CardTop/CardTop.jsx';
 import CardBtm from './CardBtm/CardBtm.jsx';
 
-const Card = styled.div`
-  height: 400px;
-  width: 250px;
-  background-color: lightgreen;
-`
-
-const Thumbnail = styled.img`
-  -webkit-mask-image: -webkit-gradient(linear, left 50%, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));
-`
-
 const CarouselCard = function({ product_id }) {
 
-  let [product, setProduct] = useState({});
+  let [product, setProduct] = React.useState({});
 
-  useEffect(() => {
+  React.useEffect(() => {
     axios.get(`/products/${product_id}`, { params: { product_id } })
       .then(res => {
         let pData = res.data;
