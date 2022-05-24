@@ -6,7 +6,8 @@
   "scripts": {
     "client-dev": "npx webpack --watch",
     "server-dev": "npx nodemon  server/server.js",
-    "build": "npx webpack"
+    "build": "npx webpack",
+    "test": "jest"
   },
   "author": "",
   "license": "ISC",
@@ -33,6 +34,7 @@
     "eslint-plugin-react-hooks": "^4.5.0",
     "html-webpack-plugin": "^5.5.0",
     "jest": "^28.1.0",
+    "supertest": "^6.2.3",
     "webpack": "^5.72.1",
     "webpack-cli": "^4.9.2",
     "webpack-dev-server": "^4.9.0"
