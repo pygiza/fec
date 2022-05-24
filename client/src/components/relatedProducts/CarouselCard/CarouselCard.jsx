@@ -2,8 +2,8 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
-import CarouselTop from './CarouselTop/CarouselTop.jsx';
-import CarouselBot from './CarouselBot/CarouselBot.jsx';
+import CardTop from './CardTop/CardTop.jsx';
+import CardBtm from './CardBtm/CardBtm.jsx';
 
 const Card = styled.div`
   height: 400px;
@@ -51,8 +51,8 @@ const CarouselCard = function({ product_id }) {
 
   return (
     <Card>
-      <CarouselTop image={product.image} characteristics={product.characteristics} />
-      <CarouselBot category={product.category} name={product.name} price={product.default_price} rating={product.rating} />
+      <CardTop image={product.image} characteristics={product.characteristics} />
+      <CardBtm category={product.category} name={product.name} price={product.default_price} rating={product.rating} />
     </Card>
   )
 }
