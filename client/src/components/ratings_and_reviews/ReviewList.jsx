@@ -18,6 +18,19 @@ function ReviewList({ productId }) {
       });
   }
 
+  function moreReviews() {
+    return getReviewsBy2(productId, page + 1)
+      .then((res) => {
+        setReviews([...reviews, ...res.data.results]);
+      })
+      .then(() => {
+        setPage(page + 1);
+      })
+      .catch((err) => {
+        console.log('error fetching more reviews', err);
+      });
+  }
+
   useEffect(() => {
     getReviews();
   }, []);
@@ -27,6 +40,7 @@ function ReviewList({ productId }) {
       {reviews.map((review) => (
         <ReviewEntry getReviews={getReviews} key={review.review_id} review={review} />
       ))}
+      <button type="button" onClick={moreReviews}>More Reviews</button>
     </ReviewListContainer>
   );
 }
