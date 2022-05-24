@@ -52,6 +52,8 @@ ReviewList.propTypes = {
 const ReviewListContainer = styled.div`
   width: 66%;
   margin: 2%;
+  height: 100vw;
+  overflow-y: auto;
 `;
 
 export default ReviewList;
