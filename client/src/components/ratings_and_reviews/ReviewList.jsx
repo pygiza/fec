@@ -1,26 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import axios from 'axios';
+import { getReviewsBy2 } from './serverFuncs.js';
 import ReviewEntry from './ReviewEntry.jsx';
-
-const ReviewListContainer = styled.div`
-  width: 66%;
-  margin: 2%;
-`;
 
 function ReviewList({ productId }) {
   const [reviews, setReviews] = useState([]);
   const [page, setPage] = useState(1);
 
   function getReviews() {
-    return axios.get('/reviews', {
-      params: {
-        product_id: productId,
-        page: 1,
-        count: 2,
-      },
-    })
+    return getReviewsBy2(productId, page)
       .then((res) => {
         setReviews([...res.data.results]);
       })
@@ -30,19 +19,7 @@ function ReviewList({ productId }) {
   }
 
   useEffect(() => {
-    axios.get('/reviews', {
-      params: {
-        product_id: productId,
-        page: 1,
-        count: 2,
-      },
-    })
-      .then((res) => {
-        setReviews([...res.data.results]);
-      })
-      .catch((err) => {
-        console.log('could not fetch reviews from client', err);
-      });
+    getReviews();
   }, []);
 
   return (
@@ -57,5 +34,10 @@ function ReviewList({ productId }) {
 ReviewList.propTypes = {
   productId: PropTypes.string.isRequired,
 };
+
+const ReviewListContainer = styled.div`
+  width: 66%;
+  margin: 2%;
+`;
 
 export default ReviewList;
