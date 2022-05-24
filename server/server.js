@@ -20,11 +20,12 @@ app.all('/*', (req, res) => {
     headers: {
       Authorization: process.env.AUTH,
     },
-    params: req.body
+    params: req.body,
+    data: req.body
   })
     .then( (data) => {
       console.log('data');
-      res.status(200).send(data.data);
+      res.status(data.status).send(data.data);
     })
     .catch( (err) => {
       console.log('error fetching from api', err);
