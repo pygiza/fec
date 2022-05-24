@@ -7,6 +7,7 @@ import { voteHelpful, reportReview } from './serverFuncs.js';
 import Helpful from './reviewEntryComps/Helpful.jsx';
 import Report from './reviewEntryComps/Report.jsx';
 import ReviewResponse from './reviewEntryComps/ReviewResponse.jsx';
+import StarAvg from './reviewEntryComps/StarAvg.jsx';
 
 function ReviewEntry({ review, getReviews }) {
   const [votedHelpful, setVotedHelpful] = useState(false);
@@ -38,8 +39,8 @@ function ReviewEntry({ review, getReviews }) {
   return (
     <ReviewEntryContainer>
       <hr />
-      {/* Star Rating */}
-      <span>
+      <StarAvg rating={review.rating} />
+      <span style={{ float: 'right' }}>
         {review.reviewer_name}
         ,
         {format(parseISO(review.date), 'MMMM do, yyyy')}
