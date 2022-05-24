@@ -11,7 +11,7 @@ var Answers = (props) => {
   for (let key in props.awn) {
     arr.push(props.awn[key]);
   }
-  console.log(arr)
+
   return (
     <Awn>
       {arr.map((answer) => (

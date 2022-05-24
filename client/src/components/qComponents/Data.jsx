@@ -7,7 +7,7 @@ function GetData(props) {
     method: 'get',
     params: {
       product_id: props.id,
-      count: 20
+      count: 100
     }
   });
 }

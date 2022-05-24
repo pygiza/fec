@@ -19,7 +19,7 @@ const Button = styled.button`
 `;
 const Buttons = (props) => (
   <div>
-    <Add />
+    <Add setData={props.setData}/>
     <Report id={props.id} what={'questions'} setData={props.setData}/>
   </div>
 );
