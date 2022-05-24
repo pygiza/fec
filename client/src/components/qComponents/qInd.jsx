@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Answers from './answerCompontnts/answerList.jsx';
 import styled from 'styled-components'
-import Buttons from './buttons.jsx'
+import { Buttons, Helpful } from './buttons.jsx'
+import axios from 'axios';
+
 // make indevituel questions and add/ store there answers
 const Wraper = styled.div`
   margin-left: 5%;
@@ -17,27 +19,41 @@ const Ques = styled.div`
   grid-template-rows: 50px;
   grid-template-areas:
     "qw button";
-  tex-align: right;
+  text-align: left;
 `;
-const Button = styled(Buttons)`
+const Button = styled(Helpful)`
   grid-area: button;
-  margin-top: 25px;
+  text-align: right;
 `;
 const Qw = styled.div`
   grid-area: qw;
-  width: 50%;
+  width: 100%;
 `;
-
-var Ind = (props) => (
+var whenClicked = (id, update) => {
+  axios({
+    url: `http://localhost:3000/qa/questions/${id}/helpful`,
+    method: 'put'
+  })
+    .then(() => {
+      update();
+    });
+}
+var Ind = (props) => {
+  const [clicked, setClicked] = useState(false);
+ return(
   <Wraper>
       <Ques>
         <Qw>
           <h2>{'Q: ' + props.que.question_body}</h2>
         </Qw>
-        <Button name={'Add answer'} count={props.que.question_helpfulness}/>
+        <Button isClicked={clicked}
+          whenClicked={function() { whenClicked(props.que.question_id, function() { setClicked(true); props.setData();}); }}
+          count={props.que.question_helpfulness}/>
+        <Buttons setData={props.setData} id={props.que.question_id}/>
       </Ques>
-      <Answers awn={props.que.answers}/>
+      <Answers setData={props.setData} awn={props.que.answers}/>
   </Wraper>
-);
+ );
+}
 
 export default Ind;

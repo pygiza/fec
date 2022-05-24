@@ -1,7 +1,6 @@
 import React from 'react';
-import Report from './aReport.jsx';
-import Answer from './answer.jsx'
-import styled from 'styled-components'
+import Answer from './answer.jsx';
+import styled from 'styled-components';
 // make and add answers list to individul questions
 const Awn = styled.h3`
   margin-left: 5%;
@@ -16,7 +15,7 @@ var Answers = (props) => {
   return (
     <Awn>
       {arr.map((answer) => (
-        <Answer answer={answer}/>
+        <Answer key={answer.id} setData={props.setData} answer={answer}/>
       ))}
     </Awn>
   );

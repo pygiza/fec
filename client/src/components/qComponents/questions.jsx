@@ -63,7 +63,7 @@ class Question extends React.Component {
               <Title>{'Q & A'}</Title>
             </TitleWrap>
             <NavBar />
-            <ListCon data={this.state.data} />
+            <ListCon data={this.state.data} setData={this.setData.bind(this)} />
           </Wrap>
         );
   }

@@ -4,7 +4,7 @@ import Ind from '/client/src/components/qComponents/qInd.jsx';
 var List = (props) => (
   <div className={props.className}>
     {props.data.map((que) => (
-      <Ind que={que}/>
+      <Ind key={que.question_id} setData={props.setData} que={que}/>
     ))}
     {/* <Ind /> */}
   </div>
