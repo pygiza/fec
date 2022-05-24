@@ -1,10 +1,12 @@
+/* eslint-disable import/extensions */
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { format, parseISO } from 'date-fns';
 import { voteHelpful, reportReview } from './serverFuncs.js';
-import Helpful from './Helpful.jsx';
-import Report from './Report.jsx';
+import Helpful from './reviewEntryComps/Helpful.jsx';
+import Report from './reviewEntryComps/Report.jsx';
+import ReviewResponse from './reviewEntryComps/ReviewResponse.jsx';
 
 function ReviewEntry({ review, getReviews }) {
   const [votedHelpful, setVotedHelpful] = useState(false);
@@ -45,13 +47,9 @@ function ReviewEntry({ review, getReviews }) {
       <h3>{review.summary}</h3>
       <p>{review.body}</p>
       {review.recommend ? <p> I recommend this product </p> : <p> </p>}
-      {review.response ? <p>{review.response}</p> : <p> </p>}
+      {review.response ? <ReviewResponse response={review.response} /> : <p> </p>}
       <span>
-        <Helpful
-          votedHelpful={votedHelpful}
-          clickHelpful={clickHelpful}
-          helpfulness={review.helpfulness}
-        />
+        <Helpful votedHelpful={votedHelpful} clickHelpful={clickHelpful} helpfulness={review.helpfulness} />
         <Report reported={reported} clickReport={clickReport} />
       </span>
       <hr />
