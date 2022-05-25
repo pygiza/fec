@@ -6,9 +6,9 @@ import Footer from './Footer.jsx';
 import MainBox from './Main.jsx';
 
 function Overview() {
-  const [styles, setStyles] = useState('');
+  //const [styles, setStyles] = useState('');
   const [image, setImage] = useState('');
-  const [currentImageIndex, setcurrentImageIndex] = useState(0);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [products, setProducts] = useState([]);
 
   const fetchStyles = (product) => {
@@ -38,16 +38,21 @@ function Overview() {
   const handleImageClick = (e) => {
     e.preventDefault();
     if (e.target.value === 'right') {
-      setcurrentImageIndex(currentImageIndex + 1);
+      setCurrentImageIndex(currentImageIndex + 1);
     } else if (e.target.value === 'left') {
       if (currentImageIndex > 0) {
-        setcurrentImageIndex(currentImageIndex - 1);
+        setCurrentImageIndex(currentImageIndex - 1);
       }
     }
     if (currentImageIndex === image.length - 1) {
-      setcurrentImageIndex(0);
+      setCurrentImageIndex(0);
     }
   };
+
+  const handleStylesClick = (e) => {
+    e.preventDefault();
+    setCurrentImageIndex(e.target.id);
+  }
 
   return (
     <Container>
@@ -55,7 +60,7 @@ function Overview() {
         <Title>PyGiza</Title>
       </NavBar>
       <MainBox image={image[currentImageIndex]} handleClick={handleImageClick} />
-      <Content products={products} images={image} />
+      <Content products={products} images={image} stylesClick={handleStylesClick} />
       <Footer products={products} />
     </Container>
   );
