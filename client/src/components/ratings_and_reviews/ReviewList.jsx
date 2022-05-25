@@ -34,7 +34,7 @@ function ReviewList({ productId }) {
 
   useEffect(() => {
     getReviews();
-  }, []);
+  }, [productId]);
 
   return (
     <ReviewListContainer>
@@ -47,7 +47,7 @@ function ReviewList({ productId }) {
 }
 
 ReviewList.propTypes = {
-  productId: PropTypes.string.isRequired,
+  productId: PropTypes.number.isRequired,
 };
 
 const ReviewListContainer = styled.div`
