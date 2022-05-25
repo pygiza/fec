@@ -4,7 +4,7 @@ import Card from '../Styles.jsx';
 import CardTop from './CardTop/CardTop.jsx';
 import CardBtm from './CardBtm/CardBtm.jsx';
 
-const CarouselCard = function({ product_id }) {
+const CarouselCard = function({ product_id, renderProduct }) {
 
   let [product, setProduct] = React.useState({});
 
@@ -39,7 +39,7 @@ const CarouselCard = function({ product_id }) {
   }, [])
 
   return (
-    <Card>
+    <Card onClick={() => {renderProduct(product_id)}} >
       <CardTop image={product.image} characteristics={product.characteristics} />
       <CardBtm category={product.category} name={product.name} price={product.default_price} rating={product.rating} />
     </Card>
