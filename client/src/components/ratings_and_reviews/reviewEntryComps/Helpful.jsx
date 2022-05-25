@@ -8,7 +8,7 @@ function Helpful({ votedHelpful, clickHelpful, helpfulness }) {
       {votedHelpful ? 'Yes'
         : <u  role="button" onClick={clickHelpful}>Yes</u>}
       (
-      {helpfulness}
+      {votedHelpful ? helpfulness + 1 : helpfulness}
       )
     </span>
   );

@@ -10,6 +10,17 @@ const getReviewsBy2 = (productId, page) => (
   })
 );
 
+const getCurrentAmtReviews = (productId, page) => {
+  const currentAmt = page * 2;
+  return axios.get('/reviews', {
+    params: {
+      product_id: productId,
+      page: 1,
+      count: currentAmt,
+    },
+  })
+}
+
 const voteHelpful = (reviewId) => (
   axios.put(`/reviews/${reviewId}/helpful`)
 );
@@ -20,6 +31,7 @@ const reportReview = (reviewId) => (
 
 module.exports = {
   getReviewsBy2,
+  getCurrentAmtReviews,
   voteHelpful,
   reportReview,
 };

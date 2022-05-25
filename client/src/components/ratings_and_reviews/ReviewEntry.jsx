@@ -9,17 +9,18 @@ import Report from './reviewEntryComps/Report.jsx';
 import ReviewResponse from './reviewEntryComps/ReviewResponse.jsx';
 import StarAvg from './reviewEntryComps/StarAvg.jsx';
 
-function ReviewEntry({ review, getReviews }) {
+function ReviewEntry({ review, getCurrentReviews }) {
   const [votedHelpful, setVotedHelpful] = useState(false);
   const [reported, setReported] = useState(false);
 
   function clickHelpful() {
     voteHelpful(review.review_id)
       .then(() => {
-        getReviews()
-        .then(() => {
-          setVotedHelpful(true);
-        });
+        // getCurrentReviews()
+        // .then(() => {
+        //   setVotedHelpful(true);
+        // });
+        setVotedHelpful(true);
       })
       .catch((err) => {
         console.log('error voting helpful from client', err);
