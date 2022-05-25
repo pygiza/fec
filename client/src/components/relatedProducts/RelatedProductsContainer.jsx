@@ -11,10 +11,15 @@ const RelatedProductsContainer = function({ product_id, renderProduct }) {
 
   useEffect(() => {
     // Grab the ids of all related products and save it in state
-    axios.get(`/products/${product_id}/related`, {
-      params: { product_id }
-    })
+    axios.get(`/products/${product_id}/related`)
     .then(res => {
+      let product_ids = res.data;
+      // Promise.all(product_ids => axios.get(`/products/${product_id}`))
+      //   .then(products => {
+
+      //   })
+      //   .catch(err => console.log('Couldnt grab related product data'));
+
       setRelated(res.data);
     })
     .catch(err => {
