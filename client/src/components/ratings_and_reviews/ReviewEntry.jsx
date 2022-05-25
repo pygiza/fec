@@ -1,4 +1,3 @@
-/* eslint-disable import/extensions */
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
@@ -9,6 +8,7 @@ import Report from './reviewEntryComps/Report.jsx';
 import ReviewResponse from './reviewEntryComps/ReviewResponse.jsx';
 import StarAvg from './reviewEntryComps/StarAvg.jsx';
 import ReviewBody from './reviewEntryComps/ReviewBody.jsx';
+import ReviewImages from './reviewEntryComps/ReviewImages.jsx';
 
 function ReviewEntry({ review, getCurrentReviews }) {
   const [votedHelpful, setVotedHelpful] = useState(false);
@@ -52,6 +52,7 @@ function ReviewEntry({ review, getCurrentReviews }) {
       <h3>{review.summary}</h3>
       <ReviewBody reviewBody={review.body} clickSeeMore={clickSeeMore} seeMore={seeMore}/>
       {review.recommend ? <p> <i className="fa-solid fa-check"/> I recommend this product </p> : <p> </p>}
+      <ReviewImages images={review.photos}/>
       {review.response ? <ReviewResponse response={review.response} /> : <p> </p>}
       <span>
         <Helpful votedHelpful={votedHelpful} clickHelpful={clickHelpful} helpfulness={review.helpfulness} />
