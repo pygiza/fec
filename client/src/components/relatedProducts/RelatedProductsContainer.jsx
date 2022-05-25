@@ -10,6 +10,7 @@ const RelatedProductsContainer = function() {
   let [outfit, setOutfit] = useState([]);
 
   useEffect(() => {
+    // Grab the ids of all related products and save it in state
     axios.get('/products/37311/related', {
       params: {
         product_id: 37311
@@ -22,12 +23,11 @@ const RelatedProductsContainer = function() {
       console.log('Couldnt get related products', err);
     })
 
-    if (localStorage.getItem('outfit') === 'null') {
+    // If the user is visiting the site for the first time, initialize local storage to be an empty array
+    if (localStorage.getItem('outfit') === null) {
       localStorage.setItem('outfit', JSON.stringify([]));
-      console.log('what is localstorage?', localStorage.getItem('outfit'));
     } else {
       setOutfit(JSON.parse(localStorage.getItem('outfit')));
-      console.log('this is outfit', outfit)
     }
   }, [])
 
@@ -48,9 +48,9 @@ const RelatedProductsContainer = function() {
   return (
     <>
       <CarouselLabel label='RELATED PRODUCTS' />
-      <CarouselList data='related products list' related={related} />
+      <CarouselList listType='related' related={related} />
       <CarouselLabel label='YOUR OUTFIT' />
-      <CarouselList data='your outfit list' addOutfit={addOutfit} removeOutfit={removeOutfit} outfit={outfit} />
+      <CarouselList listType='outfit' addOutfit={addOutfit} removeOutfit={removeOutfit} outfit={outfit} />
     </>
   );
 };

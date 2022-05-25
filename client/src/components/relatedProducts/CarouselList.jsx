@@ -13,7 +13,7 @@ const Carousel = styled.div`
   justify-content: space-between;
 `;
 
-const CarouselList = function({ data, related, outfit, addOutfit, removeOutfit }) {
+const CarouselList = function({ listType, related, outfit, addOutfit, removeOutfit }) {
 
   const [listIndex, setListIndex] = useState({ start: 0, end: 2 });
 
@@ -35,20 +35,17 @@ const CarouselList = function({ data, related, outfit, addOutfit, removeOutfit }
     <Carousel className='carouselList'>
       <button onClick={handleMoveLeft}>⬅️</button>
       {
-        data === 'related products list' ?
+        // If list type is 'related products', load the related products carousel.
+        listType === 'related' ?
         related.map((product_id, index) => {
           if (listIndex.start <= index && index <= listIndex.end)
           return <CarouselCard key={product_id} product_id={product_id} />
         }) :
-
-        outfit.map((product_id, index) => {
-          return index === 0 ?
-          <>
-            <AddOutfitCard onClick={addOutfit} removeOutfit={removeOutfit} />
-            <CarouselCard key={product_id} product_id={product_id} />
-          </> :
-            <CarouselCard key={product_id} product_id={product_id} />
-        })
+        // Otherwise, load the outfit carousel
+        <>
+          <AddOutfitCard onClick={addOutfit} removeOutfit={removeOutfit} />
+          {outfit.map(product_id => <CarouselCard key={product_id} product_id={product_id} />) }
+        </>
       }
       <button onClick={handleMoveRight}>➡️</button>
     </Carousel>
