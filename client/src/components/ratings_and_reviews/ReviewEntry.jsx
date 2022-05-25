@@ -51,6 +51,7 @@ function ReviewEntry({ review, getReviews }) {
       {review.response ? <ReviewResponse response={review.response} /> : <p> </p>}
       <span>
         <Helpful votedHelpful={votedHelpful} clickHelpful={clickHelpful} helpfulness={review.helpfulness} />
+        <span> | </span>
         <Report reported={reported} clickReport={clickReport} />
       </span>
       <hr />
