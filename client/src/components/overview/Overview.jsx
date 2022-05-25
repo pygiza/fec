@@ -2,7 +2,7 @@ import React from 'react';
 
 function Overview() {
   return (
-    <dvi className="overview"> Overview Container </dvi>
+    <div className="overview"> Overview Container </div>
   );
 }
 export default Overview;
