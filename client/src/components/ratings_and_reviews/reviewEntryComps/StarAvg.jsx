@@ -29,7 +29,9 @@ StarAvg.propTypes = {
 
 const InnerStars = styled.div`
   position: absolute;
-  width: 94px;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
 `;
 
 const InnerFilled = styled.div`
@@ -37,7 +39,18 @@ const InnerFilled = styled.div`
   line-height: 1;
   overflow: hidden;
   white-space: nowrap;
-  width: ${props => props.rating * 18}px;
+  width: ${props => {
+    let roundedRating = Math.round(props.rating * 4) / 4;
+    if (roundedRating % 1 === .25) {
+      return roundedRating * 18.75;
+    }
+
+    if (roundedRating % 1 === .75) {
+      return roundedRating * 17.25;
+    }
+
+    return roundedRating * 18;
+    }}px;
 `;
 
 const OuterStars = styled.div`

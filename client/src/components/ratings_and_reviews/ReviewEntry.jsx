@@ -12,6 +12,7 @@ import StarAvg from './reviewEntryComps/StarAvg.jsx';
 function ReviewEntry({ review, getCurrentReviews }) {
   const [votedHelpful, setVotedHelpful] = useState(false);
   const [reported, setReported] = useState(false);
+  const [isVerified, setIsVerified] = useState(false);
 
   function clickHelpful() {
     voteHelpful(review.review_id)
@@ -58,7 +59,6 @@ function ReviewEntry({ review, getCurrentReviews }) {
 
 ReviewEntry.propTypes = {
   review: PropTypes.object.isRequired,
-  getReviews: PropTypes.func.isRequired,
 };
 
 const ReviewEntryContainer = styled.div`
