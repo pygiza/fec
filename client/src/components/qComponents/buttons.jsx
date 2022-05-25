@@ -17,12 +17,6 @@ const Button = styled.button`
     color: orange;
   }
 `;
-const Buttons = (props) => (
-  <div>
-    <Add setData={props.setData}/>
-    <Report id={props.id} what={'questions'} setData={props.setData}/>
-  </div>
-);
 
 const Helpful = (props) => {
   if (props.isClicked) {
@@ -43,4 +37,4 @@ const Helpful = (props) => {
   );
 };
 
- export {Buttons, Helpful};
+ export {Helpful};

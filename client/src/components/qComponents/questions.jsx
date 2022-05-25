@@ -8,11 +8,11 @@ const Wrap = styled.div`
   display: grid;
   color: white;
   grid-template-rows: 75px 50px 400px;
-grid-template-areas:
+  grid-template-areas:
     "title title title"
     "nav nav nav "
     "con con con";
-text-align: center;
+  text-align: center;
 `;
 const Title = styled.h1`
   font-size: 30px;
@@ -40,7 +40,8 @@ class Question extends React.Component {
     super(props);
 
     this.state = {
-      data: []
+      data: [],
+      reload: null
     }
 
     this.setData()
@@ -55,6 +56,9 @@ class Question extends React.Component {
       console.log(err);
     });
   }
+  relo () {
+    this.setState({ reload: null });
+  }
 
   render () {
     return (
@@ -63,7 +67,7 @@ class Question extends React.Component {
               <Title>{'Q & A'}</Title>
             </TitleWrap>
             <NavBar />
-            <ListCon data={this.state.data} setData={this.setData.bind(this)} />
+            <ListCon data={this.state.data} setData={this.setData.bind(this)} relo={this.relo.bind(this)} />
           </Wrap>
         );
   }

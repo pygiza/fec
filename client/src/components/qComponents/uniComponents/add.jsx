@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 // add a answer/question
-const Ad = styled.button`
+let Ad = styled.button`
   border: yellow;
   background-color: inherit;
   float: left;
@@ -11,7 +12,7 @@ const Ad = styled.button`
     color: orange;
   }
 `;
-const Modal = styled.div`
+let Modal = styled.div`
   display: ${props => props.show.display};
   position: fixed;
   z-index: 1;
@@ -20,21 +21,40 @@ const Modal = styled.div`
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgb(0,0,0);
-  background-color: rgba(0,0,0,0.4);
+  background-image: url("https://www.solidbackgrounds.com/images/website/950x534/950x534-blue-abstract-noise-free-website-background-image.jpg");
 `;
-const ModalContent = styled.div`
+let ModalContent = styled.div`
   background-color: #fefefe;
   margin: 15% auto;
   padding: 20px;
   border: 1px solid #888;
   width: 80%;
 `;
-const Close = styled.input`
+let Close = styled.input`
   color: #aaa;
-  float: right;
   font-size: 28px;
   font-weight: bold;
+  float: right;
+`;
+let Answer = styled.textarea`
+  display: block;
+  margin-bottom: 10px;
+`;
+let Name = styled.input`
+  display: block;
+  width: 20%;
+`;
+let Email = styled.input`
+  display: block;
+  margin-bottom: 10px;
+  width: 30%;
+`;
+let Lonly = styled.label`
+  display: block;
+  margin-bottom: 10px;
+`;
+let BigLonly = styled(Lonly)`
+  font-size: 28px;
 `;
 Modal.defaultProps = {
   show: {
@@ -47,15 +67,46 @@ const show = {
 const hide = {
   display: 'none'
 };
+function handleSubmit(event, id, update) {
+
+  axios({
+    url: `http://localhost:3000/qa/questions/${id}/answers`,
+    method: 'post',
+    data: {
+      body: event.target[0].value,
+      name: event.target[1].value,
+      email: event.target[2].value,
+      photos: []
+    }
+  })
+    .then((data) => {
+      console.log(data)
+      update();
+    });
+}
 var Add = (props) => {
+  const [id, setId] = useState(0);
+
   return (
     <div>
-      <Ad onClick={function() {Modal.defaultProps.show = show; props.setData();}}>Add answer</Ad>
-      <Modal>
+      <Ad onClick={function(event) { Modal.defaultProps.show = show; setId(props.id.question_id)}}>Add answer</Ad>
+      <Modal onClick={function(event) {if(event.target.className === 'sc-ivTmOn hTYZeE') { Modal.defaultProps.show = hide; setId(0)}}}>
         <ModalContent>
-          <form>
-            <input type='text'></input>
-            <Close type='submit' onClick={function() { Modal.defaultProps.show = hide; } } ></Close>
+          <h3>Submit your Answer</h3>
+          <form onSubmit={function(event) {
+            event.preventDefault();
+            Modal.defaultProps.show = hide;
+            handleSubmit(event, id, props.setData);
+          }}>
+            <label>Your Answer:</label>
+            <Answer cols="100" rows="10" maxlength='1000' required></Answer>
+            <label>Your nickname: </label>
+            <Name type='text' placeholder='Example: jackson11!' required></Name>
+            <Lonly>For privacy reasons, do not use your full name or email address!</Lonly>
+            <label>Your email: </label>
+            <Email type='text' placeholder='Example: jack@email.com' required></Email>
+            <input type='button' value='to be implemented: Add photo'></input>
+            <Close type='submit'></Close>
           </form>
         </ModalContent>
       </Modal>

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import Answers from './answerCompontnts/answerList.jsx';
 import styled from 'styled-components'
-import { Buttons, Helpful } from './buttons.jsx'
+import { Helpful } from './buttons.jsx'
+import Add from './uniComponents/add.jsx';
 import axios from 'axios';
 
 // make indevituel questions and add/ store there answers
@@ -49,7 +50,7 @@ var Ind = (props) => {
         <Button isClicked={clicked}
           whenClicked={function() { whenClicked(props.que.question_id, function() { setClicked(true); props.setData();}); }}
           count={props.que.question_helpfulness}/>
-        <Buttons setData={props.setData} id={props.que.question_id}/>
+        <Add setData={props.setData} id={props.que}/>
       </Ques>
       <Answers setData={props.setData} awn={props.que.answers}/>
   </Wraper>
