@@ -10,21 +10,21 @@ const RelatedProductsContainer = function({ product_id, renderProduct }) {
   let [outfit, setOutfit] = useState([]);
 
   useEffect(() => {
-    // Grab the ids of all related products and save it in state
+    // Get the product data of all products related to product_id and store in 'related'
     axios.get(`/products/${product_id}/related`)
-    .then(res => {
-      let product_ids = res.data;
-      // Promise.all(product_ids => axios.get(`/products/${product_id}`))
-      //   .then(products => {
+      .then(res => {
+        let product_ids = res.data;
+        Promise.all(product_ids.map(product_id => axios.get(`/products/${product_id}`)))
+          .then(responses => {
+            let products = responses
+              .map(response => response.data)
+              .filter(product => product !== undefined);
 
-      //   })
-      //   .catch(err => console.log('Couldnt grab related product data'));
-
-      setRelated(res.data);
-    })
-    .catch(err => {
-      console.log('Couldnt get related products', err);
-    })
+            setRelated(products);
+          })
+          .catch(err => console.log('Couldnt grab related product data', err));
+      })
+      .catch(err => console.log('Couldnt get related products', err));
 
     // If the user is visiting the site for the first time, initialize local storage to be an empty array
     if (localStorage.getItem('outfit') === null) {
@@ -47,7 +47,6 @@ const RelatedProductsContainer = function({ product_id, renderProduct }) {
     localStorage.setItem('outfit', JSON.stringify(oldOutfit));
     setOutfit(oldOutfit);
   }
-
   return (
     <>
       <CarouselLabel label='RELATED PRODUCTS' />

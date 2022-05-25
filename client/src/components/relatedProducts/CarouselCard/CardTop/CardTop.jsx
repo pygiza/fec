@@ -23,9 +23,9 @@ const CardTop = function({ image, characteristics }) {
   return (
     <Top>
       <CardButton />
-      {image === null ?
-      <div style={{'backgroundColor': 'grey', 'height': '100%', 'width': '100%'}}></div> :
-      <Thumbnail src={image}></Thumbnail>
+      {image == null ?
+        <div style={{'backgroundColor': 'grey', 'height': '100%', 'width': '100%'}}></div> :
+        <Thumbnail src={image}></Thumbnail>
       }
     </Top>
   )

@@ -13,7 +13,7 @@ const Carousel = styled.div`
   justify-content: space-between;
 `;
 
-const CarouselList = function({ listType, related, outfit, addOutfit, removeOutfit, renderProduct }) {
+const CarouselList = function({ listType, related = [], outfit = [], addOutfit, removeOutfit, renderProduct }) {
 
   const [listIndex, setListIndex] = useState({ start: 0, end: 2 });
 
@@ -34,19 +34,32 @@ const CarouselList = function({ listType, related, outfit, addOutfit, removeOutf
   return (
     <Carousel className='carouselList'>
       <button onClick={handleMoveLeft}>⬅️</button>
-      {
+      {/* {
         // If list type is 'related products', load the related products carousel.
+        related.length === 0 && outfit.length === 0 ? undefined :
+
         listType === 'related' ?
-        related.map((product_id, index) => {
+        related.map((product, index) => {
+          console.log('im getting invoked a lot arent i', product);
           if (listIndex.start <= index && index <= listIndex.end)
-          return <CarouselCard key={product_id} product_id={product_id} renderProduct={renderProduct} />
+          return <CarouselCard key={product.id} productInfo={product} renderProduct={renderProduct} />
         }) :
         // Otherwise, load the outfit carousel
         <>
           <AddOutfitCard onClick={addOutfit} removeOutfit={removeOutfit} />
-          {outfit.map(product_id => <CarouselCard key={product_id} product_id={product_id} renderProduct={renderProduct} />) }
+          {outfit.map(product => <CarouselCard key={product.id} renderProduct={renderProduct} />) }
         </>
+      } */}
+      {
+        listType === 'related' ?
+        related.map((product, index) => {
+          return listIndex.start <= index && index <= listIndex.end ?
+            <CarouselCard key={product.id} productInfo={product} renderProduct={renderProduct} /> : undefined
+        }) : undefined
+        // outfit.map(product => <CarouselCard key={product.id} productInfo={product} renderProduct={renderProduct} />)
       }
+
+
       <button onClick={handleMoveRight}>➡️</button>
     </Carousel>
   )
