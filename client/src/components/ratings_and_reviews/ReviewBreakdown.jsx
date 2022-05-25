@@ -17,7 +17,7 @@ function ReviewBreakdown({productId}) {
 }
 
 ReviewBreakdown.propTypes = {
-  productId: PropTypes.string.isRequired,
+  productId: PropTypes.number.isRequired,
 };
 
 export default ReviewBreakdown;

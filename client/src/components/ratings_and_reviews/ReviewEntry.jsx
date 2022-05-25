@@ -8,11 +8,13 @@ import Helpful from './reviewEntryComps/Helpful.jsx';
 import Report from './reviewEntryComps/Report.jsx';
 import ReviewResponse from './reviewEntryComps/ReviewResponse.jsx';
 import StarAvg from './reviewEntryComps/StarAvg.jsx';
+import ReviewBody from './reviewEntryComps/ReviewBody.jsx';
 
 function ReviewEntry({ review, getCurrentReviews }) {
   const [votedHelpful, setVotedHelpful] = useState(false);
   const [reported, setReported] = useState(false);
   const [isVerified, setIsVerified] = useState(false);
+  const [seeMore, setSeeMore] = useState(false);
 
   function clickHelpful() {
     voteHelpful(review.review_id)
@@ -34,6 +36,10 @@ function ReviewEntry({ review, getCurrentReviews }) {
       });
   }
 
+  function clickSeeMore() {
+    setSeeMore(!seeMore);
+  }
+
   return (
     <ReviewEntryContainer>
       <hr />
@@ -44,7 +50,7 @@ function ReviewEntry({ review, getCurrentReviews }) {
         {format(parseISO(review.date), 'MMMM do, yyyy')}
       </span>
       <h3>{review.summary}</h3>
-      <p>{review.body}</p>
+      <ReviewBody reviewBody={review.body} clickSeeMore={clickSeeMore} seeMore={seeMore}/>
       {review.recommend ? <p> <i className="fa-solid fa-check"/> I recommend this product </p> : <p> </p>}
       {review.response ? <ReviewResponse response={review.response} /> : <p> </p>}
       <span>
