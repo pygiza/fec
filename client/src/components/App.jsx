@@ -15,7 +15,7 @@ function App(props) {
 
   return (
     <div>
-      <Overview />
+      <Overview productId={productId}/>
       <RelatedProductsContainer product_id={productId} renderProduct={renderProduct} />
       <Question />
       <RatingsReviews />

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import StyleList from './Styles.jsx'
 import AddToCart from './AddToCart.jsx'
 
-function Content({ products, images }) {
+function Content({ products, images, stylesClick }) {
   return (
     <ContentBox>
       <StarReviews>Star Reviews</StarReviews>
@@ -13,7 +13,7 @@ function Content({ products, images }) {
         $
         {products.default_price}
       </Price>
-      <StyleList images={images} />
+      <StyleList images={images} stylesClick={stylesClick}/>
       <AddToCart />
     </ContentBox>
   );
