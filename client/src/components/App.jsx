@@ -8,7 +8,6 @@ import RatingsReviews from './ratings_and_reviews/RatingsReviews.jsx';
 function App(props) {
   return (
     <div>
-      <h1>PyGiza</h1>
       <Overview />
       <RelatedProductsContainer />
       <Question />
