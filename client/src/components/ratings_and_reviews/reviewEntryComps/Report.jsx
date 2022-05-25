@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 function Report({ reported, clickReport }) {
   return (
     <span>
-      {reported ? 'Reported' : <a href="#" role="button" onClick={clickReport}>Report</a>}
+      {reported ? 'Reported' : <u role="button" onClick={clickReport}>Report</u>}
     </span>
   );
 }
