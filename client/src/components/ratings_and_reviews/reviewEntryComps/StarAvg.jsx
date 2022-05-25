@@ -12,7 +12,7 @@ function StarAvg({ rating }) {
         <i className="fa-regular fa-star" />
         <i className="fa-regular fa-star" />
       </InnerStars>
-      <InnerFilled style={{ width: (100 / 5) * rating }}>
+      <InnerFilled rating={rating}>
         <i className="fa-solid fa-star" />
         <i className="fa-solid fa-star" />
         <i className="fa-solid fa-star" />
@@ -29,14 +29,15 @@ StarAvg.propTypes = {
 
 const InnerStars = styled.div`
   position: absolute;
-  width: 100px;
+  width: 94px;
 `;
 
 const InnerFilled = styled.div`
   position: absolute;
-  height: 15px;
   line-height: 1;
   overflow: hidden;
+  white-space: nowrap;
+  width: ${props => props.rating * 18}px;
 `;
 
 const OuterStars = styled.div`

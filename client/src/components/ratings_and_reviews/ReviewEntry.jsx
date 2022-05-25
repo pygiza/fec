@@ -16,10 +16,6 @@ function ReviewEntry({ review, getCurrentReviews }) {
   function clickHelpful() {
     voteHelpful(review.review_id)
       .then(() => {
-        // getCurrentReviews()
-        // .then(() => {
-        //   setVotedHelpful(true);
-        // });
         setVotedHelpful(true);
       })
       .catch((err) => {
