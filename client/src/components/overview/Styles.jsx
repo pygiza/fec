@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-function StyleList({ images }) {
+function StyleList({ images, stylesClick }) {
   // const [row, setRow] = useState(1);
   // const [column, setColumn] = useState(1);
 
@@ -19,10 +19,17 @@ function StyleList({ images }) {
 
   return (
     <Styles>
-      {images ? images.map((image) => {
-        console.log('Location: ', row, column);
+      {images ? images.map((image, index) => {
         return (
-          <EachStyle src={image.thumbnail_url} test={locationChange()} row={row} column={column} />
+          <EachStyle 
+            id={index} 
+            src={image.thumbnail_url} 
+            test={locationChange()} 
+            row={row} 
+            column={column}
+            onClick={stylesClick}
+            
+            />
         );
       }) : 'Waiting on Image'}
     </Styles>
