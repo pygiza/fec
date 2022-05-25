@@ -5,7 +5,7 @@ import Content from './ContentBox.jsx';
 import Footer from './Footer.jsx';
 import MainBox from './Main.jsx';
 
-function Overview() {
+function Overview({ productId }) {
   //const [styles, setStyles] = useState('');
   const [image, setImage] = useState('');
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -22,10 +22,10 @@ function Overview() {
   };
 
   const fetchData = () => {
-    axios.get('http://localhost:3000/products')
+    axios.get(`http://localhost:3000/products/${productId}`)
       .then((data) => {
-        setProducts(data.data[2]); //data.data is the full list of prodcuts.
-        fetchStyles(data.data[2]);
+        setProducts(data.data); //data.data is the full list of prodcuts.
+        fetchStyles(data.data);
       }).catch((err) => {
         console.log(err);
       });
@@ -33,7 +33,8 @@ function Overview() {
 
   useEffect(() => {
     fetchData();
-  }, []);
+    setCurrentImageIndex(0);
+  }, [productId]);
 
   const handleImageClick = (e) => {
     e.preventDefault();
@@ -51,7 +52,8 @@ function Overview() {
 
   const handleStylesClick = (e) => {
     e.preventDefault();
-    setCurrentImageIndex(e.target.id);
+    console.log(typeof e.target.id)
+    setCurrentImageIndex(Number(e.target.id));
   }
 
   return (
@@ -59,7 +61,7 @@ function Overview() {
       <NavBar>
         <Title>PyGiza</Title>
       </NavBar>
-      <MainBox image={image[currentImageIndex]} handleClick={handleImageClick} />
+      <MainBox productId={productId} image={image[currentImageIndex]} handleClick={handleImageClick} />
       <Content products={products} images={image} stylesClick={handleStylesClick} />
       <Footer products={products} />
     </Container>
