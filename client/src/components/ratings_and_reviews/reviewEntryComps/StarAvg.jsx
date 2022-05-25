@@ -35,6 +35,7 @@ const InnerStars = styled.div`
 const InnerFilled = styled.div`
   position: absolute;
   height: 15px;
+  line-height: 1;
   overflow: hidden;
 `;
 

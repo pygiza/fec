@@ -47,7 +47,7 @@ function ReviewEntry({ review, getReviews }) {
       </span>
       <h3>{review.summary}</h3>
       <p>{review.body}</p>
-      {review.recommend ? <p> I recommend this product </p> : <p> </p>}
+      {review.recommend ? <p> <i className="fa-solid fa-check"/> I recommend this product </p> : <p> </p>}
       {review.response ? <ReviewResponse response={review.response} /> : <p> </p>}
       <span>
         <Helpful votedHelpful={votedHelpful} clickHelpful={clickHelpful} helpfulness={review.helpfulness} />
