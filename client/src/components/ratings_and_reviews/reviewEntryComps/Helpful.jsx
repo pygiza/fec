@@ -6,7 +6,7 @@ function Helpful({ votedHelpful, clickHelpful, helpfulness }) {
     <span>
       Helpful?
       {votedHelpful ? 'Yes'
-        : <a href="#" role="button" onClick={clickHelpful}>Yes</a>}
+        : <u  role="button" onClick={clickHelpful}>Yes</u>}
       (
       {helpfulness}
       )

@@ -17,9 +17,9 @@ function ReviewEntry({ review, getReviews }) {
     voteHelpful(review.review_id)
       .then(() => {
         getReviews()
-          .then(() => {
-            setVotedHelpful(true);
-          });
+        .then(() => {
+          setVotedHelpful(true);
+        });
       })
       .catch((err) => {
         console.log('error voting helpful from client', err);
