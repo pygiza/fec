@@ -18,7 +18,7 @@ const StyledImage = styled.img`
   width: 20%;
   margin: 1%;
   &:hover {
-    border: 1px black solid;
+    border: 3px #92B4EC solid;
     cursor: pointer;
   }
 `;
