@@ -40,16 +40,15 @@ const Styles = styled.div`
   display: grid;
   grid-template-columns: repeat(4, minmax(0,1fr));
   grid-template-rows: repeat(2, minmax(0,1fr));
+  grid-gap: 0.25rem;
   grid-column: 2 / 12;
   grid-row: 6 / 9;
-  padding: 0px;
-  margin: 0px;
 `;
 
 const EachStyle = styled.img`
   height: 100%;
   width: 100%; 
-  object-fit: contain;
+  object-fit: cover;
   grid-column: ${props => props.column};
   grid-row: ${props => props.row};
 `;
