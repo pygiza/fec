@@ -4,11 +4,13 @@ import PropTypes from 'prop-types';
 import { getReviewsBy2, checkMoreRevs } from './serverFuncs.js';
 import ReviewEntry from './ReviewEntry.jsx';
 import AddMoreReviews from './reviewListComps/AddMoreReviews.jsx';
+import WriteReviewButton from './reviewListComps/WriteReviewButton.jsx';
 
 function ReviewList({ productId }) {
   const [reviews, setReviews] = useState([]);
   const [page, setPage] = useState(1);
   const [revsLeft, setRevsLeft] = useState(false);
+  const [displayWrite, setDisplayWrite] = useState(false);
 
   function getReviews() {
     return getReviewsBy2(productId, 1)
@@ -52,6 +54,10 @@ function ReviewList({ productId }) {
       });
   }
 
+  function toggleWriteReview() {
+    setDisplayWrite(!displayWrite);
+  }
+
   useEffect(() => {
     getReviews();
   }, [productId]);
@@ -62,6 +68,7 @@ function ReviewList({ productId }) {
         <ReviewEntry key={review.review_id} review={review} />
       ))}
       <AddMoreReviews moreReviews={moreReviews} revsLeft={revsLeft} />
+      <WriteReviewButton toggleWriteReview={toggleWriteReview} displayWrite={displayWrite}/>
     </ReviewListContainer>
   );
 }
