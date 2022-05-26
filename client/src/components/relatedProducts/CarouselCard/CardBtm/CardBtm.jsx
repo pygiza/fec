@@ -19,7 +19,6 @@ const StarRating = function(rating) {
 }
 
 const CardBtm = function({ category, name, price, rating }) {
-  console.log('product rating', rating);
   return (
     <Btm>
       <p style={{color: 'grey', marginBottom: '5px'}}>{category}</p>
