@@ -4,7 +4,7 @@ import styled from 'styled-components';
 function ThumbnailBox({ images, updateLocation, currentImageIndex }) {
   let row = 1;
   let column = 2;
-  let borderColor = "black";
+  let borderColor = "white";
   return (
     <ThumbnailContainer>
       <TopArrowContainer>
@@ -12,7 +12,7 @@ function ThumbnailBox({ images, updateLocation, currentImageIndex }) {
       </TopArrowContainer>
       {images ? images.map((image, index) => {
         if (index === currentImageIndex) {
-          borderColor = 'white';
+          borderColor = 'red';
         } else {
           borderColor = 'black'
         }

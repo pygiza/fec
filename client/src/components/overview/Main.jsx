@@ -19,11 +19,10 @@ function MainBox({ image, handleClick, images, currentImageIndex }) {
       if (firstThumbnail > 0) {
         setFirstThumbnail(firstThumbnail - 1);
         setLastThumbnail(lastThumbnail - 1);
-
       }
     }
   }
-  console.log("Locations: ", firstThumbnail, lastThumbnail)
+  console.log("Main Index: ", currentImageIndex);
   return (
     <Main>
       <PhotoMain src={image ? image.thumbnail_url : 'Waiting for Images'} />

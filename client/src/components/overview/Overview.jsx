@@ -60,7 +60,12 @@ function Overview({ productId }) {
       <NavBar>
         <Title>PyGiza</Title>
       </NavBar>
-      <MainBox image={image[currentImageIndex]} handleClick={handleImageClick} images={image} currentImageIndex={currentImageIndex}/>
+      <MainBox 
+        image={image[currentImageIndex]} 
+        handleClick={handleImageClick} 
+        images={image} 
+        currentImageIndex={currentImageIndex}
+        />
       <Content products={products} images={image} stylesClick={handleStylesClick} />
       <Footer products={products} />
     </Container>
