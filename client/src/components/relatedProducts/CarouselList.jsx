@@ -13,7 +13,7 @@ const Carousel = styled.div`
   justify-content: space-between;
 `;
 
-const CarouselList = function({ listType, related, outfit, addOutfit, removeOutfit }) {
+const CarouselList = function({ listType, related, outfit, addOutfit, removeOutfit, renderProduct }) {
 
   const [listIndex, setListIndex] = useState({ start: 0, end: 2 });
 
@@ -39,12 +39,12 @@ const CarouselList = function({ listType, related, outfit, addOutfit, removeOutf
         listType === 'related' ?
         related.map((product_id, index) => {
           if (listIndex.start <= index && index <= listIndex.end)
-          return <CarouselCard key={product_id} product_id={product_id} />
+          return <CarouselCard key={product_id} product_id={product_id} renderProduct={renderProduct} />
         }) :
         // Otherwise, load the outfit carousel
         <>
           <AddOutfitCard onClick={addOutfit} removeOutfit={removeOutfit} />
-          {outfit.map(product_id => <CarouselCard key={product_id} product_id={product_id} />) }
+          {outfit.map(product_id => <CarouselCard key={product_id} product_id={product_id} renderProduct={renderProduct} />) }
         </>
       }
       <button onClick={handleMoveRight}>➡️</button>

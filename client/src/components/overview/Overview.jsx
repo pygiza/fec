@@ -5,10 +5,10 @@ import Content from './ContentBox.jsx';
 import Footer from './Footer.jsx';
 import MainBox from './Main.jsx';
 
-function Overview() {
-  const [styles, setStyles] = useState('');
+function Overview({ productId }) {
+  //const [styles, setStyles] = useState('');
   const [image, setImage] = useState('');
-  const [currentImageIndex, setcurrentImageIndex] = useState(0);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [products, setProducts] = useState([]);
 
   const fetchStyles = (product) => {
@@ -22,10 +22,10 @@ function Overview() {
   };
 
   const fetchData = () => {
-    axios.get('http://localhost:3000/products')
+    axios.get(`http://localhost:3000/products/${productId}`)
       .then((data) => {
-        setProducts(data.data[2]); //data.data is the full list of prodcuts.
-        fetchStyles(data.data[2]);
+        setProducts(data.data); //data.data is the full list of prodcuts.
+        fetchStyles(data.data);
       }).catch((err) => {
         console.log(err);
       });
@@ -33,29 +33,36 @@ function Overview() {
 
   useEffect(() => {
     fetchData();
-  }, []);
+    setCurrentImageIndex(0);
+  }, [productId]);
 
   const handleImageClick = (e) => {
     e.preventDefault();
     if (e.target.value === 'right') {
-      setcurrentImageIndex(currentImageIndex + 1);
+      setCurrentImageIndex(currentImageIndex + 1);
     } else if (e.target.value === 'left') {
       if (currentImageIndex > 0) {
-        setcurrentImageIndex(currentImageIndex - 1);
+        setCurrentImageIndex(currentImageIndex - 1);
       }
     }
     if (currentImageIndex === image.length - 1) {
-      setcurrentImageIndex(0);
+      setCurrentImageIndex(0);
     }
   };
+
+  const handleStylesClick = (e) => {
+    e.preventDefault();
+    console.log(typeof e.target.id)
+    setCurrentImageIndex(Number(e.target.id));
+  }
 
   return (
     <Container>
       <NavBar>
         <Title>PyGiza</Title>
       </NavBar>
-      <MainBox image={image[currentImageIndex]} handleClick={handleImageClick} />
-      <Content products={products} images={image} />
+      <MainBox productId={productId} image={image[currentImageIndex]} handleClick={handleImageClick} />
+      <Content products={products} images={image} stylesClick={handleStylesClick} />
       <Footer products={products} />
     </Container>
   );
