@@ -24,6 +24,9 @@ function ReviewBody({ reviewBody, clickSeeMore, seeMore }) {
 const SeeMoreLess = styled.p`
   text-align: center;
   text-decoration: underline;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 ReviewBody.propTypes = {

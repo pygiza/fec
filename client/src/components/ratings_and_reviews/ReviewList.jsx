@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { getReviewsBy2 } from './serverFuncs.js';
+import { getReviewsBy2, getReviewAmount } from './serverFuncs.js';
 import ReviewEntry from './ReviewEntry.jsx';
 
 function ReviewList({ productId }) {
   const [reviews, setReviews] = useState([]);
   const [page, setPage] = useState(1);
+  const [revsLeft, setRevsLeft] = useState(0);
 
   function getReviews() {
     return getReviewsBy2(productId, page)
@@ -32,8 +33,18 @@ function ReviewList({ productId }) {
       });
   }
 
+  function reviewLength() {
+    return getReviewAmount(productId)
+      .then((len) => {
+        setRevsLeft(len - reviews.length)
+      });
+  }
+
   useEffect(() => {
-    getReviews();
+    getReviews()
+      .then(() => {
+        reviewLength();
+      });
   }, [productId]);
 
   return (
