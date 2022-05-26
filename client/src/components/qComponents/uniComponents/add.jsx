@@ -56,6 +56,12 @@ let Lonly = styled.label`
 let BigLonly = styled(Lonly)`
   font-size: 28px;
 `;
+const PopUp = styled.div`
+  float: right;
+  margin: auto;
+  visibility: ${props => props.show.visibility};
+  background-color: red;
+`;
 Modal.defaultProps = {
   show: {
     display: 'none'
@@ -67,6 +73,17 @@ const show = {
 const hide = {
   display: 'none'
 };
+PopUp.defaultProps = {
+  show: {
+    visibility: 'hidden'
+  }
+}
+const pop = {
+  visibility: 'visible'
+}
+const popHide = {
+  visibility: 'hidden'
+}
 function handleSubmit(event, id, update) {
 
   axios({
@@ -86,17 +103,27 @@ function handleSubmit(event, id, update) {
 }
 var Add = (props) => {
   const [id, setId] = useState(0);
+  const [pop, setPop] = useState(false);
 
   return (
     <div>
       <Ad onClick={function(event) { Modal.defaultProps.show = show; setId(props.id.question_id)}}>Add answer</Ad>
-      <Modal onClick={function(event) {if(event.target.className === 'sc-ivTmOn hTYZeE') { Modal.defaultProps.show = hide; setId(0)}}}>
+      <Modal id='modal' onClick={function(event) {if(event.target.id === 'modal') { Modal.defaultProps.show = hide; PopUp.defaultProps.show = popHide; setId(0);}}}>
         <ModalContent>
+        <PopUp>
+          <span>Invaled email, please try again!</span>
+        </PopUp>
           <h3>Submit your Answer</h3>
           <form onSubmit={function(event) {
             event.preventDefault();
-            Modal.defaultProps.show = hide;
-            handleSubmit(event, id, props.setData);
+            if (event.target[2].value.includes('@') && event.target[2].value.includes('.com')) {
+              Modal.defaultProps.show = hide;
+              PopUp.defaultProps.show = popHide;
+              handleSubmit(event, id, props.setData);
+            } else {
+              PopUp.defaultProps.show = pop;
+              setPop(true);
+            }
           }}>
             <label>Your Answer:</label>
             <Answer cols="100" rows="10" maxlength='1000' required></Answer>

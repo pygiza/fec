@@ -1,17 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Search from './qSearch.jsx';
 import List from './qList.jsx';
-import GetData from '/client/src/components/qComponents/Data.jsx'
+import GetData from './Data.jsx'
 import styled from 'styled-components'
+import Load from './uniComponents/loadMore.jsx'
 
 const Wrap = styled.div`
   display: grid;
   color: white;
-  grid-template-rows: 75px 50px 400px;
+  grid-template-rows: 75px 50px 600px 50px;
   grid-template-areas:
     "title title title"
     "nav nav nav "
-    "con con con";
+    "con con con"
+    "but but but";
   text-align: center;
 `;
 const Title = styled.h1`
@@ -34,43 +36,61 @@ const ListCon = styled(List)`
   color: black;
   text-align: justify;
   overflow: scroll;
-`
-class Question extends React.Component {
-  constructor (props) {
-    super(props);
-
-    this.state = {
-      data: [],
-      reload: null
-    }
-
-    this.setData()
+`;
+const Buttons = styled.div`
+  grid-area = but;
+`;
+const Ans = styled(Load)`
+  background-color: inherit;
+  font-size: 16px;
+  cursor: pointer;
+  display: inline-block;
+  &:hover {
+    color: orange;
   }
-  setData () {
-    GetData({id: 37311})
-    .then(res => {
-      console.log(res.data.results);
-      this.setState( { data: res.data.results } );
-    })
-    .catch(err => {
-      console.log(err);
-    });
+`;
+const Add = styled.button`
+  background-color: inherit;
+  font-size: 16px;
+  cursor: pointer;
+  display: inline-block;
+  &:hover {
+    color: orange;
   }
-  relo () {
-    this.setState({ reload: null });
+`;
+function Question(props) {
+  const [data, setData] = useState([]);
+  const [two, setTwo] = useState([]);
+  const [colap, setColap] = useState(false);
+  function set() {
+    GetData({id: props.product_id})
+      .then(res => {
+        setData(res.data.results);
+        var arr = [];
+        arr.push(res.data.results[0]);
+        arr.push(res.data.results[1]);
+        setTwo(arr)
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
-
-  render () {
+  useEffect(() => {
+    set();
+  }, [props.product_id]);
     return (
           <Wrap>
             <TitleWrap>
               <Title>{'Q & A'}</Title>
             </TitleWrap>
             <NavBar />
-            <ListCon data={this.state.data} setData={this.setData.bind(this)} relo={this.relo.bind(this)} />
+            <ListCon data={colap ? data: two} setData={set.bind(this)}  />
+            <div>
+              <Ans colap={colap} setColap={setColap} name={'questions'}/>
+              <Add>Add question</Add>
+            </div>
           </Wrap>
         );
-  }
 }
 
 export default Question;
