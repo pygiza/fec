@@ -46,7 +46,7 @@ const CarouselCard = function({ productInfo, renderProduct }) {
       ratingSum += ratings[rating] * rating;
       reviews += Number(ratings[rating]);
     }
-    return (Math.round((ratingSum/reviews) * 4) / 4).toFixed(2);
+    return (Math.round((ratingSum/reviews) * 4) / 4);
   }
 
   useEffect(() => {
@@ -58,11 +58,12 @@ const CarouselCard = function({ productInfo, renderProduct }) {
       axios.get(`/reviews/meta`, { params: { product_id: productInfo.id } })
         .then(res => {
           newProduct.rating = calculateAvgRating(res.data.ratings);
+          console.log('whats the rating data type?', typeof newProduct.rating);
           setProduct(newProduct);
         })
-        .catch(err => console.log('couldnt get meta data for related product'));
+        .catch(err => console.log('couldnt get meta data for related product', err));
       })
-      .catch(err => console.log('couldnt get related products image'));
+      .catch(err => console.log('couldnt get related products image', err));
   }, [])
 
   return (
