@@ -19,7 +19,6 @@ const checkMoreRevs = (productId, page) => (
     },
   })
     .then((res) => {
-      console.log('checking reviews for page' + page);
       if (res.data.results.length) {
         return true;
       }
