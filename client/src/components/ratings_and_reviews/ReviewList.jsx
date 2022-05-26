@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { getReviewsBy2 } from './serverFuncs.js';
+import { getReviewsBy2, getReviewAmount } from './serverFuncs.js';
 import ReviewEntry from './ReviewEntry.jsx';
 
 function ReviewList({ productId }) {
   const [reviews, setReviews] = useState([]);
   const [page, setPage] = useState(1);
+  const [revsLeft, setRevsLeft] = useState(0);
 
   function getReviews() {
     return getReviewsBy2(productId, page)
@@ -17,6 +18,7 @@ function ReviewList({ productId }) {
         console.log('could not fetch reviews from client', err);
       });
   }
+
 
   function moreReviews() {
     return getReviewsBy2(productId, page + 1)
@@ -31,14 +33,24 @@ function ReviewList({ productId }) {
       });
   }
 
+  function reviewLength() {
+    return getReviewAmount(productId)
+      .then((len) => {
+        setRevsLeft(len - reviews.length)
+      });
+  }
+
   useEffect(() => {
-    getReviews();
-  }, []);
+    getReviews()
+      .then(() => {
+        reviewLength();
+      });
+  }, [productId]);
 
   return (
     <ReviewListContainer>
       {reviews.map((review) => (
-        <ReviewEntry getReviews={getReviews} key={review.review_id} review={review} />
+        <ReviewEntry key={review.review_id} review={review} />
       ))}
       <button type="button" onClick={moreReviews}>More Reviews</button>
     </ReviewListContainer>
@@ -46,7 +58,7 @@ function ReviewList({ productId }) {
 }
 
 ReviewList.propTypes = {
-  productId: PropTypes.string.isRequired,
+  productId: PropTypes.number.isRequired,
 };
 
 const ReviewListContainer = styled.div`
