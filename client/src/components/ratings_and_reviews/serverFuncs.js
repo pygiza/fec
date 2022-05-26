@@ -10,17 +10,23 @@ const getReviewsBy2 = (productId, page) => (
   })
 );
 
-const getReviewAmount = (productId) => (
+const checkMoreRevs = (productId, page) => (
   axios.get('/reviews', {
     params: {
       product_id: productId,
-    }
+      page,
+      count: 2,
+    },
   })
     .then((res) => {
-      return res.data.results.length;
+      console.log('checking reviews for page' + page);
+      if (res.data.results.length) {
+        return true;
+      }
+      return false;
     })
     .catch((err) => {
-      console.log('error fetching reviews length', err);
+      console.log('error checking more revs', err);
     })
 );
 
@@ -33,7 +39,7 @@ const getCurrentAmtReviews = (productId, page) => {
       count: currentAmt,
     },
   })
-}
+};
 
 const voteHelpful = (reviewId) => (
   axios.put(`/reviews/${reviewId}/helpful`)
@@ -45,8 +51,8 @@ const reportReview = (reviewId) => (
 
 module.exports = {
   getReviewsBy2,
+  checkMoreRevs,
   getCurrentAmtReviews,
-  getReviewAmount,
   voteHelpful,
   reportReview,
 };

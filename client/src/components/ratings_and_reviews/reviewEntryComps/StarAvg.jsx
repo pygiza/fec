@@ -46,7 +46,7 @@ const InnerFilled = styled.div`
     }
 
     if (roundedRating % 1 === .75) {
-      return roundedRating * 17.25;
+      return roundedRating * 17.35;
     }
 
     return roundedRating * 18;
