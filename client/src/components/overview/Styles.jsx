@@ -22,6 +22,7 @@ function StyleList({ images, stylesClick }) {
       {images ? images.map((image, index) => {
         return (
           <EachStyle 
+            key={index}
             id={index} 
             src={image.thumbnail_url} 
             test={locationChange()} 
@@ -43,14 +44,21 @@ const Styles = styled.div`
   grid-gap: 0.25rem;
   grid-column: 2 / 12;
   grid-row: 6 / 9;
+  
 `;
 
 const EachStyle = styled.img`
   height: 100%;
   width: 100%; 
   object-fit: cover;
+  
   grid-column: ${props => props.column};
   grid-row: ${props => props.row};
+
+  &:hover {
+    border: solid;
+    border-color: white;
+  }
 `;
 
 export default StyleList;

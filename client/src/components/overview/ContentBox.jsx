@@ -10,8 +10,7 @@ function Content({ products, images, stylesClick }) {
       <Category>{products.category}</Category>
       <ProductName>{products.name}</ProductName>
       <Price>
-        $
-        {products.default_price}
+        ${products.default_price}
       </Price>
       <StyleList images={images} stylesClick={stylesClick}/>
       <AddToCart />
@@ -20,39 +19,34 @@ function Content({ products, images, stylesClick }) {
 }
 
 const ContentBox = styled.div`
-display: grid;
-grid-template-columns: repeat(12, minmax(0,1fr));
-grid-template-rows: repeat(12, minmax(0,1fr));
-gap: 0.25rem;
-grid-column: 8 / 11;
-grid-row: 2 / 11;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0,1fr));
+  grid-template-rows: repeat(12, minmax(0,1fr));
+  gap: 0.25rem;
+  grid-column: 8 / 11;
+  grid-row: 2 / 11;
 `;
-// border-left: solid;
-// border-color: #FFD24C;
-// border-right: solid;
-// border-color: #FFD24C;
-//background: #FFD24C;
 
 const StarReviews = styled.h4`
-grid-column: 2 / 11;
-grid-row: 2;
-padding-bottom: 10px;
-margin: 0px;
-padding: 0px;
+  grid-column: 2 / 11;
+  grid-row: 2;
+  padding-bottom: 10px;
+  margin: 0px;
+  padding: 0px;
 `;
 
 const Category = styled.h4`
-grid-column: 2 / 11;
-grid-row: 3;
-padding: 0px;
-margin: 0px;
+  grid-column: 2 / 11;
+  grid-row: 3;
+  padding: 0px;
+  margin: 0px;
 `;
 
 const Price = styled.h4`
-grid-column: 2 / 11;
-grid-row: 5;
-padding: 0px;
-margin: 0px;
+  grid-column: 2 / 11;
+  grid-row: 5;
+  padding: 0px;
+  margin: 0px;
 `;
 
 const ProductName = styled.h2`

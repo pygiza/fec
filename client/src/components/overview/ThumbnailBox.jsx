@@ -4,7 +4,10 @@ import styled from 'styled-components';
 function ThumbnailBox({ images, updateLocation, currentImageIndex }) {
   let row = 1;
   let column = 2;
-  let borderColor = "white";
+  let borderColor = '';
+
+  console.log('Index in ThumbnailBox: ', currentImageIndex)
+  console.log(images);
   return (
     <ThumbnailContainer>
       <TopArrowContainer>
@@ -18,10 +21,10 @@ function ThumbnailBox({ images, updateLocation, currentImageIndex }) {
         }
         row += 1;
         return(<EachStyle 
+          key={index}
           src={image.thumbnail_url}
           row={row}
           column={column}
-          onClick={updateLocation}
           border={borderColor}
           />);
       }) : 'Still Waiting!'}

@@ -2,31 +2,12 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import ThumbnailBox from './ThumbnailBox.jsx';
 
-function MainBox({ image, handleClick, images, currentImageIndex }) {
-  const [firstThumbnail, setFirstThumbnail] = useState(0);
-  const [lastThumbnail, setLastThumbnail] = useState(5);
-  //let firstThumbnail = 0;
-  //let lastThumbnail = 5; //carousel only holds 5 images
+function MainBox({ image, handleClick, images, currentImageIndex, updateLocation, firstThumbnail, lastThumbnail }) {
 
-  const updateLocation = (e) => {
-    e.preventDefault();
-    if (e.target.value === 'bottom') {
-      if (lastThumbnail < images.length ) {
-        setFirstThumbnail(firstThumbnail + 1);
-        setLastThumbnail(lastThumbnail + 1);
-      }
-    } else if (e.target.value === 'top') {
-      if (firstThumbnail > 0) {
-        setFirstThumbnail(firstThumbnail - 1);
-        setLastThumbnail(lastThumbnail - 1);
-      }
-    }
-  }
-  console.log("Main Index: ", currentImageIndex);
   return (
     <Main>
       <PhotoMain src={image ? image.thumbnail_url : 'Waiting for Images'} />
-      <ThumbnailBox images={images.slice(firstThumbnail, lastThumbnail)} updateLocation={updateLocation} currentImageIndex={currentImageIndex}/>
+      <ThumbnailBox images={images()} updateLocation={updateLocation} currentImageIndex={currentImageIndex}/>
       <ArrowRight value="right" onClick={handleClick} />
       <ArrowLeft value="left" onClick={handleClick} />
     </Main>
@@ -41,9 +22,6 @@ const Main = styled.div`
   grid-row: 2 / 11;
   padding: 0.25rem;
   `;
-  // border-left: solid;
-  // border-color: #FFD24C;
-  // border: solid;
 
 const PhotoMain = styled.img`
   height: 100%;
