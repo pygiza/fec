@@ -50,15 +50,15 @@ const CarouselCard = function({ productInfo, renderProduct }) {
   }
 
   useEffect(() => {
+    let newProduct = Object.assign({}, productInfo)
     axios.get(`/products/${productInfo.id}/styles`)
     .then(res => {
-      product.image = res.data.results[0].photos[0].thumbnail_url
+      newProduct.image = res.data.results[0].photos[0].thumbnail_url
 
       axios.get(`/reviews/meta`, { params: { product_id: productInfo.id } })
         .then(res => {
-          product.rating = calculateAvgRating(res.data.ratings);
-          setProduct(product);
-          console.log('this is our final product', product);
+          newProduct.rating = calculateAvgRating(res.data.ratings);
+          setProduct(newProduct);
         })
         .catch(err => console.log('couldnt get meta data for related product'));
       })

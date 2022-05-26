@@ -20,6 +20,12 @@ const RelatedProductsContainer = function({ product_id, renderProduct }) {
               .map(response => response.data)
               .filter(product => product !== undefined);
 
+            // Promise.all(products.map(product => getProductImage(product.id)))
+            //   .then(products => {
+
+            //   })
+            //   .catch(err => 'couldnt get images for related products', err);
+
             setRelated(products);
           })
           .catch(err => console.log('Couldnt grab related product data', err));
@@ -33,6 +39,14 @@ const RelatedProductsContainer = function({ product_id, renderProduct }) {
       setOutfit(JSON.parse(localStorage.getItem('outfit')));
     }
   }, [product_id])
+
+  const getProductImage = function(id) {
+    return axios.get(`/products/${id}/styles`)
+      .then(res => {
+        return res.data.results[0].photos[0].thumbnail_url;
+      })
+      .catch(err => console.log('couldnt grab image of related product', err));
+  }
 
   const addOutfit = function(id) {
     let oldOutfit = JSON.parse(localStorage.getItem('outfit'));
