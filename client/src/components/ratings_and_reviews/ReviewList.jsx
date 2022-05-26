@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { getReviewsBy2, checkMoreRevs } from './serverFuncs.js';
+import { getReviewsBy2, checkMoreRevs, getMetaData } from './serverFuncs.js';
 import ReviewEntry from './ReviewEntry.jsx';
 import AddMoreReviews from './reviewListComps/AddMoreReviews.jsx';
 import WriteReviewButton from './reviewListComps/WriteReviewButton.jsx';
@@ -11,6 +11,7 @@ function ReviewList({ productId }) {
   const [page, setPage] = useState(1);
   const [revsLeft, setRevsLeft] = useState(false);
   const [displayWrite, setDisplayWrite] = useState(false);
+  const [metaData, setMetaData] = useState({});
 
   function getReviews() {
     return getReviewsBy2(productId, 1)
@@ -58,9 +59,21 @@ function ReviewList({ productId }) {
     setDisplayWrite(!displayWrite);
   }
 
+  function getMeta() {
+    getMetaData(productId)
+      .then((data) => {
+        setMetaData(data);
+      });
+  }
+
   useEffect(() => {
     getReviews();
   }, [productId]);
+
+  useEffect(() => {
+    getMeta();
+  }, [productId]);
+
 
   return (
     <ReviewListContainer>
@@ -68,7 +81,7 @@ function ReviewList({ productId }) {
         <ReviewEntry key={review.review_id} review={review} />
       ))}
       <AddMoreReviews moreReviews={moreReviews} revsLeft={revsLeft} />
-      <WriteReviewButton toggleWriteReview={toggleWriteReview} displayWrite={displayWrite}/>
+      <WriteReviewButton metaData={metaData} toggleWriteReview={toggleWriteReview} displayWrite={displayWrite}/>
     </ReviewListContainer>
   );
 }

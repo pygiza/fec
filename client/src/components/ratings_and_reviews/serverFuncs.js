@@ -40,6 +40,20 @@ const getCurrentAmtReviews = (productId, page) => {
   })
 };
 
+const getMetaData = (productId) => (
+  axios.get('/reviews/meta', {
+    params: {
+      product_id: productId,
+    },
+  })
+    .then((res) => {
+      return res.data;
+    })
+    .catch((err) => {
+      console.log('error fetching meta data', err);
+    })
+);
+
 const voteHelpful = (reviewId) => (
   axios.put(`/reviews/${reviewId}/helpful`)
 );
@@ -52,6 +66,7 @@ module.exports = {
   getReviewsBy2,
   checkMoreRevs,
   getCurrentAmtReviews,
+  getMetaData,
   voteHelpful,
   reportReview,
 };
