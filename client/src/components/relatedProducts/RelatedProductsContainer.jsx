@@ -70,11 +70,11 @@ const RelatedProductsContainer = function({ product_id, renderProduct }) {
       .catch(err => console.log('couldnt grab image of related product', err));
   }
 
-  const addOutfit = function(e, id = 37316) {
+  const addOutfit = function() {
     let oldOutfitIds = JSON.parse(localStorage.getItem('outfit'));
-    localStorage.setItem('outfit', JSON.stringify(oldOutfitIds.concat([37316])));
+    localStorage.setItem('outfit', JSON.stringify(oldOutfitIds.concat([product_id])));
 
-    axios.get(`/products/${id}`)
+    axios.get(`/products/${product_id}`)
       .then(res => setOutfit(outfit.concat([res.data])))
       .catch(err => console.log('couldnt add outfit', err));
   }
