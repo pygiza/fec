@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import ComfortForm from '../postReviewComps/Comfort.jsx';
 import FitForm from '../postReviewComps/Fit.jsx';
-import Length from '../postReviewComps/Length.jsx';
+import LengthForm from '../postReviewComps/Length.jsx';
 import Quality from '../postReviewComps/Quality.jsx';
 import Size from '../postReviewComps/Size.jsx';
 import Width from '../postReviewComps/Width.jsx';
@@ -43,7 +43,8 @@ function WriteReviewForm({ metaData }) {
 
       <h4>Characteristics</h4>
       <ComfortForm />
-
+      <FitForm />
+      <LengthForm />
     </ModalContent>
   );
 }

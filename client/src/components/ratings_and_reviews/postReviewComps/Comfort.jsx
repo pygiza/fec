@@ -35,6 +35,10 @@ function ComfortForm () {
         <input type="radio" id="comfortable" name="comfort" value={4} onChange={showTitle}/> <br />
         <ToggleLabel htmlFor="comfortable" id="comfortableLabel">Comfortable</ToggleLabel>
       </StyledArray>
+      <StyledArray>
+        <input type="radio" id="perfect" name="comfort" value={5} onChange={showTitle}/> <br />
+        <label htmlFor="perfect" id="perfectLabel">Perfect</label>
+      </StyledArray>
     </GridContainer>
   );
 }
@@ -52,7 +56,7 @@ const ToggleLabel = styled.label`
 const GridContainer = styled.div`
   display: grid;
   gap: 5%;
-  grid-template-columns: 20% 20% 20% 20% 20%;
+  grid-template-columns: 15% 15% 15% 15% 15%;
   text-align: center;
 `;
 
