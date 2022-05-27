@@ -73,7 +73,7 @@ const combineFeatures = function(features1, features2) {
     }
 
     if (bothFeaturesNotExist) {
-      combinedFeatures.push({ feature: feature1.feature, value1: feature1.value, value2: '𐄂' });
+      combinedFeatures.push({ feature: feature1.feature, value1: feature1.value, value2: '' });
       bothFeaturesNotExist = true;
     }
 
@@ -85,7 +85,7 @@ const combineFeatures = function(features1, features2) {
       return;
     }
     let value2 = feature2.value === null ? '✓' : feature2.value;
-    combinedFeatures.push({ feature: feature2.feature, value1: '𐄂', value2 })
+    combinedFeatures.push({ feature: feature2.feature, value1: '', value2 })
   })
 
   return combinedFeatures;
