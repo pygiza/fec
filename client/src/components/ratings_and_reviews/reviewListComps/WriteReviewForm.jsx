@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import ComfortForm from '../postReviewComps/Comfort.jsx';
-import FitForm from '../postReviewComps/Fit.jsx';
-import LengthForm from '../postReviewComps/Length.jsx';
-import Quality from '../postReviewComps/Quality.jsx';
-import Size from '../postReviewComps/Size.jsx';
-import Width from '../postReviewComps/Width.jsx';
+import ComfortForm from '../postReviewComps/ComfortForm.jsx';
+import FitForm from '../postReviewComps/FitForm.jsx';
+import LengthForm from '../postReviewComps/LengthForm.jsx';
+import QualityForm from '../postReviewComps/QualityForm.jsx';
+import SizeForm from '../postReviewComps/SizeForm.jsx';
+import WidthForm from '../postReviewComps/WidthForm.jsx';
 
 function WriteReviewForm({ metaData }) {
 
@@ -42,9 +42,14 @@ function WriteReviewForm({ metaData }) {
       <label htmlFor="noRec">No</label>
 
       <h4>Characteristics</h4>
-      <ComfortForm />
-      <FitForm />
-      <LengthForm />
+      {Comfort ? <ComfortForm /> : ''}
+      {Fit ? <FitForm /> : ''}
+      {Length ? <LengthForm /> : ''}
+      {Quality ? <QualityForm /> : ''}
+      {Size ? <SizeForm /> : ''}
+      {Width ? <WidthForm /> : ''}
+
+      <SubmitReviewButton>Submit</SubmitReviewButton>
     </ModalContent>
   );
 }
@@ -58,6 +63,20 @@ const ModalContent = styled.div`
   margin: 15% 10%;
   border: 3px solid #FFD24C;
   width: 80%;
+`;
+
+const SubmitReviewButton = styled.button`
+  padding: 1%;
+  background-color: white;
+  float: right;
+  margin-right: 2%;
+  margin-top: 1%;
+  border: 2px black solid;
+  font-weight: bold;
+  &:hover {
+    cursor: pointer;
+    background-color: #FFE69A;
+  }
 `;
 
 export default WriteReviewForm;
