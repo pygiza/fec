@@ -80,10 +80,9 @@ const RelatedProductsContainer = function({ product_id, renderProduct }) {
   }
 
   const removeOutfit = function(id) {
-    let oldOutfit = JSON.parse(localStorage.getItem('outfit'));
-    oldOutfit.shift();
-    localStorage.setItem('outfit', JSON.stringify(oldOutfit));
-    setOutfit(oldOutfit);
+    let oldOutfitIds = JSON.parse(localStorage.getItem('outfit'));
+    localStorage.setItem('outfit', JSON.stringify(oldOutfitIds.slice(0, -1)));
+    setOutfit(outfit.slice(0, -1));
   }
 
   const toggleModal = function(e, name = '', features = []) {
@@ -93,9 +92,6 @@ const RelatedProductsContainer = function({ product_id, renderProduct }) {
 
   return (
     <>
-      {console.log('this is related', related)}
-      {console.log('this is outfit', outfit)}
-      <button onClick={toggleModal}>toggle that modal</button>
       <ComparisonModal display={modalDisplay} close={toggleModal} product={product} compare={compare} />
       <CarouselLabel label='RELATED PRODUCTS' />
       <CarouselList listType='related' related={related} renderProduct={renderProduct} handleCardButtonClick={toggleModal}/>
