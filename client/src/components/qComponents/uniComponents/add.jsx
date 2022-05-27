@@ -21,7 +21,8 @@ let Modal = styled.div`
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-image: url("https://www.solidbackgrounds.com/images/website/950x534/950x534-blue-abstract-noise-free-website-background-image.jpg");
+  background-color: rgba(0, 0, 0, 0.5);
+
 `;
 let ModalContent = styled.div`
   background-color: #fefefe;
