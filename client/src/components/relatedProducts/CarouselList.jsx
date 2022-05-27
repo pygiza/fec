@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import CarouselCard from './CarouselCard/CarouselCard.jsx';
 import AddOutfitCard from './CarouselCard/AddOutfitCard.jsx';
+import PropTypes from 'prop-types';
 
 const Carousel = styled.div`
   height: 400px;
@@ -16,6 +17,7 @@ const Carousel = styled.div`
 const CarouselList = function({ listType, related = [], outfit = [], addOutfit, removeOutfit, renderProduct, handleCardButtonClick }) {
 
   const [listIndex, setListIndex] = useState({ start: 0, end: 2 });
+  // const [listIndex, setListIndex] = useState({ start: 0, end: 2 });
 
   const handleMoveLeft = function() {
     if (listIndex.start === 0) {
@@ -52,17 +54,28 @@ const CarouselList = function({ listType, related = [], outfit = [], addOutfit, 
       } */}
       {
         listType === 'related' ?
-        related.map((product, index) => {
-          return listIndex.start <= index && index <= listIndex.end ?
-            <CarouselCard key={product.id} productInfo={product} renderProduct={renderProduct} handleCardButtonClick={handleCardButtonClick} /> : undefined
-        }) : undefined
-        // outfit.map(product => <CarouselCard key={product.id} productInfo={product} renderProduct={renderProduct} />)
+          related.map((product, index) => {
+            return listIndex.start <= index && index <= listIndex.end ?
+              <CarouselCard key={product.id} productInfo={product} renderProduct={renderProduct} handleCardButtonClick={handleCardButtonClick} /> : undefined
+          }) :
+          <>
+            <AddOutfitCard addOutfit={addOutfit} removeOutfit={removeOutfit} />
+            {outfit.map((product, index) => {
+              return <CarouselCard key={product.id} productInfo={product} renderProduct={renderProduct} />
+            })}
+          </>
+          // outfit.map(product => <CarouselCard key={product.id} productInfo={product} renderProduct={renderProduct} />)
       }
 
 
       <button onClick={handleMoveRight}>➡️</button>
     </Carousel>
   )
+}
+
+CarouselList.propTypes = {
+  related: PropTypes.array.isRequired,
+  outfit: PropTypes.array.isRequired
 }
 
 export default CarouselList;

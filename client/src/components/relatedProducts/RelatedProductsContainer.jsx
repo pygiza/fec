@@ -42,12 +42,25 @@ const RelatedProductsContainer = function({ product_id, renderProduct }) {
       .catch(err => console.log('Couldnt get related products', err));
 
     // If the user is visiting the site for the first time, initialize local storage to be an empty array
+      let outfitIds = getOutfitIds();
+      Promise.all(outfitIds.map(product_id => axios.get(`/products/${product_id}`)))
+        .then(responses => {
+          let products = responses
+            .map(response => response.data)
+            .filter(product => product !== undefined);
+
+          setOutfit(products);
+        })
+        .catch(err => console.log('couldnt get product data for outfits', err));
+
+  }, [product_id])
+
+  const getOutfitIds = function() {
     if (localStorage.getItem('outfit') === null) {
       localStorage.setItem('outfit', JSON.stringify([]));
-    } else {
-      setOutfit(JSON.parse(localStorage.getItem('outfit')));
     }
-  }, [product_id])
+    return JSON.parse(localStorage.getItem('outfit'));
+  }
 
   const getProductImage = function(id) {
     return axios.get(`/products/${id}/styles`)
@@ -57,11 +70,13 @@ const RelatedProductsContainer = function({ product_id, renderProduct }) {
       .catch(err => console.log('couldnt grab image of related product', err));
   }
 
-  const addOutfit = function(id) {
-    let oldOutfit = JSON.parse(localStorage.getItem('outfit'));
-    let newOutfit = oldOutfit.concat([37316]);
-    localStorage.setItem('outfit', JSON.stringify(newOutfit));
-    setOutfit(newOutfit);
+  const addOutfit = function(e, id = 37316) {
+    let oldOutfitIds = JSON.parse(localStorage.getItem('outfit'));
+    localStorage.setItem('outfit', JSON.stringify(oldOutfitIds.concat([37316])));
+
+    axios.get(`/products/${id}`)
+      .then(res => setOutfit(outfit.concat([res.data])))
+      .catch(err => console.log('couldnt add outfit', err));
   }
 
   const removeOutfit = function(id) {
@@ -78,6 +93,8 @@ const RelatedProductsContainer = function({ product_id, renderProduct }) {
 
   return (
     <>
+      {console.log('this is related', related)}
+      {console.log('this is outfit', outfit)}
       <button onClick={toggleModal}>toggle that modal</button>
       <ComparisonModal display={modalDisplay} close={toggleModal} product={product} compare={compare} />
       <CarouselLabel label='RELATED PRODUCTS' />
