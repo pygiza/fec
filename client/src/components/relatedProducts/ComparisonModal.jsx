@@ -15,11 +15,40 @@ const Modal = styled.div`
 `
 
 const ModalContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   background-color: white;
   margin: 15% auto;
   padding: 20px;
   width: 80%
 `
+
+const FeaturesTable = styled.table`
+  width: 100%;
+  background-color: #99B3E8;
+  font-family: sans-serif;
+  font-size: 20px;
+  `
+
+const Head = styled.th`
+  width: 33%;
+  background-color: white;
+  font-size: 25px;
+`
+
+const Row = styled.tr`
+  width: 33%
+  border: 10px solid;
+`
+
+const Data = styled.td`
+  background-color: white;
+  text-align: center;
+  padding: 4px;
+`
+
 
 const handleModalClick = function(e, close) {
   if (e.target.id === 'comparisonModal') {
@@ -27,28 +56,66 @@ const handleModalClick = function(e, close) {
   }
 }
 
+const combineFeatures = function(features1, features2) {
+  let combinedFeatures = [];
+  let prevFeatures = [];
+
+  features1.forEach(feature1 => {
+    let bothFeaturesNotExist = true;
+    let value1 = feature1.value === null ? 'check' : feature1.value;
+    for (let feature2 of features2) {
+      if (features2.feature === feature1.feature) {
+        let value2 = feature2.value === null ? 'check' : feature2.value;
+        combinedFeatures.push({ feature: feature1.feature, value1, value2})
+        bothFeaturesNotExist = false;
+        break;
+      }
+    }
+
+    if (bothFeaturesNotExist) {
+      combinedFeatures.push({ feature: feature1.feature, value1: feature1.value, value2: '𐄂' });
+      bothFeaturesNotExist = true;
+    }
+
+    prevFeatures.push(feature1.feature);
+  })
+
+  features2.forEach(feature2 => {
+    if (prevFeatures.includes(feature2.feature)) {
+      return;
+    }
+    let value2 = feature2.value === null ? '✓' : feature2.value;
+    combinedFeatures.push({ feature: feature2.feature, value1: '𐄂', value2 })
+  })
+
+  return combinedFeatures;
+}
+
 const ComparisonModal = function({ display='hidden', close, product={ name: '', features: [] }, compare={ name: '', features: [] } }) {
+  let allFeatures = combineFeatures(product.features, compare.features);
+
   return (
     <Modal id='comparisonModal' display={display} onClick={(e) => handleModalClick(e, close)}>
       <ModalContent>
         <button onClick={close}>Close Modal</button>
-        <table>
+        <FeaturesTable>
           <thead>
-            <th>{product.name}</th>
-            <th>Features</th>
-            <th>{compare.name}</th>
+            <Head>{product.name}</Head>
+            <Head>Features</Head>
+            <Head>{compare.name}</Head>
           </thead>
           <tbody>
-            {product.features.map((feature) => {
+            {allFeatures.map((feature) => {
               return (
-                <tr>
-                  <td>{feature.value}</td>
-                  <td>{feature.feature}</td>
-                </tr>
+                <Row>
+                  <Data>{feature.value1}</Data>
+                  <Data>{feature.feature}</Data>
+                  <Data>{feature.value2}</Data>
+                </Row>
                 )
             })}
           </tbody>
-        </table>
+        </FeaturesTable>
       </ModalContent>
     </Modal>
   )

@@ -72,7 +72,6 @@ const RelatedProductsContainer = function({ product_id, renderProduct }) {
   }
 
   const toggleModal = function(e, name = '', features = []) {
-    console.log('name and features', name, features)
     setCompare({ name, features });
     setModalDisplay( modalDisplay === 'none' ? 'block' : 'none');
   }
@@ -82,7 +81,7 @@ const RelatedProductsContainer = function({ product_id, renderProduct }) {
       <button onClick={toggleModal}>toggle that modal</button>
       <ComparisonModal display={modalDisplay} close={toggleModal} product={product} compare={compare} />
       <CarouselLabel label='RELATED PRODUCTS' />
-      <CarouselList listType='related' related={related} renderProduct={renderProduct} />
+      <CarouselList listType='related' related={related} renderProduct={renderProduct} handleCardButtonClick={toggleModal}/>
       <CarouselLabel label='YOUR OUTFIT' />
       <CarouselList listType='outfit' addOutfit={addOutfit} removeOutfit={removeOutfit} outfit={outfit} renderProduct={renderProduct} />
     </>

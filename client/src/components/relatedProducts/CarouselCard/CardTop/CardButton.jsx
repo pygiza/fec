@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-const CaroBtn = styled.button`
+const Icon = styled.button`
   position: absolute;
   top: 5%;
   right: 5%;
@@ -13,19 +13,15 @@ const CaroBtn = styled.button`
   text-align: center;
 `
 
-const CarouselButton = function(props) {
-
-  const renderCompareProducts = function(main, related) {
-
-  }
-
+const CarouselButton = function({ name, features, onClick }) {
   return (
-    <CaroBtn id='cardButton' onClick={renderCompareProducts}>☆</CaroBtn>
+    <Icon className="fa-solid fa-arrow-right-arrow-left" id='cardButton' onClick={(e) => onClick(e, name, features)} />
   )
 }
 
 CarouselButton.propTypes = {
-  features: PropTypes.object.isRequired,
+  name: PropTypes.string.isRequired,
+  features: PropTypes.array.isRequired,
 }
 
 export default CarouselButton
