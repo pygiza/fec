@@ -109,7 +109,7 @@ const ComparisonModal = function({ display='hidden', close, product={ name: '', 
           <tbody>
             {allFeatures.map((feature) => {
               return (
-                <Row>
+                <Row key={feature.feature}>
                   <Data>{feature.value1}</Data>
                   <Data>{feature.feature}</Data>
                   <Data>{feature.value2}</Data>
