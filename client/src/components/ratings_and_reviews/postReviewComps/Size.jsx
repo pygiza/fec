@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 function Size () {
   return (
-    <div></div>
+    <div>Size</div>
   );
 }
 

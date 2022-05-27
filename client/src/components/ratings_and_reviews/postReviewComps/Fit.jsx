@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 function Fit () {
   return (
-    <div></div>
+    <div>Fit</div>
   );
 }
 

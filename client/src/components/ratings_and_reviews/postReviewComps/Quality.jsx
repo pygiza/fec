@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 function Quality () {
   return (
-    <div></div>
+    <div>Quality</div>
   );
 }
 

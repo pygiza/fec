@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 function Width () {
   return (
-    <div></div>
+    <div>Width</div>
   );
 }
 

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 function Length () {
   return (
-    <div></div>
+    <div>Length</div>
   );
 }
 

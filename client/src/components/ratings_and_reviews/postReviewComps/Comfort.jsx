@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 function Comfort () {
   return (
-    <div></div>
+    <div>Comfort</div>
   );
 }
 
