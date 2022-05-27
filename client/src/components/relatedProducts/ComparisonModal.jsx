@@ -35,7 +35,7 @@ const FeaturesTable = styled.table`
 const Head = styled.th`
   width: 33%;
   background-color: white;
-  font-size: 25px;
+  font-size: 22px;
 `
 
 const Row = styled.tr`
@@ -100,9 +100,11 @@ const ComparisonModal = function({ display='hidden', close, product={ name: '', 
         <button onClick={close}>Close Modal</button>
         <FeaturesTable>
           <thead>
-            <Head>{product.name}</Head>
-            <Head>Features</Head>
-            <Head>{compare.name}</Head>
+            <Row>
+              <Head>{product.name}</Head>
+              <Head>Features</Head>
+              <Head>{compare.name}</Head>
+            </Row>
           </thead>
           <tbody>
             {allFeatures.map((feature) => {
