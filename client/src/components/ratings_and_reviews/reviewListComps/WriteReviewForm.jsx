@@ -34,22 +34,30 @@ function WriteReviewForm({ metaData }) {
     <ModalContent>
       <h3>Write Your Review</h3>
       <h4>About the PRODUCT NAME</h4>
-      {/* Overall Rating */}
-      <p>Do you recommend this product?</p>
-      <input type="radio" name="recommend" value="true" id="yesRec" />
-      <label htmlFor="yesRec">Yes</label>
-      <input type="radio" name="recommend" value="false" id="noRec" />
-      <label htmlFor="noRec">No</label>
+      <form>
+        {/* Overall Rating */}
+        <p>Do you recommend this product?</p>
+        <input type="radio" name="recommend" value="true" id="yesRec" />
+        <label htmlFor="yesRec">Yes</label>
+        <input type="radio" name="recommend" value="false" id="noRec" />
+        <label htmlFor="noRec">No</label>
 
-      <h4>Characteristics</h4>
-      {Comfort ? <ComfortForm /> : ''}
-      {Fit ? <FitForm /> : ''}
-      {Length ? <LengthForm /> : ''}
-      {Quality ? <QualityForm /> : ''}
-      {Size ? <SizeForm /> : ''}
-      {Width ? <WidthForm /> : ''}
+        <h4>Characteristics</h4>
+        {Comfort ? <ComfortForm /> : ''}
+        {Fit ? <FitForm /> : ''}
+        {Length ? <LengthForm /> : ''}
+        {Quality ? <QualityForm /> : ''}
+        {Size ? <SizeForm /> : ''}
+        {Width ? <WidthForm /> : ''}
 
-      <SubmitReviewButton>Submit</SubmitReviewButton>
+        <h4>Review Summary</h4>
+        <ReviewSummary type="text" placeholder="Example: Best purchase ever!" maxlength="60"></ReviewSummary>
+
+        <h4>Review Body</h4>
+        <ReviewBody type="text" required="true" placeholder="Why did you like the product or not?" maxlength="1000" minlength="50" rows="5" />
+
+        <SubmitReviewButton type="Submit" />
+      </form>
     </ModalContent>
   );
 }
@@ -60,12 +68,13 @@ WriteReviewForm.propTypes = {
 
 const ModalContent = styled.div`
   background-color: #fefefe;
+  padding: 2%;
   margin: 15% 10%;
-  border: 3px solid #FFD24C;
+  border: 3px solid black;
   width: 80%;
 `;
 
-const SubmitReviewButton = styled.button`
+const SubmitReviewButton = styled.input`
   padding: 1%;
   background-color: white;
   float: right;
@@ -77,6 +86,14 @@ const SubmitReviewButton = styled.button`
     cursor: pointer;
     background-color: #FFE69A;
   }
+`;
+
+const ReviewBody = styled.textarea`
+  width: 50%;
+`;
+
+const ReviewSummary = styled.input`
+  width: 50%;
 `;
 
 export default WriteReviewForm;

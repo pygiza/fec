@@ -53,7 +53,7 @@ const StyledWriteReviewModal = styled.div`
 
 const XOut = styled.div`
   float: right;
-  margin: 14.5% 9%;
+  margin: 14% 5%;
   &:hover {
     cursor: pointer;
   }

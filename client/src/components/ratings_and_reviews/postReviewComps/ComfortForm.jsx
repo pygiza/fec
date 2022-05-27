@@ -50,6 +50,10 @@ const StyledArray = styled.div`
   float: left;
   padding: 0 1%;
   text-align: center;
+  &:hover {
+    background-color: #92B4EC;
+  }
+
 `;
 
 const ToggleLabel = styled.label`
