@@ -1,20 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import Comfort from '../postReviewComps/Comfort.jsx';
-import Fit from '../postReviewComps/Fit.jsx';
+import ComfortForm from '../postReviewComps/Comfort.jsx';
+import FitForm from '../postReviewComps/Fit.jsx';
 import Length from '../postReviewComps/Length.jsx';
 import Quality from '../postReviewComps/Quality.jsx';
 import Size from '../postReviewComps/Size.jsx';
 import Width from '../postReviewComps/Width.jsx';
 
 function WriteReviewForm({ metaData }) {
-  // const [comfort, setComfort] = useState(false);
-  // const [fit, setFit] = useState(false);
-  // const [length, setLength] = useState(false);
-  // const [quality, setQuality] = useState(false);
-  // const [size, setSize] = useState(false);
-  // const [width, setWidth] = useState(false);
 
   const initialCharacteristics = {
     Comfort: false,
@@ -37,7 +31,7 @@ function WriteReviewForm({ metaData }) {
   }, [metaData]);
 
   return (
-    <div>
+    <ModalContent>
       <h3>Write Your Review</h3>
       <h4>About the PRODUCT NAME</h4>
       {/* Overall Rating */}
@@ -48,14 +42,21 @@ function WriteReviewForm({ metaData }) {
       <label htmlFor="noRec">No</label>
 
       <h4>Characteristics</h4>
-      <div>
-      </div>
-    </div>
+      <ComfortForm />
+
+    </ModalContent>
   );
 }
 
 WriteReviewForm.propTypes = {
   metaData: PropTypes.object.isRequired,
 };
+
+const ModalContent = styled.div`
+  background-color: #fefefe;
+  margin: 15% 10%;
+  border: 3px solid #FFD24C;
+  width: 80%;
+`;
 
 export default WriteReviewForm;

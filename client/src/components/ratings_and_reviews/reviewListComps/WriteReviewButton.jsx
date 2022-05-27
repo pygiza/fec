@@ -11,9 +11,7 @@ function WriteReviewButton({ toggleWriteReview, displayWrite, metaData }) {
         <XOut>
           <i onClick={toggleWriteReview} className="fa-solid fa-circle-xmark" />
         </XOut>
-        <ModalContent >
-          <WriteReviewForm metaData={metaData} />
-        </ModalContent>
+        <WriteReviewForm metaData={metaData} />
       </StyledWriteReviewModal>
     </span>
   );
@@ -51,13 +49,6 @@ const StyledWriteReviewModal = styled.div`
   height: 100%;
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.3)
-`;
-
-const ModalContent = styled.div`
-  background-color: #fefefe;
-  margin: 15% 10%;
-  border: 3px solid #FFD24C;
-  width: 80%;
 `;
 
 const XOut = styled.div`
