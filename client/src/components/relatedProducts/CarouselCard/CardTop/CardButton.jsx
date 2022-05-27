@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const CaroBtn = styled.button`
   position: absolute;
@@ -13,9 +14,18 @@ const CaroBtn = styled.button`
 `
 
 const CarouselButton = function(props) {
+
+  const renderCompareProducts = function(main, related) {
+
+  }
+
   return (
-    <CaroBtn value='button'>☆</CaroBtn>
+    <CaroBtn id='cardButton' onClick={renderCompareProducts}>☆</CaroBtn>
   )
+}
+
+CarouselButton.propTypes = {
+  features: PropTypes.object.isRequired,
 }
 
 export default CarouselButton

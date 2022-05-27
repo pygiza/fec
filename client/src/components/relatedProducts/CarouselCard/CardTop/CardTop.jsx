@@ -19,10 +19,10 @@ const Thumbnail = styled.img`
   width: 100%;
 `
 
-const CardTop = function({ image, characteristics }) {
+const CardTop = function({ image, features }) {
   return (
     <Top>
-      <CardButton />
+      <CardButton fea/>
       {image == null ?
         <div style={{'backgroundColor': 'grey', 'height': '100%', 'width': '100%'}}></div> :
         <Thumbnail src={image}></Thumbnail>

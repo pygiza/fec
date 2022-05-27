@@ -1,15 +1,24 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import ComparisonModal from './ComparisonModal.jsx';
 import CarouselLabel from './CarouselLabel.jsx';
 import CarouselList from './CarouselList.jsx';
 
 const RelatedProductsContainer = function({ product_id, renderProduct }) {
 
+  let [product, setProduct] = useState({ name: '', features: [] });
+  let [compare, setCompare] = useState({ name: '', features: [] });
   let [related, setRelated] = useState([]);
   let [outfit, setOutfit] = useState([]);
+  let [modalDisplay, setModalDisplay] = useState('none');
 
   useEffect(() => {
+    // Get data (name, features) for product_id and store in 'product'
+    axios.get(`/products/${product_id}`)
+      .then(res => setProduct({ name: res.data.name, features: res.data.features }))
+      .catch(err => console.log('Couldnt get product features', err));
+
     // Get the product data of all products related to product_id and store in 'related'
     axios.get(`/products/${product_id}/related`)
       .then(res => {
@@ -61,8 +70,17 @@ const RelatedProductsContainer = function({ product_id, renderProduct }) {
     localStorage.setItem('outfit', JSON.stringify(oldOutfit));
     setOutfit(oldOutfit);
   }
+
+  const toggleModal = function(e, name = '', features = []) {
+    console.log('name and features', name, features)
+    setCompare({ name, features });
+    setModalDisplay( modalDisplay === 'none' ? 'block' : 'none');
+  }
+
   return (
     <>
+      <button onClick={toggleModal}>toggle that modal</button>
+      <ComparisonModal display={modalDisplay} close={toggleModal} product={product} compare={compare} />
       <CarouselLabel label='RELATED PRODUCTS' />
       <CarouselList listType='related' related={related} renderProduct={renderProduct} />
       <CarouselLabel label='YOUR OUTFIT' />

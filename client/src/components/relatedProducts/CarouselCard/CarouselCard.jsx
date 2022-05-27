@@ -36,7 +36,7 @@ const CarouselCard = function({ productInfo, renderProduct }) {
   }, [])
 
   return (
-    <Card onClick={() => {renderProduct(product.id)}} >
+    <Card onClick={(e) => {renderProduct(e, product.id)}} >
       <CardTop image={product.image} features={product.features} />
       <CardBtm category={product.category} name={product.name} price={product.default_price} rating={product.rating} />
     </Card>
