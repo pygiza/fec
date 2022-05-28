@@ -15,7 +15,13 @@ const Icon = styled.button`
 
 const CarouselButton = function({ name, features, onClick }) {
   return (
-    <Icon className="fa-solid fa-arrow-right-arrow-left" id='cardButton' onClick={(e) => onClick(e, name, features)} />
+    <>
+      {
+        name ?
+          <Icon className="fa-solid fa-table-columns" id='cardButton' onClick={onClick} /> :
+          <Icon className="fa-solid fa-trash" id='cardButton' onClick={onClick} />
+      }
+    </>
   )
 }
 

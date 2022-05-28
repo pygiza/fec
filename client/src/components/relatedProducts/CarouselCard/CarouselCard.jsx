@@ -4,7 +4,7 @@ import Card from '../Styles.jsx';
 import CardTop from './CardTop/CardTop.jsx';
 import CardBtm from './CardBtm/CardBtm.jsx';
 
-const CarouselCard = function({ productInfo, renderProduct, handleCardButtonClick }) {
+const CarouselCard = function({ productInfo, renderProduct, relatedButtonHandler, outfitButtonHandler, noName }) {
 
   let [product, setProduct] = useState(productInfo);
 
@@ -33,11 +33,11 @@ const CarouselCard = function({ productInfo, renderProduct, handleCardButtonClic
         .catch(err => console.log('couldnt get meta data for related product', err));
       })
       .catch(err => console.log('couldnt get related products image', err));
-  }, [])
+  }, [productInfo])
 
   return (
     <Card onClick={(e) => {renderProduct(e, product.id)}} >
-      <CardTop image={product.image} name={product.name} features={product.features} handleCardButtonClick={handleCardButtonClick} />
+      <CardTop id={product.id} image={product.image} name={noName ? undefined : product.name} features={product.features} relatedButtonHandler={relatedButtonHandler} outfitButtonHandler={outfitButtonHandler} />
       <CardBtm category={product.category} name={product.name} price={product.default_price} rating={product.rating} />
     </Card>
   )

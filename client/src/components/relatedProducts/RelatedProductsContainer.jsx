@@ -12,6 +12,7 @@ const RelatedProductsContainer = function({ product_id, renderProduct }) {
   let [related, setRelated] = useState([]);
   let [outfit, setOutfit] = useState([]);
   let [modalDisplay, setModalDisplay] = useState('none');
+  let [refresh, setRefresh] = useState(1);
 
   useEffect(() => {
     // Get data (name, features) for product_id and store in 'product'
@@ -79,10 +80,12 @@ const RelatedProductsContainer = function({ product_id, renderProduct }) {
       .catch(err => console.log('couldnt add outfit', err));
   }
 
-  const removeOutfit = function(id) {
+  const removeOutfit = function(e, id) {
     let oldOutfitIds = JSON.parse(localStorage.getItem('outfit'));
-    localStorage.setItem('outfit', JSON.stringify(oldOutfitIds.slice(0, -1)));
-    setOutfit(outfit.slice(0, -1));
+    oldOutfitIds.splice(oldOutfitIds.indexOf(id), 1);
+    localStorage.setItem('outfit', JSON.stringify(oldOutfitIds));
+    let newOutfit = outfit.filter(product => product.id !== id);
+    setOutfit(newOutfit);
   }
 
   const toggleModal = function(e, name = '', features = []) {
@@ -92,11 +95,12 @@ const RelatedProductsContainer = function({ product_id, renderProduct }) {
 
   return (
     <>
+      <button onClick={() => setRefresh(refresh + 1)} />
       <ComparisonModal display={modalDisplay} close={toggleModal} product={product} compare={compare} />
       <CarouselLabel label='RELATED PRODUCTS' />
-      <CarouselList listType='related' related={related} renderProduct={renderProduct} handleCardButtonClick={toggleModal}/>
+      <CarouselList listType='related' related={related} renderProduct={renderProduct} relatedButtonHandler={toggleModal}/>
       <CarouselLabel label='YOUR OUTFIT' />
-      <CarouselList listType='outfit' addOutfit={addOutfit} removeOutfit={removeOutfit} outfit={outfit} renderProduct={renderProduct} />
+      <CarouselList listType='outfit' addOutfit={addOutfit} outfitButtonHandler={removeOutfit} outfit={outfit} renderProduct={renderProduct} />
     </>
   );
 };

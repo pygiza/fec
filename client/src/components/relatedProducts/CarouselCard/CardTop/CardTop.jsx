@@ -19,10 +19,10 @@ const Thumbnail = styled.img`
   width: 100%;
 `
 
-const CardTop = function({ image, name, features, handleCardButtonClick }) {
+const CardTop = function({ id, image, name, features, relatedButtonHandler, outfitButtonHandler }) {
   return (
     <Top>
-      <CardButton name={name} features={features} onClick={handleCardButtonClick} />
+      <CardButton name={name} features={features} onClick={relatedButtonHandler ? (e) => relatedButtonHandler(e, name, features) : (e) => outfitButtonHandler(e, id)} />
       {image == null ?
         <div style={{'backgroundColor': 'grey', 'height': '100%', 'width': '100%'}}></div> :
         <Thumbnail src={image}></Thumbnail>
