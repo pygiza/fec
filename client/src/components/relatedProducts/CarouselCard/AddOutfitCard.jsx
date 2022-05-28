@@ -12,8 +12,7 @@ const AddCard = styled(Card)`
 const AddOutfitCard = function({ addOutfit, removeOutfit }) {
   return (
     <AddCard>
-      <button onClick={addOutfit}>add to outfit +</button>
-      <button onClick={removeOutfit}>remove outfit -</button>
+      <button onClick={addOutfit} style={{height: '100%', width: '100%'}} >add to outfit +</button>
     </AddCard>
   )
 }

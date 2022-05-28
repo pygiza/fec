@@ -19,7 +19,7 @@ const Thumbnail = styled.img`
   width: 100%;
 `
 
-const CardTop = function({ id, image, name, features, relatedButtonHandler, outfitButtonHandler }) {
+const CardTop = function({ id, image, name, features, relatedButtonHandler, outfitButtonHandler=function() {} }) {
   return (
     <Top>
       <CardButton name={name} features={features} onClick={relatedButtonHandler ? (e) => relatedButtonHandler(e, name, features) : (e) => outfitButtonHandler(e, id)} />
