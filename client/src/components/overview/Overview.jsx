@@ -7,6 +7,9 @@ import MainBox from './Main.jsx';
 
 function Overview({ productId }) {
   const [image, setImage] = useState('');
+  const [styles, setStyles] = useState('');
+  const [stylesIndex, setStylesIndex] = useState(0);
+  const [skus, setSkus] = useState('');
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [products, setProducts] = useState([]);
   const [firstThumbnail, setFirstThumbnail] = useState(0);
@@ -16,8 +19,10 @@ function Overview({ productId }) {
   const fetchStyles = (product) => {
     axios.get(`http://localhost:3000/products/${product.id}/styles`)
       .then((data) => {
-        console.log('Set Image to: ', data.data.results[0].photos)
+        // console.log('Set Image to: ', data.data.results[0].photos)
+        setStyles(data.data.results);
         setImage(data.data.results[0].photos);
+        makeSkuArray(data.data.results, 0);
       });
   };
 
@@ -54,10 +59,24 @@ function Overview({ productId }) {
     }
   };
 
+  const makeSkuArray = (styles, index) => { //sets skus as array
+    let skuArray = [];
+   //console.log("What is this: ", styles);
+    let skuObj = styles[index].skus;
+    for(let key in skuObj) {
+      skuArray.push(skuObj[key])
+    }
+    setSkus(skuArray);
+  }
+
   const handleStylesClick = (e) => {
     e.preventDefault();
-    setCurrentImageIndex(Number(e.target.id));
-    setThumbnailIndex(Number(e.target.id));
+    setImage(styles[Number(e.target.id)].photos);
+    makeSkuArray(styles, Number(e.target.id));
+    setStylesIndex(Number(e.target.id));
+
+    // setCurrentImageIndex(Number(e.target.id));
+    // setThumbnailIndex(Number(e.target.id));
   }
 
   // Thumbnail Carousel location function
@@ -66,11 +85,9 @@ function Overview({ productId }) {
     if (e.target.value === 'bottom') {
       if (currentImageIndex < 5) {
         setCurrentImageIndex(currentImageIndex + 1);
-        console.log(currentImageIndex)
         setThumbnailIndex(currentImageIndex +1);
       }
       if (currentImageIndex >= 4) { // this is because thumbnail carousel only holds 5
-        console.log('The Last Thumb ',lastThumbnail)
         if (lastThumbnail < image.length) {
           setFirstThumbnail(firstThumbnail + 1);
           setLastThumbnail(lastThumbnail + 1);
@@ -80,7 +97,6 @@ function Overview({ productId }) {
       }
     }
     if (e.target.value === 'top') {
-      console.log('Current Image Index and TOP!!!', currentImageIndex)
       if (currentImageIndex > 0 ) {
         setCurrentImageIndex(currentImageIndex - 1);
         if (thumbnailIndex !== 0) {
@@ -94,7 +110,6 @@ function Overview({ productId }) {
         }
       }
       if (currentImageIndex === image.length-1) { 
-              console.log('AM I GETTING HERE OR NOT COME ON MAN')
               setThumbnailIndex(3);
               setCurrentImageIndex(image.length - 2)
       }
@@ -119,7 +134,7 @@ function Overview({ productId }) {
         lastThumbnail={lastThumbnail}
         updateLocation={updateLocation}
         />
-      <Content products={products} images={image} stylesClick={handleStylesClick} />
+      <Content products={products} styles={styles} stylesClick={handleStylesClick} skus={skus} stylesIndex={stylesIndex} />
       <Footer products={products} />
     </Container>
   );
@@ -133,8 +148,11 @@ const Container = styled.div`
   grid-template-rows: repeat(12, minmax(0,1fr));
   `;
 
-const Title = styled.h1`
+const Title = styled.div`
   object-fit: contain;
+  font-Size: 2.7vw;
+  font-weigh: bold;
+  margin-top: 1.7vw
 `;
 
 const NavBar = styled.div`

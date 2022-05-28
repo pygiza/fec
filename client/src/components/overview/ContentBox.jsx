@@ -2,18 +2,15 @@ import React from 'react';
 import styled from 'styled-components';
 import StyleList from './Styles.jsx'
 import AddToCart from './AddToCart.jsx'
+import InfoBox from './InfoBox.jsx'
 
-function Content({ products, images, stylesClick }) {
+function Content({ products, styles, stylesClick, skus, stylesIndex }) {
+  //console.log('CONTENT BOX SKUS: ', styles)
   return (
     <ContentBox>
-      <StarReviews>Star Reviews</StarReviews>
-      <Category>{products.category}</Category>
-      <ProductName>{products.name}</ProductName>
-      <Price>
-        ${products.default_price}
-      </Price>
-      <StyleList images={images} stylesClick={stylesClick}/>
-      <AddToCart />
+      <InfoBox products={products}/>
+      <StyleList images={styles} stylesClick={stylesClick} stylesIndex={stylesIndex}/>
+      <AddToCart skus={skus}/>
     </ContentBox>
   );
 }
@@ -27,33 +24,6 @@ const ContentBox = styled.div`
   grid-row: 2 / 11;
 `;
 
-const StarReviews = styled.h4`
-  grid-column: 2 / 11;
-  grid-row: 2;
-  padding-bottom: 10px;
-  margin: 0px;
-  padding: 0px;
-`;
 
-const Category = styled.h4`
-  grid-column: 2 / 11;
-  grid-row: 3;
-  padding: 0px;
-  margin: 0px;
-`;
-
-const Price = styled.h4`
-  grid-column: 2 / 11;
-  grid-row: 5;
-  padding: 0px;
-  margin: 0px;
-`;
-
-const ProductName = styled.h2`
-  grid-column: 2 / 11;
-  grid-row: 4;
-  padding: 0px;
-  margin: 0px;
-`;
 
 export default Content;

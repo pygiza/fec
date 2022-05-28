@@ -30,11 +30,12 @@ const PhotoMain = styled.img`
   grid-column: 1 / 5;
   grid-row: 1 / 4;
   border: solid;
+  border-width: thin;
 `;
 
 const ArrowRight = styled.button`
   border: solid black;
-  border-width: 0 3px 3px 0;
+  border-width: 0 1px 1px 0;
   display: inline-block;
   padding: 7px;
   transform: rotate(-45deg);
@@ -46,7 +47,7 @@ const ArrowRight = styled.button`
 
 const ArrowLeft = styled.button`
   border: solid black;
-  border-width: 0 3px 3px 0;
+  border-width: 0 1px 1px 0;
   display: inline-block;
   padding: 7px;
   transform: rotate(135deg);
