@@ -76,7 +76,7 @@ const RelatedProductsContainer = function({ product_id, renderProduct }) {
     localStorage.setItem('outfit', JSON.stringify(oldOutfitIds.concat([product_id])));
 
     axios.get(`/products/${product_id}`)
-      .then(res => setOutfit(outfit.concat([res.data])))
+      .then(res => setOutfit([res.data].concat(outfit)))
       .catch(err => console.log('couldnt add outfit', err));
   }
 

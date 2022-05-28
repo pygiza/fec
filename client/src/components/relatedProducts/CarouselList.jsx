@@ -16,66 +16,117 @@ const Carousel = styled.div`
 
 const CarouselList = function({ listType, related = [], outfit = [], addOutfit, removeOutfit, renderProduct, relatedButtonHandler, outfitButtonHandler }) {
 
-  const [listIndex, setListIndex] = useState({ start: 0, end: 2 });
-  // const [listIndex, setListIndex] = useState({ start: 0, end: 2 });
+  const [relatedIndex, setRelatedIndex] = useState({ start: 0, end: 2 });
+  const [outfitIndex, setOutfitIndex] = useState({ start: 0, end: 1 });
+  const [refresh, setRefresh] = useState(1);
 
   const handleMoveLeft = function() {
-    if (listIndex.start === 0) {
-      return;
+    switch (listType) {
+      case 'related':
+        if (relatedIndex.start <= 0) {
+          break;
+        }
+        setRelatedIndex({ start: relatedIndex.start - 1, end: relatedIndex.end - 1 })
+        break;
+
+      case 'outfit':
+        if (outfitIndex.start <= 0) {
+          break;
+        }
+        setOutfitIndex({ start: outfitIndex.start - 1, end: outfitIndex.end - 1 })
+        console.log('what our outfit indexes (left)?', outfitIndex);
+        break;
+
+      default:
+        console.log('couldnt move related carousel');
     }
-    setListIndex({ start: listIndex.start - 1, end: listIndex.end - 1 })
   }
 
   const handleMoveRight = function() {
-    if (listIndex.end === related.length - 1) {
-      return;
+    switch (listType) {
+      case 'related':
+        if (relatedIndex.end >= related.length - 1) {
+          break;
+        }
+        console.log('what our outfit indexes (right before)?', relatedIndex);
+        setRelatedIndex({ start: relatedIndex.start + 1, end: relatedIndex.end + 1 })
+        console.log('what our outfit indexes (right)?', relatedIndex);
+        break;
+
+      case 'outfit':
+        if (outfitIndex.end >= outfit.length - 1) {
+          console.log('you telling me we never get in here?');
+          break;
+        }
+        console.log('what our outfit indexes (right before)?', outfitIndex);
+        setOutfitIndex({ start: outfitIndex.start + 1, end: outfitIndex.end + 1 })
+        console.log('what our outfit indexes (right)?', outfitIndex);
+        break;
+
+      default:
+        console.log('couldnt move outfit carousel');
     }
-    setListIndex({ start: listIndex.start + 1, end: listIndex.end + 1 })
   }
+
+  const moveOutfitRight = function() {
+    setOutfitIndex({ start: 1, end: 3})
+  }
+
+  useEffect(() => {
+    console.log('hey i got triggered  when related index changed!');
+  }, [relatedIndex]);
+  useEffect(() => {
+    console.log('hey i got triggered when outfit index changed!');
+  }, [outfitIndex]);
+  // console.log('what is related', related);
+  // console.log('what is outfit', outfit);
 
   return (
     <Carousel className='carouselList'>
       <button onClick={handleMoveLeft}>⬅️</button>
-      {/* {
-        // If list type is 'related products', load the related products carousel.
-        related.length === 0 && outfit.length === 0 ? undefined :
-
-        listType === 'related' ?
-        related.map((product, index) => {
-          console.log('im getting invoked a lot arent i', product);
-          if (listIndex.start <= index && index <= listIndex.end)
-          return <CarouselCard key={product.id} productInfo={product} renderProduct={renderProduct} />
-        }) :
-        // Otherwise, load the outfit carousel
-        <>
-          <AddOutfitCard onClick={addOutfit} removeOutfit={removeOutfit} />
-          {outfit.map(product => <CarouselCard key={product.id} renderProduct={renderProduct} />) }
-        </>
-      } */}
       {
         listType === 'related' ?
-          related.map((product, index) => {
-            return listIndex.start <= index && index <= listIndex.end ?
-              <CarouselCard key={product.id} productInfo={product} renderProduct={renderProduct} relatedButtonHandler={relatedButtonHandler} /> : undefined
-          }) :
           <>
-            <AddOutfitCard addOutfit={addOutfit} removeOutfit={removeOutfit} />
-            {outfit.map((product, index) => {
-              return <CarouselCard key={index} productInfo={product} renderProduct={renderProduct} outfitButtonHandler={outfitButtonHandler} noName={true} />
+            {related.map((product, index) => {
+              console.log('relatedIndex start and end and index', relatedIndex.start, relatedIndex.end, index);
+              return relatedIndex.start <= index && index <= relatedIndex.end ?
+                <CarouselCard key={product.id} productInfo={product} renderProduct={renderProduct} handleCardButtonClick={handleCardButtonClick} /> : undefined
             })}
-          </>
-          // outfit.map(product => <CarouselCard key={product.id} productInfo={product} renderProduct={renderProduct} />)
+          </> : undefined
       }
+      {
+        listType === 'outfit' ?
+          <>
+            {/* <AddOutfitCard addOutfit={addOutfit} removeOutfit={removeOutfit} /> */}
+            <button onClick={() => setRefresh(refresh + 1)} />
+            {/* {outfit[0] !== undefined ? <CarouselCard key={outfit[0].id} productInfo={outfit[0]} renderProduct={renderProduct} /> : undefined} */}
 
+            {/* {outfit.map((product, index) => {
+              console.log('outfit index updated!', outfitIndex, index);
+              console.log('what my outfit', outfit);
+              if (index >= outfitIndex.start) {
+                return <CarouselCard key={product.id} productInfo={product} renderProduct={renderProduct} />
+              } else {
+                return undefined;
+              }
+            })} */}
 
-      <button onClick={handleMoveRight}>➡️</button>
+            {/* {outfit.map((product, index) => {
+              console.log('outfitIndex start and end and index', outfitIndex.start, outfitIndex.end, index);
+              console.log('this is true', outfitIndex.start <= index && index <= outfitIndex.end);
+              return outfitIndex.start <= index && index <= outfitIndex.end ?
+                <CarouselCard key={product.id} productInfo={product} renderProduct={renderProduct} handleCardButtonClick={handleCardButtonClick} /> : undefined
+            })} */}
+          </> : undefined
+      }
+      <button onClick={moveOutfitRight}>➡️</button>
     </Carousel>
   )
 }
 
-CarouselList.propTypes = {
-  related: PropTypes.array.isRequired,
-  outfit: PropTypes.array.isRequired
-}
+// CarouselList.propTypes = {
+//   related: PropTypes.array.isRequired,
+//   outfit: PropTypes.array.isRequired
+// }
 
 export default CarouselList;
