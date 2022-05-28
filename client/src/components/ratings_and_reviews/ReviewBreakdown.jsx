@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { getMetaData } from './serverFuncs.js';
 import StarAvg from './reviewEntryComps/StarAvg.jsx';
 import BarGraphList from './reviewBreakdownComps/BarGraphList.jsx';
+import CharList from './reviewBreakdownComps/CharList.jsx';
 
 function ReviewBreakdown({productId}) {
   const [ratings, setRatings] = useState({});
@@ -45,6 +46,7 @@ function ReviewBreakdown({productId}) {
       </Heading>
       <RecStyle>{avgRecommend}% of reviews recommend this product</RecStyle>
       <BarGraphList ratings={ratings.ratings} count={totalRatings}/>
+      <CharList />
     </ReviewBreakdownContainer>
   );
 }
@@ -60,9 +62,9 @@ const ReviewBreakdownContainer = styled.div`
 `;
 
 const AvgRatingText = styled.span`
-  font-size: 4em;
+  font-size: 400%;
   text-align: left;
-  margin-left: 5%;
+  margin-left: 10%;
 `;
 
 const Heading = styled.div`

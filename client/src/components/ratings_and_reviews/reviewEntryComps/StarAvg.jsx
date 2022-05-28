@@ -56,6 +56,13 @@ const InnerFilled = styled.div`
 const OuterStars = styled.div`
   position: relative;
   margin-bottom: 4%;
+  padding-bottom: 2%;
+`;
+
+const Star = styled.i`
+  color: #FFD24C;
+  font-size: 100%;
+  width: 100%
 `;
 
 export default StarAvg;

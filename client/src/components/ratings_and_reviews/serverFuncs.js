@@ -54,6 +54,27 @@ const getMetaData = (productId) => (
     })
 );
 
+const getStarReviews = (star) => (
+  axios.get('/reviews', {
+    params: {
+      product_id: productId,
+      count: 10000,
+    },
+  })
+    .then((res) => {
+      const starReviews = [];
+      res.data.results.forEach((review) => {
+        if (review.rating === star) {
+          starReviews.push(review);
+        }
+      });
+      return starReviews;
+    })
+    .catch((err) => {
+      console.log(`error fetching ${star} star reviews from api`, err);
+    })
+);
+
 const voteHelpful = (reviewId) => (
   axios.put(`/reviews/${reviewId}/helpful`)
 );
@@ -67,6 +88,7 @@ module.exports = {
   checkMoreRevs,
   getCurrentAmtReviews,
   getMetaData,
+  getStarReviews,
   voteHelpful,
   reportReview,
 };

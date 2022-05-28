@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { getReviewsBy2, checkMoreRevs, getMetaData } from './serverFuncs.js';
+import { getReviewsBy2, checkMoreRevs, getMetaData, getStarReviews } from './serverFuncs.js';
 import ReviewEntry from './ReviewEntry.jsx';
 import AddMoreReviews from './reviewListComps/AddMoreReviews.jsx';
 import WriteReviewButton from './reviewListComps/WriteReviewButton.jsx';
