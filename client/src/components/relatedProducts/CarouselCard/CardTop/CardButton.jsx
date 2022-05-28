@@ -25,9 +25,4 @@ const CarouselButton = function({ name, features, onClick }) {
   )
 }
 
-CarouselButton.propTypes = {
-  name: PropTypes.string.isRequired,
-  features: PropTypes.array.isRequired,
-}
-
 export default CarouselButton
