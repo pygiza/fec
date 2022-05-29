@@ -54,7 +54,7 @@ function WriteReviewForm({ metaData }) {
         <ReviewSummary type="text" placeholder="Example: Best purchase ever!" maxlength="60"></ReviewSummary>
 
         <h4>Review Body</h4>
-        <ReviewBody type="text" required="true" placeholder="Why did you like the product or not?" maxlength="1000" minlength="50" rows="5" />
+        <ReviewBody type="text" required={true} placeholder="Why did you like the product or not?" maxlength="1000" minlength="50" rows="5" />
 
         <SubmitReviewButton type="Submit" />
       </form>

@@ -33,7 +33,7 @@ function ReviewBreakdown({ productId, metaData, filterStars, getCurrentRevs }) {
   return (
     <ReviewBreakdownContainer>
       <Heading>
-        <AvgRatingText onClick={getCurrentRevs}>{avgRating}</AvgRatingText>
+        <AvgRatingText onClick={getCurrentRevs}>{avgRating || ""}</AvgRatingText>
         <StarContainer>
           <StarAvg rating={avgRating} />
         </StarContainer>

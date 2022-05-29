@@ -6,7 +6,7 @@ import WriteReviewForm from './WriteReviewForm.jsx';
 function WriteReviewButton({ toggleWriteReview, displayWrite, metaData }) {
   return (
     <span>
-      <StyledWriteReviewButton onClick={toggleWriteReview}>Write Review</StyledWriteReviewButton>
+      <StyledWriteReviewButton onClick={toggleWriteReview}>Write Review +</StyledWriteReviewButton>
       <StyledWriteReviewModal displayWrite={displayWrite} >
         <XOut>
           <i onClick={toggleWriteReview} className="fa-solid fa-circle-xmark" />
