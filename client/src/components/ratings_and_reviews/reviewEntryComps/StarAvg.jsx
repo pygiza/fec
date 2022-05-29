@@ -24,7 +24,7 @@ function StarAvg({ rating }) {
 }
 
 StarAvg.propTypes = {
-  rating: PropTypes.number.isRequired,
+  rating: PropTypes.number,
 };
 
 const InnerStars = styled.div`

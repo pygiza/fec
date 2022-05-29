@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-function BarGraph({ star, percent }) {
+function BarGraph({ star, percent, filterStars }) {
   return (
     <BarGraphContainer>
       <StarContainer>
-        <StarLabel>{star} Star</StarLabel>
+        <StarLabel onClick={() => filterStars(star)}>{star} Star</StarLabel>
         <BarContainer>
           <LightBar />
           <DarkBar percent={percent}/>
@@ -19,6 +19,7 @@ function BarGraph({ star, percent }) {
 BarGraph.propTypes = {
   star: PropTypes.string,
   percent: PropTypes.number,
+  filterStars: PropTypes.func.isRequired,
 }
 
 const BarGraphContainer = styled.div`

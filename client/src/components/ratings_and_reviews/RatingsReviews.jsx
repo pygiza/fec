@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { getReviewsBy2, checkMoreRevs, getMetaData, getStarReviews, getCurrentAmtReviews } from './serverFuncs.js';
 import ReviewList from './ReviewList.jsx';
 import ReviewBreakdown from './ReviewBreakdown.jsx';
 
 
 function RatingsReviews({ productId }) {
-
+  // dynamic sizing
   const [matches, setMatches] = useState(
     window.matchMedia("(min-width: 768px)").matches
   )
@@ -17,18 +18,146 @@ function RatingsReviews({ productId }) {
     .addEventListener('change', e => setMatches( e.matches ));
   }, []);
 
+  const initialMetaData = {
+    "product_id": "",
+    "ratings": {
+        "1": "",
+        "2": "",
+        "3": "",
+        "4": "",
+        "5": ""
+    },
+    "recommended": {
+        "false": "",
+        "true": ""
+    },
+    "characteristics": {
+    }
+  };
+
+  const [reviews, setReviews] = useState([]);
+  const [metaData, setMetaData] = useState(initialMetaData);
+  const [page, setPage] = useState(1);
+  const [revsLeft, setRevsLeft] = useState(false);
+  const [currentFilters, setCurrentFilters] = useState([]);
+
+  function getReviews() {
+    return getReviewsBy2(productId, 1)
+      .then((revs) => {
+        setReviews([...revs]);
+      })
+      .then(() => {
+        setPage(1);
+      })
+      .then(() => {
+        checkMoreRevs(productId, 2)
+          .then((revsLeft) => {
+            setRevsLeft(revsLeft);
+          });
+      })
+  }
+
+  useEffect(() => {
+    getReviews();
+  }, [productId]);
+
+  function getMeta() {
+    getMetaData(productId)
+      .then((data) => {
+        setMetaData(data);
+      });
+  }
+
+  useEffect(() => {
+    getMeta();
+  }, [productId]);
+
+  function moreReviews() {
+    return getReviewsBy2(productId, page + 1)
+      .then((revs) => {
+        setReviews([...reviews, ...revs]);
+        return revs;
+      })
+      .then((revs) => {
+        if (revs.length) {
+          setPage(page + 1);
+        }
+      })
+      .then(() => {
+        checkMoreRevs(productId, page + 2)
+          .then((revsLeft) => {
+            setRevsLeft(revsLeft);
+          });
+      });
+  }
+
+  function filterStars(star) {
+    getStarReviews(star, productId)
+      .then((data) => {
+        setRevsLeft(false);
+        setReviews([...data]);
+        setCurrentFilters([...currentFilters, star]);
+      });
+  }
+
+  function getCurrentRevs() {
+    getCurrentAmtReviews(productId, page)
+      .then((currentRevs) => {
+        setReviews([...currentRevs]);
+        setCurrentFilters([]);
+      })
+      .then(() => {
+        checkMoreRevs(productId, page + 1)
+          .then((revsLeft) => {
+            setRevsLeft(revsLeft);
+          });
+      });
+  }
+
+  useEffect(() => {
+    setCurrentFilters([]);
+  }, [productId]);
+
+
   return (
     <div>
-      <p>RATINGS & REVIEWS</p>
+      <SectionTitle>RATINGS & REVIEWS</SectionTitle>
       { matches &&
       (<OverallReviews>
-        <ReviewBreakdown productId={productId} />
-        <ReviewList productId={productId} />
+        <ReviewBreakdown
+          productId={productId}
+          metaData={metaData}
+          filterStars={filterStars}
+          getCurrentRevs={getCurrentRevs}
+        />
+        <ReviewList
+          productId={productId}
+          reviews={reviews}
+          metaData={metaData}
+          page={page}
+          revsLeft={revsLeft}
+          getReviews={getReviews}
+          moreReviews={moreReviews}
+        />
       </OverallReviews>)}
       { !matches &&
       (<SmallScreen>
-        <ReviewBreakdown productId={productId} />
-        <ReviewList productId={productId} />
+          <ReviewBreakdown
+            productId={productId}
+            metaData={metaData}
+            filterStars={filterStars}
+            getCurrentRevs={getCurrentRevs}
+          />
+        <ReviewList
+          productId={productId}
+          reviews={reviews}
+          metaData={metaData}
+          page={page}
+          revsLeft={revsLeft}
+          getReviews={getReviews}
+          moreReviews={moreReviews}
+          filterStars={filterStars}
+        />
       </SmallScreen>)}
     </div>
 
@@ -39,6 +168,13 @@ function RatingsReviews({ productId }) {
 const OverallReviews = styled.div`
   display: grid;
   grid-template-columns: 34% 66%;
+`;
+
+const SectionTitle = styled.p`
+  font-size: 1.3em;
+  margin-left: 1%;
+  margin-top: 2%;
+  font-weight: bold;
 `;
 
 const SmallScreen = styled.div`

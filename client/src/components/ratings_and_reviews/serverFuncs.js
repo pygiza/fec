@@ -8,6 +8,10 @@ const getReviewsBy2 = (productId, page) => (
       count: 2,
     },
   })
+    .then((res) => (res.data.results))
+    .catch((err) => {
+      console.log('could not fetch reviews from client', err);
+    })
 );
 
 const checkMoreRevs = (productId, page) => (
@@ -38,6 +42,7 @@ const getCurrentAmtReviews = (productId, page) => {
       count: currentAmt,
     },
   })
+    .then(res => (res.data.results))
 };
 
 const getMetaData = (productId) => (
@@ -54,7 +59,7 @@ const getMetaData = (productId) => (
     })
 );
 
-const getStarReviews = (star) => (
+const getStarReviews = (star, productId) => (
   axios.get('/reviews', {
     params: {
       product_id: productId,
@@ -64,7 +69,7 @@ const getStarReviews = (star) => (
     .then((res) => {
       const starReviews = [];
       res.data.results.forEach((review) => {
-        if (review.rating === star) {
+        if (review.rating === parseInt(star)) {
           starReviews.push(review);
         }
       });
