@@ -66,6 +66,11 @@ function ReviewList({ productId }) {
       });
   }
 
+  function filterStars() {
+    getStarReviews(productId)
+      .then((data) => setReviews([...data]));
+  }
+
   useEffect(() => {
     getReviews();
   }, [productId]);
