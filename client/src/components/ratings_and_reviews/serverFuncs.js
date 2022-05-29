@@ -8,6 +8,10 @@ const getReviewsBy2 = (productId, page) => (
       count: 2,
     },
   })
+    .then((res) => (res.data.results))
+    .catch((err) => {
+      console.log('could not fetch reviews from client', err);
+    })
 );
 
 const checkMoreRevs = (productId, page) => (

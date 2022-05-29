@@ -1,84 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { getReviewsBy2, checkMoreRevs, getMetaData, getStarReviews } from './serverFuncs.js';
 import ReviewEntry from './ReviewEntry.jsx';
 import AddMoreReviews from './reviewListComps/AddMoreReviews.jsx';
 import WriteReviewButton from './reviewListComps/WriteReviewButton.jsx';
 
-function ReviewList({ productId }) {
-  const [reviews, setReviews] = useState([]);
-  const [page, setPage] = useState(1);
-  const [revsLeft, setRevsLeft] = useState(false);
+function ReviewList({ productId, reviews, metaData, page, revsLeft, getReviews, moreReviews, filterStars }) {
   const [displayWrite, setDisplayWrite] = useState(false);
-  const [metaData, setMetaData] = useState({});
-
-  function getReviews() {
-    return getReviewsBy2(productId, 1)
-      .then((res) => {
-        setReviews([...res.data.results]);
-      })
-      .then(() => {
-        setPage(1);
-      })
-      .then(() => {
-        checkMoreRevs(productId, 2)
-          .then((revsLeft) => {
-            setRevsLeft(revsLeft);
-          });
-      })
-      .catch((err) => {
-        console.log('could not fetch reviews from client', err);
-      });
-  }
-
-
-  function moreReviews() {
-    return getReviewsBy2(productId, page + 1)
-      .then((res) => {
-        setReviews([...reviews, ...res.data.results]);
-        return res.data.results;
-      })
-      .then((res) => {
-        if (res.length) {
-          setPage(page + 1);
-        }
-      })
-      .then(() => {
-        checkMoreRevs(productId, page + 2)
-          .then((revsLeft) => {
-            setRevsLeft(revsLeft);
-          });
-      })
-      .catch((err) => {
-        console.log('error fetching more reviews', err);
-      });
-  }
 
   function toggleWriteReview() {
     setDisplayWrite(!displayWrite);
   }
-
-  function getMeta() {
-    getMetaData(productId)
-      .then((data) => {
-        setMetaData(data);
-      });
-  }
-
-  function filterStars() {
-    getStarReviews(productId)
-      .then((data) => setReviews([...data]));
-  }
-
-  useEffect(() => {
-    getReviews();
-  }, [productId]);
-
-  useEffect(() => {
-    getMeta();
-  }, [productId]);
-
 
   return (
     <ReviewListContainer>
@@ -96,6 +28,13 @@ function ReviewList({ productId }) {
 
 ReviewList.propTypes = {
   productId: PropTypes.number.isRequired,
+  reviews: PropTypes.array.isRequired,
+  metaData: PropTypes.object.isRequired,
+  page: PropTypes.number,
+  revsLeft: PropTypes.bool,
+  getReviews: PropTypes.func.isRequired,
+  moreReviews: PropTypes.func.isRequired,
+  filterStars: PropTypes.func.isRequired,
 };
 
 const ReviewListContainer = styled.div`
