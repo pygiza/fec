@@ -53,7 +53,6 @@ const StyledArray = styled.div`
   &:hover {
     background-color: #92B4EC;
   }
-
 `;
 
 const ToggleLabel = styled.label`

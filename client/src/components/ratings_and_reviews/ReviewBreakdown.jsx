@@ -46,7 +46,7 @@ function ReviewBreakdown({productId}) {
       </Heading>
       <RecStyle>{avgRecommend}% of reviews recommend this product</RecStyle>
       <BarGraphList ratings={ratings.ratings} count={totalRatings}/>
-      <CharList />
+      <CharList chars={ratings.characteristics}/>
     </ReviewBreakdownContainer>
   );
 }
@@ -62,7 +62,7 @@ const ReviewBreakdownContainer = styled.div`
 `;
 
 const AvgRatingText = styled.span`
-  font-size: 400%;
+  font-size: 6vw;
   text-align: left;
   margin-left: 10%;
 `;

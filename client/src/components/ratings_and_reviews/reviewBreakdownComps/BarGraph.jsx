@@ -55,6 +55,7 @@ const LightBar = styled.div`
 
 const StarLabel = styled.p`
   text-decoration: underline;
+  font-size: 1.5vw;
   &:hover{
     cursor: pointer;
   }
