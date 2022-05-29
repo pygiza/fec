@@ -24,40 +24,44 @@ BarGraph.propTypes = {
 const BarGraphContainer = styled.div`
   margin-left: 8%;
   padding-top: 1%;
+  position: relative;
 `;
 
 const StarContainer = styled.div`
   display: grid;
-  grid-template-columns: 18% auto auto;
+  grid-template-columns: 18% auto ;
 `;
 
 const BarContainer = styled.div`
-  margin-top: 12%;
 `;
 
 const DarkBar = styled.div`
   position: absolute;
+  bottom: 0;
   width: ${props => (
-    props.percent * 20
+    props.percent * 60
   )}%;
-  height: 1rem;
+  height: .9rem;
   background-color: #92B4EC;
   border: 1px solid #92B4EC;
 `;
 
 const LightBar = styled.div`
   position: absolute;
-  width: 20%;
-  height: 1rem;
+  bottom: 0;
+  width: 60%;
+  height: .9rem;
   background-color: #F7F7F7;
   border: 1px solid #92B4EC;
 `;
 
 const StarLabel = styled.p`
+  margin-bottom: 0;
   text-decoration: underline;
-  font-size: 1.5vw;
+  font-size: 1em;
   &:hover{
     cursor: pointer;
+    color: #F9C321;
   }
 `;
 

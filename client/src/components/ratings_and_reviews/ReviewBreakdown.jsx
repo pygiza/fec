@@ -56,13 +56,12 @@ ReviewBreakdown.propTypes = {
 };
 
 const ReviewBreakdownContainer = styled.div`
-  width: 34%;
   margin: 2%;
   border: solid black 3px;
 `;
 
 const AvgRatingText = styled.span`
-  font-size: 6vw;
+  font-size: 4em;
   text-align: left;
   margin-left: 10%;
 `;
@@ -78,6 +77,7 @@ const StarContainer = styled.span`
 
 const RecStyle = styled.p`
   font-size: 1em;
+  margin: 1% 8%;
   text-align: center;
   font-weight: bold;
 `;

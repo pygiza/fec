@@ -80,8 +80,11 @@ function ReviewList({ productId }) {
       {reviews.map((review) => (
         <ReviewEntry key={review.review_id} review={review} />
       ))}
-      <AddMoreReviews moreReviews={moreReviews} revsLeft={revsLeft} />
-      <WriteReviewButton metaData={metaData} toggleWriteReview={toggleWriteReview} displayWrite={displayWrite}/>
+      <ReviewButtons>
+        <AddMoreReviews moreReviews={moreReviews} revsLeft={revsLeft} />
+        <WriteReviewButton metaData={metaData} toggleWriteReview={toggleWriteReview} displayWrite={displayWrite}/>
+      </ReviewButtons>
+
     </ReviewListContainer>
   );
 }
@@ -91,10 +94,12 @@ ReviewList.propTypes = {
 };
 
 const ReviewListContainer = styled.div`
-  width: 66%;
   margin: 2%;
   height: 100vw;
   overflow-y: auto;
+`;
+
+const ReviewButtons = styled.div`
 `;
 
 export default ReviewList;

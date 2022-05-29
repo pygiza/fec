@@ -22,13 +22,13 @@ function BarGraphList({ ratings, count }) {
   }, [ratings, count]);
 
   return(
-    <div>
+    <BarGraphContainer>
       <BarGraph star="5" percent={percentages["5"]}/>
       <BarGraph star="4" percent={percentages["4"]}/>
       <BarGraph star="3" percent={percentages["3"]}/>
       <BarGraph star="2" percent={percentages["2"]}/>
       <BarGraph star="1" percent={percentages["1"]}/>
-    </div>
+    </BarGraphContainer>
   );
 }
 
@@ -36,6 +36,10 @@ BarGraphList.propTypes = {
   ratings: PropTypes.object,
   count: PropTypes.number,
 }
+
+const BarGraphContainer = styled.div`
+  margin-bottom: 10%;
+`;
 
 export default BarGraphList;
 
