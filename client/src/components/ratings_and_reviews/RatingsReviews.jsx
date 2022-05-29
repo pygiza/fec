@@ -39,6 +39,7 @@ function RatingsReviews({ productId }) {
   const [metaData, setMetaData] = useState(initialMetaData);
   const [page, setPage] = useState(1);
   const [revsLeft, setRevsLeft] = useState(false);
+  const [currentFilters, setCurrentFilters] = useState([]);
 
   function getReviews() {
     return getReviewsBy2(productId, 1)
@@ -95,6 +96,7 @@ function RatingsReviews({ productId }) {
       .then((data) => {
         setRevsLeft(false);
         setReviews([...data]);
+        setCurrentFilters([...currentFilters, star]);
       });
   }
 
@@ -102,6 +104,7 @@ function RatingsReviews({ productId }) {
     getCurrentAmtReviews(productId, page)
       .then((currentRevs) => {
         setReviews([...currentRevs]);
+        setCurrentFilters([]);
       })
       .then(() => {
         checkMoreRevs(productId, page + 1)
@@ -110,6 +113,10 @@ function RatingsReviews({ productId }) {
           });
       });
   }
+
+  useEffect(() => {
+    setCurrentFilters([]);
+  }, [productId]);
 
 
   return (
