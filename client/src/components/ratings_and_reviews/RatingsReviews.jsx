@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { getReviewsBy2, checkMoreRevs, getMetaData, getStarReviews } from './serverFuncs.js';
+import { getReviewsBy2, checkMoreRevs, getMetaData, getStarReviews, getCurrentAmtReviews } from './serverFuncs.js';
 import ReviewList from './ReviewList.jsx';
 import ReviewBreakdown from './ReviewBreakdown.jsx';
 
@@ -93,17 +93,36 @@ function RatingsReviews({ productId }) {
   function filterStars(star) {
     getStarReviews(star, productId)
       .then((data) => {
-        console.log('star reviews client', data);
-        setReviews([...data])});
+        setRevsLeft(false);
+        setReviews([...data]);
+      });
+  }
+
+  function getCurrentRevs() {
+    getCurrentAmtReviews(productId, page)
+      .then((currentRevs) => {
+        setReviews([...currentRevs]);
+      })
+      .then(() => {
+        checkMoreRevs(productId, page + 1)
+          .then((revsLeft) => {
+            setRevsLeft(revsLeft);
+          });
+      });
   }
 
 
   return (
     <div>
-      <p>RATINGS & REVIEWS</p>
+      <SectionTitle>RATINGS & REVIEWS</SectionTitle>
       { matches &&
       (<OverallReviews>
-        <ReviewBreakdown productId={productId} metaData={metaData} filterStars={filterStars}/>
+        <ReviewBreakdown
+          productId={productId}
+          metaData={metaData}
+          filterStars={filterStars}
+          getCurrentRevs={getCurrentRevs}
+        />
         <ReviewList
           productId={productId}
           reviews={reviews}
@@ -116,7 +135,12 @@ function RatingsReviews({ productId }) {
       </OverallReviews>)}
       { !matches &&
       (<SmallScreen>
-        <ReviewBreakdown productId={productId} metaData={metaData} filterStars={filterStars}/>
+          <ReviewBreakdown
+            productId={productId}
+            metaData={metaData}
+            filterStars={filterStars}
+            getCurrentRevs={getCurrentRevs}
+          />
         <ReviewList
           productId={productId}
           reviews={reviews}
@@ -137,6 +161,13 @@ function RatingsReviews({ productId }) {
 const OverallReviews = styled.div`
   display: grid;
   grid-template-columns: 34% 66%;
+`;
+
+const SectionTitle = styled.p`
+  font-size: 1.3em;
+  margin-left: 1%;
+  margin-top: 2%;
+  font-weight: bold;
 `;
 
 const SmallScreen = styled.div`

@@ -42,6 +42,7 @@ const getCurrentAmtReviews = (productId, page) => {
       count: currentAmt,
     },
   })
+    .then(res => (res.data.results))
 };
 
 const getMetaData = (productId) => (

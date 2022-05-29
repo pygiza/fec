@@ -6,7 +6,7 @@ import StarAvg from './reviewEntryComps/StarAvg.jsx';
 import BarGraphList from './reviewBreakdownComps/BarGraphList.jsx';
 import CharList from './reviewBreakdownComps/CharList.jsx';
 
-function ReviewBreakdown({ productId, metaData, filterStars }) {
+function ReviewBreakdown({ productId, metaData, filterStars, getCurrentRevs }) {
   const [avgRating, setAvgRating] = useState(null);
   const [avgRecommend, setAvgRecommend] = useState(null);
   const [totalRatings, setTotalRatings] = useState(null);
@@ -33,7 +33,7 @@ function ReviewBreakdown({ productId, metaData, filterStars }) {
   return (
     <ReviewBreakdownContainer>
       <Heading>
-        <AvgRatingText>{avgRating}</AvgRatingText>
+        <AvgRatingText onClick={getCurrentRevs}>{avgRating}</AvgRatingText>
         <StarContainer>
           <StarAvg rating={avgRating} />
         </StarContainer>
@@ -49,6 +49,7 @@ ReviewBreakdown.propTypes = {
   productId: PropTypes.number.isRequired,
   metaData: PropTypes.object.isRequired,
   filterStars: PropTypes.func.isRequired,
+  getCurrentRevs: PropTypes.func.isRequired,
 };
 
 const ReviewBreakdownContainer = styled.div`
@@ -60,6 +61,10 @@ const AvgRatingText = styled.span`
   font-size: 4em;
   text-align: left;
   margin-left: 10%;
+  &:hover {
+    cursor: pointer;
+    color: red;
+  }
 `;
 
 const Heading = styled.div`
