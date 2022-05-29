@@ -34,12 +34,11 @@ ReviewList.propTypes = {
   revsLeft: PropTypes.bool,
   getReviews: PropTypes.func.isRequired,
   moreReviews: PropTypes.func.isRequired,
-  filterStars: PropTypes.func.isRequired,
 };
 
 const ReviewListContainer = styled.div`
   margin: 2%;
-  height: 100vw;
+  height: 100vh;
   overflow-y: auto;
 `;
 

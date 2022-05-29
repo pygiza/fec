@@ -6,35 +6,29 @@ import StarAvg from './reviewEntryComps/StarAvg.jsx';
 import BarGraphList from './reviewBreakdownComps/BarGraphList.jsx';
 import CharList from './reviewBreakdownComps/CharList.jsx';
 
-function ReviewBreakdown({productId}) {
-  const [ratings, setRatings] = useState({});
+function ReviewBreakdown({ productId, metaData, filterStars }) {
   const [avgRating, setAvgRating] = useState(null);
   const [avgRecommend, setAvgRecommend] = useState(null);
   const [totalRatings, setTotalRatings] = useState(null);
 
   function getRatings() {
-    getMetaData(productId)
-      .then((data) => {
-        setRatings(data);
-        let total = 0;
-        let count = 0;
-        for (let key in data.ratings) {
-          total += (parseInt(data.ratings[key]) * parseInt(key));
-          count += parseInt(data.ratings[key]);
-        }
-        setTotalRatings(count);
-        setAvgRating(Math.round(total/count * 10) / 10);
+    let total = 0;
+    let count = 0;
+    for (let key in metaData.ratings) {
+      total += (parseInt(metaData.ratings[key]) * parseInt(key));
+      count += parseInt(metaData.ratings[key]);
+    }
+    setTotalRatings(count);
+    setAvgRating(Math.round(total/count * 10) / 10);
 
-        let avgRec = (parseInt(data.recommended.true) / (parseInt(data.recommended.true) + parseInt(data.recommended.false)) * 100);
-        setAvgRecommend(Math.round(avgRec));
-      });
+    let avgRec = (parseInt(metaData.recommended.true) / (parseInt(metaData.recommended.true) + parseInt(metaData.recommended.false)) * 100);
+    setAvgRecommend(Math.round(avgRec));
   }
 
 
   useEffect(() => {
-    setRatings({});
     getRatings();
-  }, [productId]);
+  }, [metaData]);
 
   return (
     <ReviewBreakdownContainer>
@@ -45,14 +39,16 @@ function ReviewBreakdown({productId}) {
         </StarContainer>
       </Heading>
       <RecStyle>{avgRecommend}% of reviews recommend this product</RecStyle>
-      <BarGraphList ratings={ratings.ratings} count={totalRatings}/>
-      <CharList chars={ratings.characteristics}/>
+      <BarGraphList ratings={metaData.ratings} count={totalRatings} filterStars={filterStars}/>
+      <CharList chars={metaData.characteristics}/>
     </ReviewBreakdownContainer>
   );
 }
 
 ReviewBreakdown.propTypes = {
   productId: PropTypes.number.isRequired,
+  metaData: PropTypes.object.isRequired,
+  filterStars: PropTypes.func.isRequired,
 };
 
 const ReviewBreakdownContainer = styled.div`

@@ -58,7 +58,7 @@ const getMetaData = (productId) => (
     })
 );
 
-const getStarReviews = (star) => (
+const getStarReviews = (star, productId) => (
   axios.get('/reviews', {
     params: {
       product_id: productId,
@@ -68,7 +68,7 @@ const getStarReviews = (star) => (
     .then((res) => {
       const starReviews = [];
       res.data.results.forEach((review) => {
-        if (review.rating === star) {
+        if (review.rating === parseInt(star)) {
           starReviews.push(review);
         }
       });

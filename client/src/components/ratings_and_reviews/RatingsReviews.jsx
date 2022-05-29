@@ -18,8 +18,25 @@ function RatingsReviews({ productId }) {
     .addEventListener('change', e => setMatches( e.matches ));
   }, []);
 
+  const initialMetaData = {
+    "product_id": "",
+    "ratings": {
+        "1": "",
+        "2": "",
+        "3": "",
+        "4": "",
+        "5": ""
+    },
+    "recommended": {
+        "false": "",
+        "true": ""
+    },
+    "characteristics": {
+    }
+  };
+
   const [reviews, setReviews] = useState([]);
-  const [metaData, setMetaData] = useState({});
+  const [metaData, setMetaData] = useState(initialMetaData);
   const [page, setPage] = useState(1);
   const [revsLeft, setRevsLeft] = useState(false);
 
@@ -73,9 +90,11 @@ function RatingsReviews({ productId }) {
       });
   }
 
-  function filterStars() {
-    getStarReviews(productId)
-      .then((data) => setReviews([...data]));
+  function filterStars(star) {
+    getStarReviews(star, productId)
+      .then((data) => {
+        console.log('star reviews client', data);
+        setReviews([...data])});
   }
 
 
@@ -84,7 +103,20 @@ function RatingsReviews({ productId }) {
       <p>RATINGS & REVIEWS</p>
       { matches &&
       (<OverallReviews>
-        <ReviewBreakdown productId={productId} metaData={metaData}/>
+        <ReviewBreakdown productId={productId} metaData={metaData} filterStars={filterStars}/>
+        <ReviewList
+          productId={productId}
+          reviews={reviews}
+          metaData={metaData}
+          page={page}
+          revsLeft={revsLeft}
+          getReviews={getReviews}
+          moreReviews={moreReviews}
+        />
+      </OverallReviews>)}
+      { !matches &&
+      (<SmallScreen>
+        <ReviewBreakdown productId={productId} metaData={metaData} filterStars={filterStars}/>
         <ReviewList
           productId={productId}
           reviews={reviews}
@@ -95,11 +127,6 @@ function RatingsReviews({ productId }) {
           moreReviews={moreReviews}
           filterStars={filterStars}
         />
-      </OverallReviews>)}
-      { !matches &&
-      (<SmallScreen>
-        <ReviewBreakdown productId={productId} />
-        <ReviewList productId={productId} />
       </SmallScreen>)}
     </div>
 
