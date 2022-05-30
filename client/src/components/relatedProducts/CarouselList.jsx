@@ -13,65 +13,52 @@ const Carousel = styled.div`
   justify-content: space-between;
 `;
 
+const ArrowLeft = styled.button`
+  height: 100%;
+  background-color: white;
+  font-size: 40px;
+  border: none;
+  background: linear-gradient(to right, white, lightgrey);
+`
+
+const ArrowRight = styled.button`
+  height: 100%;
+  background-color: white;
+  font-size: 40px;
+  border: none;
+  background: linear-gradient(to left, white, lightgrey);
+`
+
 const CarouselList = function({ listType, related = [], outfit = [], addOutfit, removeOutfit, renderProduct, relatedButtonHandler, outfitButtonHandler }) {
 
-  const [relatedIndex, setRelatedIndex] = useState({ start: 0, end: 2 });
-  const [outfitIndex, setOutfitIndex] = useState({ start: 0, end: 2 });
+  let [listIndex, setListIndex] = useState({ start: 0, end: 2 })
 
   const handleMoveLeft = function() {
-    switch (listType) {
-      case 'related':
-        if (relatedIndex.start <= 0) {
-          break;
-        }
-        setRelatedIndex({ start: relatedIndex.start - 1, end: relatedIndex.end - 1 })
-        break;
-
-      case 'outfit':
-        if (outfitIndex.start <= 0) {
-          break;
-        }
-        setOutfitIndex({ start: outfitIndex.start - 1, end: outfitIndex.end - 1 })
-        break;
-
-      default:
-        console.log('couldnt move related carousel');
+    if (listIndex.start <= 0) {
+      return;
     }
+    setListIndex({ start: listIndex.start - 1, end: listIndex.end - 1 });
   }
 
   const handleMoveRight = function() {
-    switch (listType) {
-      case 'related':
-        if (relatedIndex.end >= related.length - 1) {
-          break;
-        }
-        setRelatedIndex({ start: relatedIndex.start + 1, end: relatedIndex.end + 1 })
-        break;
-
-      case 'outfit':
-        if (outfitIndex.end >= outfit.length - 1) {
-          break;
-        }
-        setOutfitIndex({ start: outfitIndex.start + 1, end: outfitIndex.end + 1 })
-        break;
-
-      default:
-        console.log('couldnt move outfit carousel');
+    let length = listType === 'related' ? related.length - 1 : outfit.length - 1;
+    if (listIndex.end >= length) {
+      return;
     }
-  }
-
-  const moveOutfitRight = function() {
-    setOutfitIndex({ start: outfitIndex.start + 1, end: outfitIndex.end + 1 })
+    setListIndex({ start: listIndex.start + 1, end: listIndex.end + 1 });
   }
 
   return (
     <Carousel className='carouselList'>
-      <button onClick={handleMoveLeft}>⬅️</button>
+      <ArrowLeft onClick={handleMoveLeft}>
+        {}
+        <i className='fa-solid fa-caret-left' />
+      </ArrowLeft>
       {
         listType === 'related' ?
           <>
             {related.map((product, index) => {
-              return relatedIndex.start <= index && index <= relatedIndex.end ?
+              return listIndex.start <= index && index <= listIndex.end ?
                 <CarouselCard key={product.id} product={product} renderProduct={renderProduct} relatedButtonHandler={relatedButtonHandler} /> : undefined
             })}
           </> : undefined
@@ -80,7 +67,7 @@ const CarouselList = function({ listType, related = [], outfit = [], addOutfit, 
         listType === 'outfit' ?
           <>
             {outfit.map((product, index) => {
-              if (outfitIndex.start <= index && index <= outfitIndex.end) {
+              if (listIndex.start <= index && index <= listIndex.end) {
                 return product === 'add' ? <AddOutfitCard key='add' addOutfit={addOutfit} /> :
                 <CarouselCard key={product.id} product={product} renderProduct={renderProduct} outfitButtonHandler={outfitButtonHandler} noName={true} />
               } else {
@@ -89,7 +76,7 @@ const CarouselList = function({ listType, related = [], outfit = [], addOutfit, 
             })}
           </> : undefined
       }
-      <button onClick={handleMoveRight}>➡️</button>
+      <ArrowRight onClick={handleMoveRight}><i className='fa-solid fa-caret-right' /></ArrowRight>
     </Carousel>
   )
 }
