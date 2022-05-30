@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { getReviewsBy2, checkMoreRevs, getMetaData, getStarReviews, getCurrentAmtReviews } from './serverFuncs.js';
 import ReviewList from './ReviewList.jsx';
 import ReviewBreakdown from './ReviewBreakdown.jsx';
+import ReviewFilter from './reviewListComps/ReviewFilter.jsx';
 
 
 function RatingsReviews({ productId }) {
@@ -118,7 +119,6 @@ function RatingsReviews({ productId }) {
     setCurrentFilters([]);
   }, [productId]);
 
-
   return (
     <div>
       <SectionTitle>RATINGS & REVIEWS</SectionTitle>
@@ -130,6 +130,7 @@ function RatingsReviews({ productId }) {
           filterStars={filterStars}
           getCurrentRevs={getCurrentRevs}
         />
+        {/* <ReviewFilter style={{ gridColumnStart: 2, }}/> */}
         <ReviewList
           productId={productId}
           reviews={reviews}
@@ -148,6 +149,7 @@ function RatingsReviews({ productId }) {
             filterStars={filterStars}
             getCurrentRevs={getCurrentRevs}
           />
+        {/* <ReviewFilter /> */}
         <ReviewList
           productId={productId}
           reviews={reviews}

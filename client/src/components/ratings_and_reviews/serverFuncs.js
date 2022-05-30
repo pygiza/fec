@@ -80,6 +80,19 @@ const getStarReviews = (star, productId) => (
     })
 );
 
+const getTotalReviews = (productId) => (
+  axios.get('/reviews', {
+    params: {
+      product_id: productId,
+      count: 10000,
+    }
+  })
+    .then((res) => res.data.results.length)
+    .catch((err) => {
+      console.log('could not fetch review length', err);
+    })
+);
+
 const voteHelpful = (reviewId) => (
   axios.put(`/reviews/${reviewId}/helpful`)
 );
