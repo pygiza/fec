@@ -1,21 +1,25 @@
 const axios = require('axios');
 
-const getReviewsBy2 = (productId, page, sort = 'relevant') => (
+const getReviewsBy2 = (productId, page, sort) => (
   axios.get('/reviews', {
     params: {
       product_id: productId,
-      page,
-      count: 2,
+      page: 1,
+      count: 1000,
       sort,
     },
   })
-    .then((res) => (res.data.results))
+    .then((res) => {
+      let start = (page * 2) - 2;
+      let end = (page * 2);
+      return res.data.results.slice(start, end);
+    })
     .catch((err) => {
       console.log('could not fetch reviews from client', err);
     })
 );
 
-const checkMoreRevs = (productId, page, sort = 'relevant') => (
+const checkMoreRevs = (productId, page, sort) => (
   axios.get('/reviews', {
     params: {
       product_id: productId,
@@ -35,17 +39,17 @@ const checkMoreRevs = (productId, page, sort = 'relevant') => (
     })
 );
 
-const getCurrentAmtReviews = (productId, page, sort = 'relevant') => {
+const getCurrentAmtReviews = (productId, page, sort) => {
   const currentAmt = page * 2;
   return axios.get('/reviews', {
     params: {
       product_id: productId,
       page: 1,
-      count: currentAmt,
+      count: 1000,
       sort,
     },
   })
-    .then(res => (res.data.results))
+    .then(res => (res.data.results.slice(0, currentAmt)))
 };
 
 const getMetaData = (productId) => (
@@ -84,18 +88,6 @@ const getStarReviews = (star, productId, sort = 'relevant') => (
     })
 );
 
-const getTotalReviews = (productId) => (
-  axios.get('/reviews', {
-    params: {
-      product_id: productId,
-      count: 10000,
-    }
-  })
-    .then((res) => res.data.results.length)
-    .catch((err) => {
-      console.log('could not fetch review length', err);
-    })
-);
 
 const voteHelpful = (reviewId) => (
   axios.put(`/reviews/${reviewId}/helpful`)
