@@ -16,8 +16,7 @@ const Carousel = styled.div`
 const CarouselList = function({ listType, related = [], outfit = [], addOutfit, removeOutfit, renderProduct, relatedButtonHandler, outfitButtonHandler }) {
 
   const [relatedIndex, setRelatedIndex] = useState({ start: 0, end: 2 });
-  const [outfitIndex, setOutfitIndex] = useState({ start: 0, end: 1 });
-  const [refresh, setRefresh] = useState(1);
+  const [outfitIndex, setOutfitIndex] = useState({ start: 0, end: 2 });
 
   const handleMoveLeft = function() {
     switch (listType) {
@@ -73,18 +72,17 @@ const CarouselList = function({ listType, related = [], outfit = [], addOutfit, 
           <>
             {related.map((product, index) => {
               return relatedIndex.start <= index && index <= relatedIndex.end ?
-                <CarouselCard key={product.id} productInfo={product} renderProduct={renderProduct} handleCardButtonClick={relatedButtonHandler} /> : undefined
+                <CarouselCard key={product.id} productInfo={product} renderProduct={renderProduct} relatedButtonHandler={relatedButtonHandler} /> : undefined
             })}
           </> : undefined
       }
       {
         listType === 'outfit' ?
           <>
-            <AddOutfitCard addOutfit={addOutfit} />
-            <button onClick={() => setRefresh(refresh + 1)} />
             {outfit.map((product, index) => {
               if (outfitIndex.start <= index && index <= outfitIndex.end) {
-                return <CarouselCard key={product.id} productInfo={product} renderProduct={renderProduct} handleCardButtonClick={outfitButtonHandler} />
+                return product === 'add' ? <AddOutfitCard key='add' addOutfit={addOutfit} /> :
+                <CarouselCard key={product.id} productInfo={product} renderProduct={renderProduct} outfitButtonHandler={outfitButtonHandler} noName={true} />
               } else {
                 return undefined;
               }

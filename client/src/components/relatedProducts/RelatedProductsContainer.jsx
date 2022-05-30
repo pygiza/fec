@@ -12,7 +12,6 @@ const RelatedProductsContainer = function({ product_id, renderProduct }) {
   let [related, setRelated] = useState([]);
   let [outfit, setOutfit] = useState([]);
   let [modalDisplay, setModalDisplay] = useState('none');
-  let [refresh, setRefresh] = useState(1);
 
   useEffect(() => {
     // Get data (name, features) for product_id and store in 'product'
@@ -50,11 +49,30 @@ const RelatedProductsContainer = function({ product_id, renderProduct }) {
             .map(response => response.data)
             .filter(product => product !== undefined);
 
-          setOutfit(products);
+            let addFlag = true;
+          products.forEach(product => {
+            if (product.id === product_id) {
+              addFlag = false;
+            }
+          })
+
+          if (addFlag) {
+            setOutfit(['add'].concat(products));
+          } else {
+            setOutfit(products);
+          }
         })
         .catch(err => console.log('couldnt get product data for outfits', err));
 
   }, [product_id])
+
+  const getProduct = function(id) {
+    return axios.get(`products/${id}`)
+      .then(res => {
+        return res.data;
+      })
+      .catch(err => console.log('couldnt get product: ', id));
+  }
 
   const getOutfitIds = function() {
     if (localStorage.getItem('outfit') === null) {
@@ -63,20 +81,16 @@ const RelatedProductsContainer = function({ product_id, renderProduct }) {
     return JSON.parse(localStorage.getItem('outfit'));
   }
 
-  const getProductImage = function(id) {
-    return axios.get(`/products/${id}/styles`)
-      .then(res => {
-        return res.data.results[0].photos[0].thumbnail_url;
-      })
-      .catch(err => console.log('couldnt grab image of related product', err));
-  }
-
   const addOutfit = function() {
     let oldOutfitIds = JSON.parse(localStorage.getItem('outfit'));
-    localStorage.setItem('outfit', JSON.stringify(oldOutfitIds.concat([product_id])));
+    localStorage.setItem('outfit', JSON.stringify([product_id].concat(oldOutfitIds)));
 
     axios.get(`/products/${product_id}`)
-      .then(res => setOutfit([res.data].concat(outfit)))
+      .then(res => {
+        outfit.splice(0, 1, res.data);
+        console.log('added outfit', outfit);
+        setOutfit([].concat(outfit))
+      })
       .catch(err => console.log('couldnt add outfit', err));
   }
 
@@ -85,7 +99,8 @@ const RelatedProductsContainer = function({ product_id, renderProduct }) {
     oldOutfitIds.splice(oldOutfitIds.indexOf(id), 1);
     localStorage.setItem('outfit', JSON.stringify(oldOutfitIds));
     let newOutfit = outfit.filter(product => product.id !== id);
-    setOutfit(newOutfit);
+    let extension = newOutfit[0] === 'add' ? [] : ['add'];
+    setOutfit(extension.concat(newOutfit));
   }
 
   const toggleModal = function(e, name = '', features = []) {
@@ -95,7 +110,6 @@ const RelatedProductsContainer = function({ product_id, renderProduct }) {
 
   return (
     <>
-      <button onClick={() => setRefresh(refresh + 1)} />
       <ComparisonModal display={modalDisplay} close={toggleModal} product={product} compare={compare} />
       <CarouselLabel label='RELATED PRODUCTS' />
       <CarouselList listType='related' related={related} renderProduct={renderProduct} relatedButtonHandler={toggleModal}/>
