@@ -1,50 +1,81 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
+
 
 function AddToCart({ skus }) { //sku array
   const [skuIndex, setSkuIndex] = useState(0);
+  const [skuQuantity, setSkuQuantity] = useState(0);
+  const [countUpdate, setCountUpdate] = useState(0);
+  const [quantityArr, setQuantityArr] = useState([0]);
+
+
+  useEffect(()=>{
+    setQuantityArr(skus ? [...Array(skus[skuIndex].quantity).keys()] : [-1]);
+  }, [skuIndex]);
 
   const handleSizeClick = (e) => {
     e.preventDefault();
+    setSkuIndex(Number(e.target.value));
     console.log('Size Click => ', e.target.value);
-    setSkuIndex(e.target.value);
   }
 
-  //console.log("Styles inside Add to Cart: ", skus? [...Array(skus[skuIndex].quantity).keys()] : "Whatever")
-  //console.log("SKUS Add to Cart: ", skus)
+  const quantitySetter = (e) => {
+    e.preventDefault();
+    console.log('Quantity => ', e.target.value);
+    setSkuQuantity(Number(e.target.value));
+  }
   
-  let quantityArr = skus ? [...Array(skus[skuIndex].quantity).keys()] : [1];
+  const addQuantityToBag = (e) => {
+    let reqArray = [];
+    for (let i = 0; i < skuQuantity; i++) {
+      let newPromise = axios({
+        method: 'post',
+        url: 'http://localhost:3000/cart',
+        data: {sku_id : skus[skuIndex].id}
+      });
+      reqArray.push(newPromise);
+    }
+
+    axios.all(reqArray)
+    .then(axios.spread((...responses) => {
+      setCountUpdate(countUpdate + skuQuantity);
+      console.log('All Done Updating Cart');
+    }));
+  }
+
   
   return (
     <CartBox>
       <Title>
       </Title>
       <Size onChange={(e) => handleSizeClick(e)}>
-        <Option value={0}>Select A Size</Option>
+        {/* <Option value={0}>Select A Size</Option> */}
       {skus ? skus.map((style, index) => {
         return (
         <Option value={index} > {style.size}</Option>
         );
       }) : 'Waiting on Images... '}
       </Size>
-      <Quantity>
+
+      <Quantity onChange={quantitySetter}>
+        <Option value={0}>Select</Option>
       {quantityArr.map((num)=> {
         return (
-        <Option> {num + 1}</Option>
+        <Option value={num + 1}> {num + 1}</Option>
         );
       })}
       </Quantity>
-   
-      <Add>
-        <BagWord>
-          Add to Bag
-        </BagWord>
-        <Plus>
-          +
-        </Plus>
+      {skuQuantity ? <Add onClick={addQuantityToBag}>
+        <BagWord>Add to Bag</BagWord>
+        <Plus>+</Plus>
       </Add>
+      : null}
       <Star>
-        ✩
+       <CartNumber>
+        {countUpdate}
+      </CartNumber> 
+       🛒
       </Star>
     </CartBox>
   );
@@ -67,15 +98,24 @@ const Title = styled.h4`
 
 const Size = styled.select`
   background: white;
+  color: black;
   grid-column: 1 / 6;
   grid-row: 2 / 4;
 `;
 
 const Quantity = styled.select`
   background: white;
+  color: black;
   grid-column: 7 / 10;
   grid-row: 2 / 4;
+  `;
+
+const Option = styled.option`
+  background: white;
+  color: black;
+  font-size: 1.5vw;
 `;
+
 const Add = styled.div`
   display: grid;
   grid-template-columns: 1fr 30% 10%;
@@ -99,7 +139,6 @@ const Plus = styled.div`
 grid-column: 3;
 grid-row: 2 ;
 font-size: 1.5vw
-
 `;
 
 const Star = styled.button`
@@ -112,9 +151,9 @@ const Star = styled.button`
   font-size: 2vw
 `;
 
-const Option = styled.option`
-  background: white;
-  font-size: 1.5vw;
+const CartNumber = styled.div`
+  font-size: .75vw;
 `;
+
 
 export default AddToCart;

@@ -60,12 +60,17 @@ function Overview({ productId }) {
   };
 
   const makeSkuArray = (styles, index) => { //sets skus as array
-    let skuArray = [];
-   //console.log("What is this: ", styles);
+    let skuArray = [{size:'Select a Size'}];
     let skuObj = styles[index].skus;
+    //add id to quantity size object 
+    for (let key in skuObj) {
+      skuObj[key].id=key;
+    }
+    //add the new object to an array for iteration 
     for(let key in skuObj) {
       skuArray.push(skuObj[key])
     }
+    console.log('SKUARR: ', skuArray)
     setSkus(skuArray);
   }
 
@@ -152,7 +157,7 @@ const Title = styled.div`
   object-fit: contain;
   font-Size: 2.7vw;
   font-weigh: bold;
-  margin-top: 1.7vw
+  margin-top: .25em;
 `;
 
 const NavBar = styled.div`

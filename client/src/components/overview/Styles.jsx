@@ -45,7 +45,7 @@ const Styles = styled.div`
   grid-gap: 0.25rem;
   grid-column: 2 / 12;
   grid-row: 5 / 9;
-  
+  margin-top: 1em;
   
 `;
 

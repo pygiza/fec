@@ -43,14 +43,14 @@ const ProductName = styled.div`
   grid-row: 4;
   font-size: 3vw;
   padding: 0px;
-  margin-top: .15em;
+  margin-top: .16em;
 `;
 
 const Price = styled.h4`
   grid-column: 1;
   grid-row: 5;
   padding: 0px;
-  margin-top: 2.5em;
+  margin-top: 3.3em;
   font-size: 1.3vw;
 `;
 
