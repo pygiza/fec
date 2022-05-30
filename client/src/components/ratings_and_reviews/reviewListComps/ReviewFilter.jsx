@@ -40,6 +40,7 @@ const FilterContainer = styled.div`
   padding: 1%;
   border-bottom: #FFD24C solid 2px;
   width: max-content;
+  background-color: white;
 `;
 
 const OptGroup = styled.optgroup`

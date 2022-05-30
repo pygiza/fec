@@ -1,11 +1,12 @@
 const axios = require('axios');
 
-const getReviewsBy2 = (productId, page) => (
+const getReviewsBy2 = (productId, page, sort = 'relevant') => (
   axios.get('/reviews', {
     params: {
       product_id: productId,
       page,
       count: 2,
+      sort,
     },
   })
     .then((res) => (res.data.results))
@@ -14,12 +15,13 @@ const getReviewsBy2 = (productId, page) => (
     })
 );
 
-const checkMoreRevs = (productId, page) => (
+const checkMoreRevs = (productId, page, sort = 'relevant') => (
   axios.get('/reviews', {
     params: {
       product_id: productId,
       page,
       count: 2,
+      sort,
     },
   })
     .then((res) => {
@@ -33,13 +35,14 @@ const checkMoreRevs = (productId, page) => (
     })
 );
 
-const getCurrentAmtReviews = (productId, page) => {
+const getCurrentAmtReviews = (productId, page, sort = 'relevant') => {
   const currentAmt = page * 2;
   return axios.get('/reviews', {
     params: {
       product_id: productId,
       page: 1,
       count: currentAmt,
+      sort,
     },
   })
     .then(res => (res.data.results))
@@ -59,11 +62,12 @@ const getMetaData = (productId) => (
     })
 );
 
-const getStarReviews = (star, productId) => (
+const getStarReviews = (star, productId, sort = 'relevant') => (
   axios.get('/reviews', {
     params: {
       product_id: productId,
       count: 10000,
+      sort,
     },
   })
     .then((res) => {
