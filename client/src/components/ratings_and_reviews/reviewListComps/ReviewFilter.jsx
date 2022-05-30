@@ -11,7 +11,7 @@ function ReviewFilter({ metaData, onSortChange, currentFilters }) {
   }, [metaData])
 
   return (
-    <div>
+    <OverallContainer>
       <FilterContainer>
         <span>{revLength} reviews sorted by </span>
         <FilterMenu name="filter" id="filter" defaultValue="relevant" onChange={onSortChange}>
@@ -23,7 +23,7 @@ function ReviewFilter({ metaData, onSortChange, currentFilters }) {
       <div>
         <StarFilterTags currentFilters={currentFilters}/>
       </div>
-    </div>
+    </OverallContainer>
   );
 }
 
@@ -56,6 +56,10 @@ const FilterContainer = styled.div`
 
 const OptGroup = styled.optgroup`
   background-color: white;
+`;
+
+const OverallContainer = styled.div`
+
 `;
 
 export default ReviewFilter;

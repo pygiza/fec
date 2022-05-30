@@ -47,7 +47,7 @@ const RightSide = styled.div`
 `;
 
 const ReviewListContainer = styled.div`
-  height: 93vh;
+  height: 88vh;
   overflow-y: auto;
 `;
 
