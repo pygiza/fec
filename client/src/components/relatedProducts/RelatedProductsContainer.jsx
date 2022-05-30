@@ -14,55 +14,31 @@ const RelatedProductsContainer = function({ product_id, renderProduct }) {
   let [modalDisplay, setModalDisplay] = useState('none');
 
   useEffect(() => {
-    // Get data (name, features) for product_id and store in 'product'
-    axios.get(`/products/${product_id}`)
-      .then(res => setProduct({ name: res.data.name, features: res.data.features }))
-      .catch(err => console.log('Couldnt get product features', err));
+    // Get main product info
+    getProduct(product_id)
+      .then(product => setProduct(product))
+      .catch(err => console.log('couldnt get main product info'));
 
-    // Get the product data of all products related to product_id and store in 'related'
+    // Get related products info
     axios.get(`/products/${product_id}/related`)
       .then(res => {
-        let product_ids = res.data;
-        Promise.all(product_ids.map(product_id => axios.get(`/products/${product_id}`)))
-          .then(responses => {
-            let products = responses
-              .map(response => response.data)
-              .filter(product => product !== undefined);
-
-            // Promise.all(products.map(product => getProductImage(product.id)))
-            //   .then(products => {
-
-            //   })
-            //   .catch(err => 'couldnt get images for related products', err);
-
-            setRelated(products);
-          })
-          .catch(err => console.log('Couldnt grab related product data', err));
+        let relatedIds = res.data;
+        Promise.all(relatedIds.map(id => getProduct(id)))
+          .then(products => setRelated(products))
+          .catch(err => console.log('couldnt get related products', err));
       })
-      .catch(err => console.log('Couldnt get related products', err));
 
-    // If the user is visiting the site for the first time, initialize local storage to be an empty array
-      let outfitIds = getOutfitIds();
-      Promise.all(outfitIds.map(product_id => axios.get(`/products/${product_id}`)))
-        .then(responses => {
-          let products = responses
-            .map(response => response.data)
-            .filter(product => product !== undefined);
+    // Get outfit list info
+    let outfitIds = getOutfitIds();
+    Promise.all(outfitIds.map(id => getProduct(id)))
+      .then(products => {
+        let contains = products.reduce((flag, product) => {
+          return flag || product.id === product_id;
+        }, false);
 
-            let addFlag = true;
-          products.forEach(product => {
-            if (product.id === product_id) {
-              addFlag = false;
-            }
-          })
-
-          if (addFlag) {
-            setOutfit(['add'].concat(products));
-          } else {
-            setOutfit(products);
-          }
-        })
-        .catch(err => console.log('couldnt get product data for outfits', err));
+        setOutfit(contains ? products : ['add'].concat(products));
+      })
+      .catch(err => console.log('couldnt get outfit products', err));
 
   }, [product_id])
 
@@ -71,7 +47,21 @@ const RelatedProductsContainer = function({ product_id, renderProduct }) {
       .then(res => {
         return res.data;
       })
-      .catch(err => console.log('couldnt get product: ', id));
+      .then(product => {
+        return axios.get(`products/${id}/styles`)
+          .then(res => {
+            product.image = res.data.results[0].photos[0].url;
+            return product;
+          })
+      })
+      .then(product => {
+        return axios.get(`reviews/meta`, { params: { product_id: id } })
+          .then(res => {
+            product.rating = calculateAvgRating(res.data.ratings);
+            return product;
+          })
+      })
+      .catch(err => console.log('couldnt get product: ', id, err));
   }
 
   const getOutfitIds = function() {
@@ -85,13 +75,8 @@ const RelatedProductsContainer = function({ product_id, renderProduct }) {
     let oldOutfitIds = JSON.parse(localStorage.getItem('outfit'));
     localStorage.setItem('outfit', JSON.stringify([product_id].concat(oldOutfitIds)));
 
-    axios.get(`/products/${product_id}`)
-      .then(res => {
-        outfit.splice(0, 1, res.data);
-        console.log('added outfit', outfit);
-        setOutfit([].concat(outfit))
-      })
-      .catch(err => console.log('couldnt add outfit', err));
+    outfit.splice(0, 1)
+    setOutfit([product].concat(outfit));
   }
 
   const removeOutfit = function(e, id) {
@@ -99,13 +84,23 @@ const RelatedProductsContainer = function({ product_id, renderProduct }) {
     oldOutfitIds.splice(oldOutfitIds.indexOf(id), 1);
     localStorage.setItem('outfit', JSON.stringify(oldOutfitIds));
     let newOutfit = outfit.filter(product => product.id !== id);
-    let extension = newOutfit[0] === 'add' ? [] : ['add'];
+    let extension = id === product_id ? ['add'] : [];
     setOutfit(extension.concat(newOutfit));
   }
 
   const toggleModal = function(e, name = '', features = []) {
     setCompare({ name, features });
     setModalDisplay( modalDisplay === 'none' ? 'block' : 'none');
+  }
+
+  const calculateAvgRating = function(ratings) {
+    let reviews = 0;
+    let ratingSum = 0;
+    for (let rating in ratings) {
+      ratingSum += ratings[rating] * rating;
+      reviews += Number(ratings[rating]);
+    }
+    return (Math.round((ratingSum/reviews) * 4) / 4);
   }
 
   return (

@@ -4,37 +4,7 @@ import Card from '../Styles.jsx';
 import CardTop from './CardTop/CardTop.jsx';
 import CardBtm from './CardBtm/CardBtm.jsx';
 
-const CarouselCard = function({ productInfo, renderProduct, relatedButtonHandler, outfitButtonHandler, noName }) {
-
-  let [product, setProduct] = useState(productInfo);
-
-  // get avg rating accurate to a quarter of a star
-  const calculateAvgRating = function(ratings) {
-    let reviews = 0;
-    let ratingSum = 0;
-    for (let rating in ratings) {
-      ratingSum += ratings[rating] * rating;
-      reviews += Number(ratings[rating]);
-    }
-    return (Math.round((ratingSum/reviews) * 4) / 4);
-  }
-
-  useEffect(() => {
-    let newProduct = Object.assign({}, productInfo)
-    axios.get(`/products/${productInfo.id}/styles`)
-    .then(res => {
-      newProduct.image = res.data.results[0].photos[0].thumbnail_url
-
-      axios.get(`/reviews/meta`, { params: { product_id: productInfo.id } })
-        .then(res => {
-          newProduct.rating = calculateAvgRating(res.data.ratings);
-          setProduct(newProduct);
-        })
-        .catch(err => console.log('couldnt get meta data for related product', err));
-      })
-      .catch(err => console.log('couldnt get related products image', err));
-  }, [productInfo])
-
+const CarouselCard = function({ product, renderProduct, relatedButtonHandler, outfitButtonHandler, noName }) {
   return (
     <Card onClick={(e) => {renderProduct(e, product.id)}} >
       <CardTop id={product.id} image={product.image} name={noName ? undefined : product.name} features={product.features} relatedButtonHandler={relatedButtonHandler} outfitButtonHandler={outfitButtonHandler} />

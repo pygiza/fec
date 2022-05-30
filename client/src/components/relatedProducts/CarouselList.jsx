@@ -72,7 +72,7 @@ const CarouselList = function({ listType, related = [], outfit = [], addOutfit, 
           <>
             {related.map((product, index) => {
               return relatedIndex.start <= index && index <= relatedIndex.end ?
-                <CarouselCard key={product.id} productInfo={product} renderProduct={renderProduct} relatedButtonHandler={relatedButtonHandler} /> : undefined
+                <CarouselCard key={product.id} product={product} renderProduct={renderProduct} relatedButtonHandler={relatedButtonHandler} /> : undefined
             })}
           </> : undefined
       }
@@ -82,7 +82,7 @@ const CarouselList = function({ listType, related = [], outfit = [], addOutfit, 
             {outfit.map((product, index) => {
               if (outfitIndex.start <= index && index <= outfitIndex.end) {
                 return product === 'add' ? <AddOutfitCard key='add' addOutfit={addOutfit} /> :
-                <CarouselCard key={product.id} productInfo={product} renderProduct={renderProduct} outfitButtonHandler={outfitButtonHandler} noName={true} />
+                <CarouselCard key={product.id} product={product} renderProduct={renderProduct} outfitButtonHandler={outfitButtonHandler} noName={true} />
               } else {
                 return undefined;
               }
