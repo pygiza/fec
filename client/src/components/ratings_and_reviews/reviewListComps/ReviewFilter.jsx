@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import StarFilterTags from './StarFilterTags.jsx';
 
-function ReviewFilter({ metaData, onSortChange }) {
+function ReviewFilter({ metaData, onSortChange, currentFilters }) {
   const revLength = parseInt(metaData.recommended.true) + parseInt(metaData.recommended.false);
 
   useEffect(() => {
@@ -10,20 +11,26 @@ function ReviewFilter({ metaData, onSortChange }) {
   }, [metaData])
 
   return (
-    <FilterContainer>
-      <span>{revLength} reviews sorted by </span>
-      <FilterMenu name="filter" id="filter" defaultValue="relevant" onChange={onSortChange}>
-        <option value="relevant">relevance</option>
-        <option value="newest">newest</option>
-        <option value="helpful">helpful</option>
-      </FilterMenu>
-    </FilterContainer>
+    <div>
+      <FilterContainer>
+        <span>{revLength} reviews sorted by </span>
+        <FilterMenu name="filter" id="filter" defaultValue="relevant" onChange={onSortChange}>
+          <option value="relevant">relevance</option>
+          <option value="newest">newest</option>
+          <option value="helpful">helpful</option>
+        </FilterMenu>
+      </FilterContainer>
+      <div>
+        <StarFilterTags currentFilters={currentFilters}/>
+      </div>
+    </div>
   );
 }
 
 ReviewFilter.propTypes = {
   metaData: PropTypes.object,
   onSortChange: PropTypes.func.isRequired,
+  currentFilters: PropTypes.array.isRequired,
 };
 
 const FilterMenu = styled.select`

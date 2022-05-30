@@ -149,6 +149,7 @@ function RatingsReviews({ productId }) {
           getReviews={getReviews}
           moreReviews={moreReviews}
           onSortChange={onSortChange}
+          currentFilters={currentFilters}
         />
       </OverallReviews>)}
       { !matches &&
@@ -169,6 +170,7 @@ function RatingsReviews({ productId }) {
           getReviews={getReviews}
           moreReviews={moreReviews}
           onSortChange={onSortChange}
+          currentFilters={currentFilters}
         />
       </SmallScreen>)}
     </div>
