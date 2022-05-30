@@ -2,17 +2,20 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-function ReviewFilter({ metaData }) {
+function ReviewFilter({ metaData, onSortChange }) {
   const revLength = parseInt(metaData.recommended.true) + parseInt(metaData.recommended.false);
+
+  useEffect(() => {
+    document.getElementById('filter').value = 'relevant';
+  }, [metaData])
+
   return (
     <FilterContainer>
       <span>{revLength} reviews sorted by </span>
-      <FilterMenu name="filter" id="filter" defaultValue="relevant">
-
-          <option value="relevant">relevance</option>
-          <option value="newest">newest</option>
-          <option value="helpful">helpful</option>
-
+      <FilterMenu name="filter" id="filter" defaultValue="relevant" onChange={onSortChange}>
+        <option value="relevant">relevance</option>
+        <option value="newest">newest</option>
+        <option value="helpful">helpful</option>
       </FilterMenu>
     </FilterContainer>
   );
@@ -20,6 +23,7 @@ function ReviewFilter({ metaData }) {
 
 ReviewFilter.propTypes = {
   metaData: PropTypes.object,
+  onSortChange: PropTypes.func.isRequired,
 };
 
 const FilterMenu = styled.select`

@@ -41,9 +41,10 @@ function RatingsReviews({ productId }) {
   const [page, setPage] = useState(1);
   const [revsLeft, setRevsLeft] = useState(false);
   const [currentFilters, setCurrentFilters] = useState([]);
+  const [sort, setSort] = useState('relevant');
 
   function getReviews() {
-    return getReviewsBy2(productId, 1)
+    return getReviewsBy2(productId, 1, sort)
       .then((revs) => {
         setReviews([...revs]);
       })
@@ -51,7 +52,7 @@ function RatingsReviews({ productId }) {
         setPage(1);
       })
       .then(() => {
-        checkMoreRevs(productId, 2)
+        checkMoreRevs(productId, 2, sort)
           .then((revsLeft) => {
             setRevsLeft(revsLeft);
           });
@@ -60,7 +61,7 @@ function RatingsReviews({ productId }) {
 
   useEffect(() => {
     getReviews();
-  }, [productId]);
+  }, [productId, sort]);
 
   function getMeta() {
     getMetaData(productId)
@@ -74,7 +75,7 @@ function RatingsReviews({ productId }) {
   }, [productId]);
 
   function moreReviews() {
-    return getReviewsBy2(productId, page + 1)
+    return getReviewsBy2(productId, page + 1, sort)
       .then((revs) => {
         setReviews([...reviews, ...revs]);
         return revs;
@@ -85,7 +86,7 @@ function RatingsReviews({ productId }) {
         }
       })
       .then(() => {
-        checkMoreRevs(productId, page + 2)
+        checkMoreRevs(productId, page + 2, sort)
           .then((revsLeft) => {
             setRevsLeft(revsLeft);
           });
@@ -93,7 +94,7 @@ function RatingsReviews({ productId }) {
   }
 
   function filterStars(star) {
-    getStarReviews(star, productId)
+    getStarReviews(star, productId, sort)
       .then((data) => {
         setRevsLeft(false);
         setReviews([...data]);
@@ -102,13 +103,13 @@ function RatingsReviews({ productId }) {
   }
 
   function getCurrentRevs() {
-    getCurrentAmtReviews(productId, page)
+    getCurrentAmtReviews(productId, page, sort)
       .then((currentRevs) => {
         setReviews([...currentRevs]);
         setCurrentFilters([]);
       })
       .then(() => {
-        checkMoreRevs(productId, page + 1)
+        checkMoreRevs(productId, page + 1, sort)
           .then((revsLeft) => {
             setRevsLeft(revsLeft);
           });
@@ -117,6 +118,14 @@ function RatingsReviews({ productId }) {
 
   useEffect(() => {
     setCurrentFilters([]);
+  }, [productId]);
+
+  function onSortChange(e) {
+    setSort(e.target.value);
+  }
+
+  useEffect(() => {
+    setSort('relevant');
   }, [productId]);
 
   return (
@@ -139,6 +148,7 @@ function RatingsReviews({ productId }) {
           revsLeft={revsLeft}
           getReviews={getReviews}
           moreReviews={moreReviews}
+          onSortChange={onSortChange}
         />
       </OverallReviews>)}
       { !matches &&
@@ -158,7 +168,7 @@ function RatingsReviews({ productId }) {
           revsLeft={revsLeft}
           getReviews={getReviews}
           moreReviews={moreReviews}
-          filterStars={filterStars}
+          onSortChange={onSortChange}
         />
       </SmallScreen>)}
     </div>
