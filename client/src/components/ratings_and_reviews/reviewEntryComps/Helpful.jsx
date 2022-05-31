@@ -26,6 +26,7 @@ const HelpfulContainer = styled.span`
   margin: 1%;
   &:hover {
     cursor: pointer;
+    color: red;
   }
 `;
 

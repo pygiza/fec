@@ -42,7 +42,7 @@ function ReviewEntry({ review, getCurrentReviews }) {
 
   return (
     <ReviewEntryContainer>
-      <hr />
+      <LineBreak />
       <StarAvg rating={review.rating} />
       <span style={{ float: 'right' }}>
         {review.reviewer_name}
@@ -59,7 +59,7 @@ function ReviewEntry({ review, getCurrentReviews }) {
         <span> | </span>
         <Report reported={reported} clickReport={clickReport} />
       </span>
-      <hr />
+      <LineBreak />
     </ReviewEntryContainer>
   );
 }
@@ -69,7 +69,13 @@ ReviewEntry.propTypes = {
 };
 
 const ReviewEntryContainer = styled.div`
-  background-color: #F8F9F9;
+  &:hover {
+    background-color: #F8F9F9;
+  }
+`;
+
+const LineBreak = styled.hr`
+  border: 1px black solid;
 `;
 
 export default ReviewEntry;
