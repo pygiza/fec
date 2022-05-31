@@ -8,8 +8,8 @@ function WriteReviewButton({ toggleWriteReview, displayWrite, metaData }) {
     <span>
       <StyledWriteReviewButton onClick={toggleWriteReview}>Write Review +</StyledWriteReviewButton>
       <StyledWriteReviewModal displayWrite={displayWrite} >
-        <XOut>
-          <i onClick={toggleWriteReview} className="fa-solid fa-circle-xmark" />
+        <XOut onClick={toggleWriteReview}>
+          <i  className="fa-solid fa-xmark fa-2x"/>
         </XOut>
         <WriteReviewForm metaData={metaData} />
       </StyledWriteReviewModal>
@@ -57,6 +57,12 @@ const XOut = styled.div`
   &:hover {
     cursor: pointer;
   }
+  text-align: center;
+  background-color: white;
+  border-radius: 50%;
+  height: 35px;
+  width: 35px;
+  border: 2px solid black;
 `;
 
 export default WriteReviewButton;
