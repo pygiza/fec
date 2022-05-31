@@ -6,7 +6,7 @@ import AddMoreReviews from './reviewListComps/AddMoreReviews.jsx';
 import WriteReviewButton from './reviewListComps/WriteReviewButton.jsx';
 import ReviewFilter from './reviewListComps/ReviewFilter.jsx';
 
-function ReviewList({ productId, reviews, metaData, page, revsLeft, getReviews, moreReviews, onSortChange, currentFilters }) {
+function ReviewList({ productId, reviews, metaData, page, revsLeft, getReviews, moreReviews, onSortChange, currentFilters, filterStars }) {
   const [displayWrite, setDisplayWrite] = useState(false);
 
   function toggleWriteReview() {
@@ -15,7 +15,7 @@ function ReviewList({ productId, reviews, metaData, page, revsLeft, getReviews, 
 
   return (
     <RightSide>
-      <ReviewFilter metaData={metaData} onSortChange={onSortChange} currentFilters={currentFilters}/>
+      <ReviewFilter metaData={metaData} onSortChange={onSortChange} currentFilters={currentFilters} filterStars={filterStars}/>
       <ReviewListContainer>
         {reviews.map((review) => (
           <ReviewEntry key={review.review_id} review={review} />
@@ -40,6 +40,7 @@ ReviewList.propTypes = {
   moreReviews: PropTypes.func.isRequired,
   onSortChange: PropTypes.func.isRequired,
   currentFilters: PropTypes.array.isRequired,
+  filterStars: PropTypes.func.isRequired,
 };
 
 const RightSide = styled.div`

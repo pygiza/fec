@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import StarFilterTags from './StarFilterTags.jsx';
 
-function ReviewFilter({ metaData, onSortChange, currentFilters }) {
+function ReviewFilter({ metaData, onSortChange, currentFilters, filterStars }) {
   const revLength = parseInt(metaData.recommended.true) + parseInt(metaData.recommended.false);
 
   useEffect(() => {
@@ -21,7 +21,7 @@ function ReviewFilter({ metaData, onSortChange, currentFilters }) {
         </FilterMenu>
       </FilterContainer>
       <div>
-        <StarFilterTags currentFilters={currentFilters}/>
+        <StarFilterTags currentFilters={currentFilters} filterStars={filterStars}/>
       </div>
     </OverallContainer>
   );
@@ -31,6 +31,7 @@ ReviewFilter.propTypes = {
   metaData: PropTypes.object,
   onSortChange: PropTypes.func.isRequired,
   currentFilters: PropTypes.array.isRequired,
+  filterStars: PropTypes.func.isRequired,
 };
 
 const FilterMenu = styled.select`

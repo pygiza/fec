@@ -66,7 +66,7 @@ const getMetaData = (productId) => (
     })
 );
 
-const getStarReviews = (star, productId, sort = 'relevant') => (
+const getStarReviews = (starFilters, productId, sort = 'relevant') => (
   axios.get('/reviews', {
     params: {
       product_id: productId,
@@ -77,9 +77,11 @@ const getStarReviews = (star, productId, sort = 'relevant') => (
     .then((res) => {
       const starReviews = [];
       res.data.results.forEach((review) => {
-        if (review.rating === parseInt(star)) {
-          starReviews.push(review);
-        }
+        starFilters.forEach((star) => {
+          if (review.rating === parseInt(star)) {
+            starReviews.push(review);
+          }
+        });
       });
       return starReviews;
     })

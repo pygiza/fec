@@ -94,11 +94,29 @@ function RatingsReviews({ productId }) {
   }
 
   function filterStars(star) {
-    getStarReviews(star, productId, sort)
+    let newFilters = [...currentFilters];
+    if (currentFilters.indexOf(star) !== -1) {
+      let index = currentFilters.indexOf(star);
+      console.log('index of star', index)
+      if (index === 0) {
+        newFilters.shift();
+      } else {
+        console.log(newFilters.slice(0, index));
+        newFilters = newFilters.slice(0, index).concat(newFilters.slice(index + 1));
+      }
+      console.log('new filters', newFilters);
+    } else {
+      newFilters.push(star);
+    }
+    setCurrentFilters([...newFilters]);
+    if (newFilters.length === 0) {
+      getReviews();
+      return;
+    }
+    getStarReviews(newFilters, productId, sort)
       .then((data) => {
         setRevsLeft(false);
         setReviews([...data]);
-        setCurrentFilters([...currentFilters, star]);
       });
   }
 
@@ -150,6 +168,7 @@ function RatingsReviews({ productId }) {
           moreReviews={moreReviews}
           onSortChange={onSortChange}
           currentFilters={currentFilters}
+          filterStars={filterStars}
         />
       </OverallReviews>)}
       { !matches &&
@@ -171,6 +190,7 @@ function RatingsReviews({ productId }) {
           moreReviews={moreReviews}
           onSortChange={onSortChange}
           currentFilters={currentFilters}
+          filterStars={filterStars}
         />
       </SmallScreen>)}
     </div>
