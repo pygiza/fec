@@ -144,6 +144,11 @@ function RatingsReviews({ productId }) {
     setSort('relevant');
   }, [productId]);
 
+  function removeFilters() {
+    setCurrentFilters([]);
+    getReviews();
+  }
+
   return (
     <div id="reviews">
       <SectionTitle>RATINGS & REVIEWS</SectionTitle>
@@ -167,6 +172,7 @@ function RatingsReviews({ productId }) {
           onSortChange={onSortChange}
           currentFilters={currentFilters}
           filterStars={filterStars}
+          removeFilters={removeFilters}
         />
       </OverallReviews>)}
       { !matches &&
@@ -189,6 +195,7 @@ function RatingsReviews({ productId }) {
           onSortChange={onSortChange}
           currentFilters={currentFilters}
           filterStars={filterStars}
+          removeFilters={removeFilters}
         />
       </SmallScreen>)}
     </div>
