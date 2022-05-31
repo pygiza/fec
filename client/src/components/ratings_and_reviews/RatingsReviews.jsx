@@ -146,7 +146,7 @@ function RatingsReviews({ productId }) {
   }, [productId]);
 
   return (
-    <div>
+    <div id="reviews">
       <SectionTitle>RATINGS & REVIEWS</SectionTitle>
       { matches &&
       (<OverallReviews>
