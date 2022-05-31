@@ -1,71 +1,58 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { getReviewsBy2, getReviewAmount } from './serverFuncs.js';
 import ReviewEntry from './ReviewEntry.jsx';
+import AddMoreReviews from './reviewListComps/AddMoreReviews.jsx';
+import WriteReviewButton from './reviewListComps/WriteReviewButton.jsx';
+import ReviewFilter from './reviewListComps/ReviewFilter.jsx';
 
-function ReviewList({ productId }) {
-  const [reviews, setReviews] = useState([]);
-  const [page, setPage] = useState(1);
-  const [revsLeft, setRevsLeft] = useState(0);
+function ReviewList({ productId, reviews, metaData, page, revsLeft, getReviews, moreReviews, onSortChange, currentFilters, filterStars }) {
+  const [displayWrite, setDisplayWrite] = useState(false);
 
-  function getReviews() {
-    return getReviewsBy2(productId, page)
-      .then((res) => {
-        setReviews([...res.data.results]);
-      })
-      .catch((err) => {
-        console.log('could not fetch reviews from client', err);
-      });
+  function toggleWriteReview() {
+    setDisplayWrite(!displayWrite);
   }
-
-
-  function moreReviews() {
-    return getReviewsBy2(productId, page + 1)
-      .then((res) => {
-        setReviews([...reviews, ...res.data.results]);
-      })
-      .then(() => {
-        setPage(page + 1);
-      })
-      .catch((err) => {
-        console.log('error fetching more reviews', err);
-      });
-  }
-
-  function reviewLength() {
-    return getReviewAmount(productId)
-      .then((len) => {
-        setRevsLeft(len - reviews.length)
-      });
-  }
-
-  useEffect(() => {
-    getReviews()
-      .then(() => {
-        reviewLength();
-      });
-  }, [productId]);
 
   return (
-    <ReviewListContainer>
-      {reviews.map((review) => (
-        <ReviewEntry key={review.review_id} review={review} />
-      ))}
-      <button type="button" onClick={moreReviews}>More Reviews</button>
-    </ReviewListContainer>
+    <RightSide>
+      <ReviewFilter metaData={metaData} onSortChange={onSortChange} currentFilters={currentFilters} filterStars={filterStars}/>
+      <ReviewListContainer>
+        {reviews.map((review) => (
+          <ReviewEntry key={review.review_id} review={review} />
+        ))}
+        <ReviewButtons>
+          <AddMoreReviews moreReviews={moreReviews} revsLeft={revsLeft} />
+          <WriteReviewButton metaData={metaData} toggleWriteReview={toggleWriteReview} displayWrite={displayWrite}/>
+        </ReviewButtons>
+      </ReviewListContainer>
+    </RightSide>
+
   );
 }
 
 ReviewList.propTypes = {
   productId: PropTypes.number.isRequired,
+  reviews: PropTypes.array.isRequired,
+  metaData: PropTypes.object.isRequired,
+  page: PropTypes.number,
+  revsLeft: PropTypes.bool,
+  getReviews: PropTypes.func.isRequired,
+  moreReviews: PropTypes.func.isRequired,
+  onSortChange: PropTypes.func.isRequired,
+  currentFilters: PropTypes.array.isRequired,
+  filterStars: PropTypes.func.isRequired,
 };
 
-const ReviewListContainer = styled.div`
-  width: 66%;
+const RightSide = styled.div`
   margin: 2%;
-  height: 100vw;
+`;
+
+const ReviewListContainer = styled.div`
+  height: 88vh;
   overflow-y: auto;
+`;
+
+const ReviewButtons = styled.div`
 `;
 
 export default ReviewList;

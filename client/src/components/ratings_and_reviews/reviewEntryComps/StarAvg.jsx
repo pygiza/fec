@@ -24,7 +24,7 @@ function StarAvg({ rating }) {
 }
 
 StarAvg.propTypes = {
-  rating: PropTypes.number.isRequired,
+  rating: PropTypes.number,
 };
 
 const InnerStars = styled.div`
@@ -46,7 +46,7 @@ const InnerFilled = styled.div`
     }
 
     if (roundedRating % 1 === .75) {
-      return roundedRating * 17.25;
+      return roundedRating * 17.35;
     }
 
     return roundedRating * 18;
@@ -56,6 +56,13 @@ const InnerFilled = styled.div`
 const OuterStars = styled.div`
   position: relative;
   margin-bottom: 4%;
+  padding-bottom: 2%;
+`;
+
+const Star = styled.i`
+  color: #FFD24C;
+  font-size: 100%;
+  width: 100%
 `;
 
 export default StarAvg;

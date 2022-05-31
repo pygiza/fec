@@ -1,39 +1,95 @@
 const axios = require('axios');
 
-const getReviewsBy2 = (productId, page) => (
+const getReviewsBy2 = (productId, page, sort) => (
+  axios.get('/reviews', {
+    params: {
+      product_id: productId,
+      page: 1,
+      count: 1000,
+      sort,
+    },
+  })
+    .then((res) => {
+      let start = (page * 2) - 2;
+      let end = (page * 2);
+      return res.data.results.slice(start, end);
+    })
+    .catch((err) => {
+      console.log('could not fetch reviews from client', err);
+    })
+);
+
+const checkMoreRevs = (productId, page, sort) => (
   axios.get('/reviews', {
     params: {
       product_id: productId,
       page,
       count: 2,
+      sort,
     },
   })
-);
-
-const getReviewAmount = (productId) => (
-  axios.get('/reviews', {
-    params: {
-      product_id: productId,
-    }
-  })
     .then((res) => {
-      return res.data.results.length;
+      if (res.data.results.length) {
+        return true;
+      }
+      return false;
     })
     .catch((err) => {
-      console.log('error fetching reviews length', err);
+      console.log('error checking more revs', err);
     })
 );
 
-const getCurrentAmtReviews = (productId, page) => {
+const getCurrentAmtReviews = (productId, page, sort) => {
   const currentAmt = page * 2;
   return axios.get('/reviews', {
     params: {
       product_id: productId,
       page: 1,
-      count: currentAmt,
+      count: 1000,
+      sort,
     },
   })
-}
+    .then(res => (res.data.results.slice(0, currentAmt)))
+};
+
+const getMetaData = (productId) => (
+  axios.get('/reviews/meta', {
+    params: {
+      product_id: productId,
+    },
+  })
+    .then((res) => {
+      return res.data;
+    })
+    .catch((err) => {
+      console.log('error fetching meta data', err);
+    })
+);
+
+const getStarReviews = (starFilters, productId, sort = 'relevant') => (
+  axios.get('/reviews', {
+    params: {
+      product_id: productId,
+      count: 10000,
+      sort,
+    },
+  })
+    .then((res) => {
+      const starReviews = [];
+      res.data.results.forEach((review) => {
+        starFilters.forEach((star) => {
+          if (review.rating === parseInt(star)) {
+            starReviews.push(review);
+          }
+        });
+      });
+      return starReviews;
+    })
+    .catch((err) => {
+      console.log(`error fetching ${star} star reviews from api`, err);
+    })
+);
+
 
 const voteHelpful = (reviewId) => (
   axios.put(`/reviews/${reviewId}/helpful`)
@@ -45,8 +101,10 @@ const reportReview = (reviewId) => (
 
 module.exports = {
   getReviewsBy2,
+  checkMoreRevs,
   getCurrentAmtReviews,
-  getReviewAmount,
+  getMetaData,
+  getStarReviews,
   voteHelpful,
   reportReview,
 };
