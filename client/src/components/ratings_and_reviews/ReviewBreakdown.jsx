@@ -19,7 +19,7 @@ function ReviewBreakdown({ productId, metaData, filterStars, getCurrentRevs }) {
       count += parseInt(metaData.ratings[key]);
     }
     setTotalRatings(count);
-    setAvgRating(Math.round(total/count * 10) / 10);
+    setAvgRating(parseFloat(Math.round(total/count * 10) / 10).toFixed(1));
 
     let avgRec = (parseInt(metaData.recommended.true) / (parseInt(metaData.recommended.true) + parseInt(metaData.recommended.false)) * 100);
     setAvgRecommend(Math.round(avgRec));
@@ -55,6 +55,7 @@ ReviewBreakdown.propTypes = {
 const ReviewBreakdownContainer = styled.div`
   margin: 2%;
   border: solid black 3px;
+  height: max-content;
 `;
 
 const AvgRatingText = styled.span`
