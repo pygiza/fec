@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-function BarGraph({ star, percent, filterStars }) {
+function BarGraph({ star, percent, filterStars, count }) {
   return (
     <BarGraphContainer>
       <StarContainer>
@@ -11,6 +11,7 @@ function BarGraph({ star, percent, filterStars }) {
           <LightBar />
           <DarkBar percent={percent}/>
         </BarContainer>
+        <CountLabel>[{count}]</CountLabel>
       </StarContainer>
     </BarGraphContainer>
   );
@@ -20,6 +21,7 @@ BarGraph.propTypes = {
   star: PropTypes.string,
   percent: PropTypes.number,
   filterStars: PropTypes.func.isRequired,
+  count: PropTypes.string.isRequired,
 }
 
 const BarGraphContainer = styled.div`
@@ -30,7 +32,7 @@ const BarGraphContainer = styled.div`
 
 const StarContainer = styled.div`
   display: grid;
-  grid-template-columns: 18% auto ;
+  grid-template-columns: 18% auto 18%;
 `;
 
 const BarContainer = styled.div`
@@ -64,6 +66,11 @@ const StarLabel = styled.p`
     cursor: pointer;
     color: #F9C321;
   }
+`;
+
+const CountLabel = styled.p`
+  margin-bottom: 0;
+  font-size: 1em;
 `;
 
 export default BarGraph;
