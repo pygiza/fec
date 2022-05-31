@@ -100,7 +100,6 @@ function RatingsReviews({ productId }) {
       if (index === 0) {
         newFilters.shift();
       } else {
-        console.log(newFilters.slice(0, index));
         newFilters = newFilters.slice(0, index).concat(newFilters.slice(index + 1));
       }
     } else {
