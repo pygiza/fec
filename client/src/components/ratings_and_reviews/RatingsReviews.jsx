@@ -97,14 +97,12 @@ function RatingsReviews({ productId }) {
     let newFilters = [...currentFilters];
     if (currentFilters.indexOf(star) !== -1) {
       let index = currentFilters.indexOf(star);
-      console.log('index of star', index)
       if (index === 0) {
         newFilters.shift();
       } else {
         console.log(newFilters.slice(0, index));
         newFilters = newFilters.slice(0, index).concat(newFilters.slice(index + 1));
       }
-      console.log('new filters', newFilters);
     } else {
       newFilters.push(star);
     }
@@ -140,6 +138,7 @@ function RatingsReviews({ productId }) {
 
   function onSortChange(e) {
     setSort(e.target.value);
+    setCurrentFilters([]);
   }
 
   useEffect(() => {

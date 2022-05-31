@@ -5,7 +5,7 @@ import CharBar from './CharBar.jsx';
 
 function CharList({ chars }) {
   const charAdjs = {
-    Comfort: ['Uncomfort- able', 'Ok', 'Perfect'],
+    Comfort: ['Uncomfortable', 'Ok', 'Perfect'],
     Fit: ['Runs Tight', 'Perfect', 'Runs Long'],
     Length: ['Runs Short', 'Perfect', 'Runs Long'],
     Quality: ['Poor', 'What I Expected', 'Perfect'],
