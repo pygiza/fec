@@ -4,7 +4,8 @@ import styled from 'styled-components';
 function ThumbnailBox({ images, updateLocation, currentImageIndex }) {
   let row = 1;
   let column = 2;
-  let borderColor = "white";
+  let borderColor = '';
+
   return (
     <ThumbnailContainer>
       <TopArrowContainer>
@@ -18,10 +19,10 @@ function ThumbnailBox({ images, updateLocation, currentImageIndex }) {
         }
         row += 1;
         return(<EachStyle 
+          key={index}
           src={image.thumbnail_url}
           row={row}
           column={column}
-          onClick={updateLocation}
           border={borderColor}
           />);
       }) : 'Still Waiting!'}
@@ -44,11 +45,11 @@ const ThumbnailContainer = styled.div`
 
 const ArrowTop = styled.button`
   border: solid black;
-  border-width: 0 3px 3px 0;
+  border-width: 0 1px 1px 0;
   transform: rotate(-135deg);
   -webkit-transform: rotate(-135deg);
-  height: 50%;
-  width: 70%; 
+  height: 40%;
+  width: 60%; 
   object-fit: contain;
   background: #FFE69A;
   grid-column: 2;
@@ -65,14 +66,13 @@ const TopArrowContainer = styled.div`
 
 const ArrowBottom = styled.button`
   border: solid black;
-  border-width: 0 3px 3px 0;
+  border-width: 0 1px 1px 0;
   transform: rotate(45deg);
   -webkit-transform: rotate(45deg);
-  height: 50%;
-  width: 70%; 
+  height: 40%;
+  width: 60%; 
   object-fit: contain;
   background: #FFE69A;
-
   grid-column: 2;
   grid-row: 3;
 `;
@@ -90,6 +90,7 @@ const EachStyle = styled.img`
   width: 100%; 
   object-fit: contain;
   border: solid;
+  border-width: thin;
   border-color: ${props => props.border};
   padding-top: .25em;
   padding-bottom: .25em;

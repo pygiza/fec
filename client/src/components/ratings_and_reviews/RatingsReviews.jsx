@@ -146,6 +146,7 @@ function RatingsReviews({ productId }) {
   }, [productId]);
 
   return (
+<<<<<<< HEAD
     <div id="reviews">
       <SectionTitle>RATINGS & REVIEWS</SectionTitle>
       { matches &&
@@ -192,6 +193,14 @@ function RatingsReviews({ productId }) {
           filterStars={filterStars}
         />
       </SmallScreen>)}
+=======
+    <div>
+      <p>RATINGS & REVIEWS</p>
+      <OverallReviews id="reviews">
+        <ReviewBreakdown productId={productId} />
+        <ReviewList productId={productId} />
+      </OverallReviews>
+>>>>>>> master
     </div>
 
 

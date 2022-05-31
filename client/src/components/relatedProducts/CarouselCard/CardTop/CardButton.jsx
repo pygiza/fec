@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
-const CaroBtn = styled.button`
+const Icon = styled.button`
   position: absolute;
   top: 5%;
   right: 5%;
@@ -12,9 +13,15 @@ const CaroBtn = styled.button`
   text-align: center;
 `
 
-const CarouselButton = function(props) {
+const CarouselButton = function({ name, features, onClick }) {
   return (
-    <CaroBtn value='button'>☆</CaroBtn>
+    <>
+      {
+        name ?
+          <Icon className="fa-solid fa-table-columns" id='cardButton' onClick={onClick} /> :
+          <Icon className="fa-solid fa-trash" id='cardButton' onClick={onClick} />
+      }
+    </>
   )
 }
 
