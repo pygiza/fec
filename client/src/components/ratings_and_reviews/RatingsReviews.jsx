@@ -12,7 +12,7 @@ function RatingsReviews({ productId }) {
   return (
     <div>
       <p>RATINGS & REVIEWS</p>
-      <OverallReviews>
+      <OverallReviews id="reviews">
         <ReviewBreakdown productId={productId} />
         <ReviewList productId={productId} />
       </OverallReviews>

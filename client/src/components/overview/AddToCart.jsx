@@ -75,7 +75,7 @@ function AddToCart({ skus }) { //sku array
        <CartNumber>
         {countUpdate}
       </CartNumber> 
-       🛒
+      <i class="fa-solid fa-cart-shopping"></i>
       </Star>
     </CartBox>
   );
