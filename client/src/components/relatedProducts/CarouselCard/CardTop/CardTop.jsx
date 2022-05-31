@@ -19,13 +19,13 @@ const Thumbnail = styled.img`
   width: 100%;
 `
 
-const CardTop = function({ image, characteristics }) {
+const CardTop = function({ id, image, name, features, relatedButtonHandler, outfitButtonHandler=function() {} }) {
   return (
     <Top>
-      <CardButton />
-      {image === null ?
-      <div style={{'backgroundColor': 'grey', 'height': '100%', 'width': '100%'}}></div> :
-      <Thumbnail src={image}></Thumbnail>
+      <CardButton name={name} features={features} onClick={relatedButtonHandler ? (e) => relatedButtonHandler(e, name, features) : (e) => outfitButtonHandler(e, id)} />
+      {image == null ?
+        <div style={{'backgroundColor': 'grey', 'height': '100%', 'width': '100%'}}></div> :
+        <Thumbnail src={image}></Thumbnail>
       }
     </Top>
   )

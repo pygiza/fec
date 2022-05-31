@@ -9,7 +9,10 @@ function App(props) {
 
   let [productId, setProductId] = useState(37311);
 
-  const renderProduct = function(id) {
+  const renderProduct = function(e, id) {
+    if (e.target.id === 'cardButton') {
+      return;
+    }
     setProductId(id);
   }
 
