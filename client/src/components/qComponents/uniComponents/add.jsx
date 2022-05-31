@@ -2,16 +2,7 @@ import React, {useState} from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 // add a answer/question
-let Ad = styled.button`
-  border: yellow;
-  background-color: inherit;
-  float: left;
-  font-size: 15px;
-  text-decoration: underline;
-  &:hover {
-    color: orange;
-  }
-`;
+
 let Modal = styled.div`
   display: ${props => props.show.display};
   position: fixed;
@@ -22,7 +13,8 @@ let Modal = styled.div`
   height: 100%;
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.5);
-
+  color: black;
+  text-align: left;
 `;
 let ModalContent = styled.div`
   background-color: #fefefe;
@@ -63,6 +55,12 @@ const PopUp = styled.div`
   visibility: ${props => props.show.visibility};
   background-color: red;
 `;
+const Photo = styled.input`
+
+`;
+const Empty = styled.div`
+  display: none;
+`;
 Modal.defaultProps = {
   show: {
     display: 'none'
@@ -85,55 +83,70 @@ const pop = {
 const popHide = {
   visibility: 'hidden'
 }
-function handleSubmit(event, id, update) {
-
-  axios({
-    url: `http://localhost:3000/qa/questions/${id}/answers`,
-    method: 'post',
-    data: {
-      body: event.target[0].value,
-      name: event.target[1].value,
-      email: event.target[2].value,
-      photos: []
-    }
-  })
-    .then((data) => {
-      console.log(data)
-      update();
+function handleSubmit(event, tar, value, update) {
+  if (value === 'Answer') {
+    axios({
+      url: `http://localhost:3000/qa/questions/${tar}/answers`,
+      method: 'post',
+      data: {
+        body: event.target[0].value,
+        name: event.target[1].value,
+        email: event.target[2].value,
+        photos: []
+      }
+    })
+      .then((data) => {
+        console.log(data)
+        update();
+      });
+  } else {
+    axios({
+      url: `http://localhost:3000/qa/questions`,
+      method: 'post',
+      data: {
+        body: event.target[0].value,
+        name: event.target[1].value,
+        email: event.target[2].value,
+        product_id: tar
+      }
     });
+  }
 }
-var Add = (props) => {
+var Add = ({ value, Id, setData, className }) => {
   const [id, setId] = useState(0);
   const [pop, setPop] = useState(false);
+  var Check = (value === 'Answer') ? Photo: Empty;
 
   return (
     <div>
-      <Ad onClick={function(event) { Modal.defaultProps.show = show; setId(props.id.question_id)}}>Add answer</Ad>
+      <button className={className} onClick={function(event) { Modal.defaultProps.show = show; setId(Id)}}>{`Add ${value}`}</button>
       <Modal id='modal' onClick={function(event) {if(event.target.id === 'modal') { Modal.defaultProps.show = hide; PopUp.defaultProps.show = popHide; setId(0);}}}>
         <ModalContent>
         <PopUp>
           <span>Invaled email, please try again!</span>
         </PopUp>
-          <h3>Submit your Answer</h3>
-          <form onSubmit={function(event) {
-            event.preventDefault();
+          <h3>{`Submit your ${value}`}</h3>
+          <form id='form1' onSubmit={function(event) {
+
             if (event.target[2].value.includes('@') && event.target[2].value.includes('.com')) {
               Modal.defaultProps.show = hide;
               PopUp.defaultProps.show = popHide;
-              handleSubmit(event, id, props.setData);
+              handleSubmit(event, Id, value, setData);
             } else {
+              event.preventDefault();
               PopUp.defaultProps.show = pop;
               setPop(true);
             }
           }}>
-            <label>Your Answer:</label>
+            <label>{`Your ${value}:`}</label>
             <Answer cols="100" rows="10" maxlength='1000' required></Answer>
             <label>Your nickname: </label>
             <Name type='text' placeholder='Example: jackson11!' required></Name>
             <Lonly>For privacy reasons, do not use your full name or email address!</Lonly>
             <label>Your email: </label>
             <Email type='text' placeholder='Example: jack@email.com' required></Email>
-            <input type='button' value='to be implemented: Add photo'></input>
+            <Lonly>For authentication reasons, you will not be emailed</Lonly>
+            <Check type='button' value='to be implemented: Add photo'></Check>
             <Close type='submit'></Close>
           </form>
         </ModalContent>

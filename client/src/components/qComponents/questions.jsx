@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import Search from './qSearch.jsx';
 import List from './qList.jsx';
-import GetData from './Data.jsx'
-import styled from 'styled-components'
-import Load from './uniComponents/loadMore.jsx'
+import GetData from './Data.jsx';
+import styled from 'styled-components';
+import Load from './uniComponents/loadMore.jsx';
+import Add from './uniComponents/add.jsx';
 
 const Wrap = styled.div`
   display: grid;
   color: white;
-  grid-template-rows: 75px 50px 600px 50px;
+  grid-template-rows: 75px 50px 600px 75px;
   grid-template-areas:
     "title title title"
     "nav nav nav "
     "con con con"
-    "but but but";
+    "button button button";
   text-align: center;
 `;
 const Title = styled.h1`
@@ -38,22 +39,25 @@ const ListCon = styled(List)`
   overflow: scroll;
 `;
 const Buttons = styled.div`
-  grid-area = but;
+  grid-area: button;
+  width: 100%;
+  text-align: left;
 `;
 const Ans = styled(Load)`
   background-color: inherit;
   font-size: 16px;
   cursor: pointer;
-  display: inline-block;
+  float: left;
+  margin-left: 40px;
   &:hover {
     color: orange;
   }
 `;
-const Add = styled.button`
+const AddQ = styled(Add)`
   background-color: inherit;
   font-size: 16px;
   cursor: pointer;
-  display: inline-block;
+  float: left;
   &:hover {
     color: orange;
   }
@@ -85,10 +89,10 @@ function Question(props) {
             </TitleWrap>
             <NavBar />
             <ListCon data={colap ? data: two} setData={set.bind(this)}  />
-            <div>
+            <Buttons>
               <Ans colap={colap} setColap={setColap} name={'questions'}/>
-              <Add>Add question</Add>
-            </div>
+              <AddQ setData={set.bind(this)} Id={props.product_id} value={'Question'}/>
+            </Buttons>
           </Wrap>
         );
 }

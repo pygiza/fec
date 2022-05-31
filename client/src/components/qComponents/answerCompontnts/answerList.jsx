@@ -12,7 +12,6 @@ const NoAns = styled.div`
 `;
 const Ans = styled(Load)`
   margin-left: 5%;
-
   background-color: inherit;
   font-size: 16px;
   cursor: pointer;
@@ -26,6 +25,7 @@ var Answers = (props) => {
   for (let key in props.awn) {
     arr.push(props.awn[key]);
   }
+  arr.sort(function(a, b){return b.helpfulness - a.helpfulness})
   var two = arr.slice(0, 2)
   var AddAns = (arr.length >= 3) ? Ans: NoAns;
   const [colap, setColap] = useState(false);
