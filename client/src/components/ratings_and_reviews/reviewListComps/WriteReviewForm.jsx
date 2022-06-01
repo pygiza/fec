@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import axios from 'axios';
 import ComfortForm from '../postReviewComps/ComfortForm.jsx';
 import FitForm from '../postReviewComps/FitForm.jsx';
 import LengthForm from '../postReviewComps/LengthForm.jsx';
@@ -51,9 +52,13 @@ function WriteReviewForm({ metaData }) {
 
   function onSubmit (e) {
     e.preventDefault();
-    axios.post('/reviews', {
-      body: formData,
-    });
+    axios.post('/reviews', formData)
+      .then((res) => {
+        console.log(res.status);
+      })
+      .catch((err) => {
+        console.log('error posting review', err);
+      });
   }
 
   function onFormChange (e, isChar) {
