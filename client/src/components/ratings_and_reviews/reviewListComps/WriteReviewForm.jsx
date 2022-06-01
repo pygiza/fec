@@ -9,7 +9,7 @@ import QualityForm from '../postReviewComps/QualityForm.jsx';
 import SizeForm from '../postReviewComps/SizeForm.jsx';
 import WidthForm from '../postReviewComps/WidthForm.jsx';
 
-function WriteReviewForm({ metaData }) {
+function WriteReviewForm({ metaData, productInfo }) {
 
   const initialCharacteristics = {
     Comfort: false,
@@ -81,15 +81,15 @@ function WriteReviewForm({ metaData }) {
   return (
     <ModalContent>
       <h3>Write Your Review</h3>
-      <h4>About the PRODUCT NAME</h4>
+      <h4>About the {productInfo.name}</h4>
       <form id='writeReview' onSubmit={onSubmit}>
 
         <p>Rating:</p>
-        <i className="fa-regular fa-star fa-1x" id={1}/>
-        <i className="fa-regular fa-star fa-1x" id={2}/>
-        <i className="fa-regular fa-star fa-1x" id={3}/>
-        <i className="fa-regular fa-star fa-1x" id={4}/>
-        <i className="fa-regular fa-star fa-1x" id={5}/>
+        <i className="fa-regular fa-star fa-1x" id={1}/> <br />
+        <i className="fa-regular fa-star fa-1x" id={2}/> <br />
+        <i className="fa-regular fa-star fa-1x" id={3}/> <br />
+        <i className="fa-regular fa-star fa-1x" id={4}/> <br />
+        <i className="fa-regular fa-star fa-1x" id={5}/> <br />
 
         <p>Do you recommend this product?</p>
         <input type="radio" name="recommend" value="true" id="yesRec" onChange={onFormChange} required={true}/>
@@ -119,6 +119,7 @@ function WriteReviewForm({ metaData }) {
 
 WriteReviewForm.propTypes = {
   metaData: PropTypes.object.isRequired,
+  productInfo: PropTypes.object.isRequired,
 };
 
 const ModalContent = styled.div`

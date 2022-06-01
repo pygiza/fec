@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import WriteReviewForm from './WriteReviewForm.jsx';
 
-function WriteReviewButton({ toggleWriteReview, displayWrite, metaData }) {
+function WriteReviewButton({ toggleWriteReview, displayWrite, metaData, productInfo }) {
   return (
     <span>
       <StyledWriteReviewButton onClick={toggleWriteReview}>Write Review +</StyledWriteReviewButton>
@@ -11,7 +11,7 @@ function WriteReviewButton({ toggleWriteReview, displayWrite, metaData }) {
         <XOut onClick={toggleWriteReview}>
           <i  className="fa-solid fa-xmark fa-2x"/>
         </XOut>
-        <WriteReviewForm metaData={metaData} />
+        <WriteReviewForm metaData={metaData} productInfo={productInfo}/>
       </StyledWriteReviewModal>
     </span>
   );
@@ -21,6 +21,7 @@ WriteReviewButton.propTypes = {
   toggleWriteReview: PropTypes.func.isRequired,
   displayWrite: PropTypes.bool.isRequired,
   metaData: PropTypes.object.isRequired,
+  productInfo: PropTypes.object.isRequired,
 };
 
 const StyledWriteReviewButton = styled.button`
