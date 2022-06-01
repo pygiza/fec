@@ -54,7 +54,7 @@ ReviewBreakdown.propTypes = {
 
 const ReviewBreakdownContainer = styled.div`
   margin: 2%;
-  border: solid black 3px;
+  border: solid black 1px;
   height: max-content;
 `;
 

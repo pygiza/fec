@@ -54,7 +54,7 @@ const StyledWriteReviewModal = styled.div`
 
 const XOut = styled.div`
   float: right;
-  margin: 14% 5%;
+  margin: 4% 9%;
   &:hover {
     cursor: pointer;
     background-color: #FFE69A;

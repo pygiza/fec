@@ -81,7 +81,7 @@ function WriteReviewForm({ metaData, productInfo, toggleWriteReview }) {
       });
   }
 
-  function onFormChange (e, isChar) {
+  function onFormChange (e, isChar, isPhoto) {
     if (isChar) {
       setFormData({
         ...formData,
@@ -89,6 +89,14 @@ function WriteReviewForm({ metaData, productInfo, toggleWriteReview }) {
           ...formData.characteristics,
           [e.target.name]: parseInt(e.target.value),
           }
+      });
+      return;
+    }
+    if (isPhoto) {
+      let currentData = {...formData};
+      currentData.photos = e.target.value.split(" ");
+      setFormData({
+        ...currentData,
       });
       return;
     }
@@ -137,10 +145,10 @@ function WriteReviewForm({ metaData, productInfo, toggleWriteReview }) {
   return (
     <ModalContent>
       <h3>Write Your Review</h3>
-      <h4>About the {productInfo.name}</h4>
+      <StyledHeading>About the {productInfo.name}</StyledHeading>
       <form id='writeReview' onSubmit={onSubmit}>
 
-        <h4>Overall Rating*:</h4>
+        <StyledHeading>Overall Rating*:</StyledHeading>
         <StarRating>
           <StarIcon role="button" className="fa-regular fa-star fa-1x" id="star1" onClick={onStarClick}/>
           <StarIcon role="button" className="fa-regular fa-star fa-1x" id="star2" onClick={onStarClick}/>
@@ -154,13 +162,13 @@ function WriteReviewForm({ metaData, productInfo, toggleWriteReview }) {
           <div><StarLabel id="starLabel5">Great</StarLabel></div>
         </StarRating>
 
-        <h4>Do you recommend this product?*</h4>
+        <StyledHeading>Do you recommend this product?*</StyledHeading>
         <input type="radio" name="recommend" value={true} id="yesRec" onChange={onFormChange} required={true}/>
         <label htmlFor="yesRec">Yes</label>
         <input type="radio" name="recommend" value={false} id="noRec" onChange={onFormChange}/>
         <label htmlFor="noRec">No</label>
 
-        <h4>Characteristics*</h4>
+        <StyledHeading>Characteristics*</StyledHeading>
         {Comfort ? <ComfortForm form="writeReview" onChange={onFormChange} /> : ''}
         {Fit ? <FitForm form="writeReview" onChange={onFormChange} /> : ''}
         {Length ? <LengthForm form="writeReview" onChange={onFormChange} /> : ''}
@@ -168,18 +176,21 @@ function WriteReviewForm({ metaData, productInfo, toggleWriteReview }) {
         {Size ? <SizeForm form="writeReview" onChange={onFormChange} /> : ''}
         {Width ? <WidthForm form="writeReview" onChange={onFormChange} /> : ''}
 
-        <h4>Nickname*</h4>
+        <StyledHeading>Nickname*</StyledHeading>
         <ReviewInput type="text" name="name" placeholder="Jane123" maxlength="60" onChange={onFormChange} required={true}></ReviewInput>
 
-        <h4>Email*</h4>
+        <StyledHeading>Email*</StyledHeading>
         <ReviewInput type="text" name="email" placeholder="JaneDoe@gmail.com" maxlength="60" onChange={onFormChange} required={true}></ReviewInput>
 
-        <h4>Review Summary</h4>
+        <StyledHeading>Review Summary</StyledHeading>
         <ReviewInput type="text" name="summary" placeholder="Example: Best purchase ever!" maxlength="60" onChange={onFormChange}></ReviewInput>
 
-        <h4>Review Body*</h4>
+        <StyledHeading>Review Body*</StyledHeading>
         <ReviewBody type="text" name="body" required={true} placeholder="Why did you like the product or not?" maxlength="1000" minlength="50" rows="5" onChange={onFormChange}/>
 
+        <StyledHeading>Photo Url (max 5)</StyledHeading>
+        <p>Psst... try <a href="https://unsplash.com/s/photos/clothes">Upsplash</a></p>
+        <input type="text" name="photos" onChange={(e) => onFormChange(e, null, true)}/>
         {/* {missing ? <Missing formData={formData} /> : ""} */}
         <SubmitReviewButton type="Submit" />
       </form>
@@ -196,9 +207,9 @@ WriteReviewForm.propTypes = {
 const ModalContent = styled.div`
   background-color: #fefefe;
   padding: 2%;
-  margin: 15% 10%;
+  margin: 5% 2% 5% 15%;
   border: 3px solid black;
-  width: 80%;
+  width: 70%;
 
 `;
 
@@ -240,6 +251,10 @@ const StarIcon = styled.i`
     cursor: pointer;
     font-size: 20px;
   }
+`;
+
+const StyledHeading = styled.h4`
+  margin-bottom: 0;
 `;
 
 export default WriteReviewForm;

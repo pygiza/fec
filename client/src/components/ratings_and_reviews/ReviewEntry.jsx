@@ -46,7 +46,7 @@ function ReviewEntry({ review, getCurrentReviews }) {
       <StarAvg rating={review.rating} />
       <span style={{ float: 'right' }}>
         {review.reviewer_name}
-        ,
+        <span>{', '}</span>
         {format(parseISO(review.date), 'MMMM do, yyyy')}
       </span>
       <h3>{review.summary}</h3>
@@ -75,7 +75,7 @@ const ReviewEntryContainer = styled.div`
 `;
 
 const LineBreak = styled.hr`
-  border: 1px black solid;
+
 `;
 
 export default ReviewEntry;
