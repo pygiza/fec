@@ -22,7 +22,7 @@ function ReviewList({ productId, reviews, metaData, page, revsLeft, getReviews, 
         ))}
         <ReviewButtons>
           <AddMoreReviews moreReviews={moreReviews} revsLeft={revsLeft} />
-          <WriteReviewButton metaData={metaData} toggleWriteReview={toggleWriteReview} displayWrite={displayWrite}/>
+          <WriteReviewButton metaData={metaData} toggleWriteReview={toggleWriteReview} displayWrite={displayWrite} />
         </ReviewButtons>
       </ReviewListContainer>
     </RightSide>

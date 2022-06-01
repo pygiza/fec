@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 const middleButtons = ['slightlyUncomfortable', 'ok', 'comfortable']
 
-function ComfortForm () {
+function ComfortForm ({onChange}) {
 
   function showTitle(e) {
     const elementLabel = document.getElementById(e.target.id + 'Label');
@@ -17,34 +17,40 @@ function ComfortForm () {
     });
   }
 
+  function onCharChange(e) {
+    showTitle(e);
+    onChange(e, true);
+  }
+
   return (
     <div>
       <p>Comfort:</p>
       <GridContainer>
         <StyledArray>
-          <input type="radio" id="uncomfortable" name="comfort" value={1} onChange={showTitle} /> <br />
+          <input type="radio" id="uncomfortable" name="125033" value={1} onChange={onCharChange} /> <br />
           <label htmlFor="uncomfortable" id="uncomfortableLabel">Uncomfortable</label>
         </StyledArray>
         <StyledArray>
-          <input type="radio" id="slightlyUncomfortable" name="comfort" value={2} onChange={showTitle}/> <br />
+          <input type="radio" id="slightlyUncomfortable" name="125033" value={2} onChange={onCharChange}/> <br />
           <ToggleLabel htmlFor="slightlyUncomfortable" id="slightlyUncomfortableLabel">Slightly Uncomfortable</ToggleLabel>
         </StyledArray>
         <StyledArray>
-          <input type="radio" id="ok" name="comfort" value={3} onChange={showTitle}/> <br />
+          <input type="radio" id="ok" name="125033" value={3} onChange={onCharChange}/> <br />
           <ToggleLabel htmlFor="ok" id="okLabel">Ok</ToggleLabel>
         </StyledArray>
         <StyledArray>
-          <input type="radio" id="comfortable" name="comfort" value={4} onChange={showTitle}/> <br />
+          <input type="radio" id="comfortable" name="125033" value={4} onChange={onCharChange}/> <br />
           <ToggleLabel htmlFor="comfortable" id="comfortableLabel">Comfortable</ToggleLabel>
         </StyledArray>
         <StyledArray>
-          <input type="radio" id="perfect" name="comfort" value={5} onChange={showTitle}/> <br />
+          <input type="radio" id="perfect" name="125033" value={5} onChange={onCharChange}/> <br />
           <label htmlFor="perfect" id="perfectLabel">Perfect</label>
         </StyledArray>
       </GridContainer>
     </div>
   );
 }
+
 
 const StyledArray = styled.div`
   float: left;

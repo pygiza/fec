@@ -56,6 +56,7 @@ const XOut = styled.div`
   margin: 14% 5%;
   &:hover {
     cursor: pointer;
+    background-color: #FFE69A;
   }
   text-align: center;
   background-color: white;

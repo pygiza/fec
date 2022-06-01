@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 const middleButtons = ['slightlyNarrow', 'perfect6', 'slightlyWide']
 
-function WidthForm () {
+function WidthForm ({ onChange }) {
 
   function showTitle(e) {
     const elementLabel = document.getElementById(e.target.id + 'Label');
@@ -17,28 +17,33 @@ function WidthForm () {
     });
   }
 
+  function onCharChange(e) {
+    showTitle(e);
+    onChange(e, true);
+  }
+
   return (
     <div>
       <p>Width:</p>
       <GridContainer>
         <StyledArray>
-          <input type="radio" id="tooNarrow" name="width" value={1} onChange={showTitle} /> <br />
+          <input type="radio" id="tooNarrow" name="125045" value={1} onChange={onCharChange} /> <br />
           <label htmlFor="tooNarrow" id="tooNarrowLabel">Too Narrow</label>
         </StyledArray>
         <StyledArray>
-          <input type="radio" id="slightlyNarrow" name="width" value={2} onChange={showTitle}/> <br />
+          <input type="radio" id="slightlyNarrow" name="125045" value={2} onChange={onCharChange}/> <br />
           <ToggleLabel htmlFor="slightlyNarrow" id="slightlyNarrowLabel">Slightly Narrow</ToggleLabel>
         </StyledArray>
         <StyledArray>
-          <input type="radio" id="perfect6" name="width" value={3} onChange={showTitle}/> <br />
+          <input type="radio" id="perfect6" name="125045" value={3} onChange={onCharChange}/> <br />
           <ToggleLabel htmlFor="perfect6" id="perfect6Label">Perfect</ToggleLabel>
         </StyledArray>
         <StyledArray>
-          <input type="radio" id="slightlyWide" name="width" value={4} onChange={showTitle}/> <br />
+          <input type="radio" id="slightlyWide" name="125045" value={4} onChange={onCharChange}/> <br />
           <ToggleLabel htmlFor="slightlyWide" id="slightlyWideLabel">Slightly Wide</ToggleLabel>
         </StyledArray>
         <StyledArray>
-          <input type="radio" id="tooWide" name="width" value={5} onChange={showTitle}/> <br />
+          <input type="radio" id="tooWide" name="125045" value={5} onChange={onCharChange}/> <br />
           <label htmlFor="tooWide" id="tooWideLabel">Too Wide</label>
         </StyledArray>
       </GridContainer>

@@ -19,7 +19,26 @@ function WriteReviewForm({ metaData }) {
     Width: false,
   };
 
+  const initialFormData = {
+    product_id: metaData.product_id,
+    rating: null,
+    summary: "",
+    body: "",
+    recommend: null,
+    name: "",
+    email: "",
+    photos: [],
+    characteristics: {},
+  };
+
   const [ { Comfort, Fit, Length, Quality, Size, Width }, setCharacteristics ] = useState(initialCharacteristics);
+
+  const [formData, setFormData] = useState({...initialFormData});
+
+  useEffect(() => {
+    setFormData({});
+    document.getElementById('writeReview').reset();
+  }, [metaData])
 
   useEffect(() => {
     setCharacteristics(initialCharacteristics);
@@ -30,31 +49,55 @@ function WriteReviewForm({ metaData }) {
     setCharacteristics(newChars);
   }, [metaData]);
 
+  function onSubmit (e) {
+    e.preventDefault();
+    axios.post('/reviews', {
+      body: formData,
+    });
+  }
+
+  function onFormChange (e, isChar) {
+    if (isChar) {
+      setFormData({
+        ...formData,
+        characteristics: {
+          ...formData.characteristics,
+          [e.target.name]: e.target.value,
+          }
+      });
+      return;
+    }
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  }
+
   return (
     <ModalContent>
       <h3>Write Your Review</h3>
       <h4>About the PRODUCT NAME</h4>
-      <form>
+      <form id='writeReview' onSubmit={onSubmit}>
         {/* Overall Rating */}
         <p>Do you recommend this product?</p>
-        <input type="radio" name="recommend" value="true" id="yesRec" />
+        <input type="radio" name="recommend" value="true" id="yesRec" onChange={onFormChange}/>
         <label htmlFor="yesRec">Yes</label>
-        <input type="radio" name="recommend" value="false" id="noRec" />
+        <input type="radio" name="recommend" value="false" id="noRec" onChange={onFormChange}/>
         <label htmlFor="noRec">No</label>
 
         <h4>Characteristics</h4>
-        {Comfort ? <ComfortForm /> : ''}
-        {Fit ? <FitForm /> : ''}
-        {Length ? <LengthForm /> : ''}
-        {Quality ? <QualityForm /> : ''}
-        {Size ? <SizeForm /> : ''}
-        {Width ? <WidthForm /> : ''}
+        {Comfort ? <ComfortForm form="writeReview" onChange={onFormChange} /> : ''}
+        {Fit ? <FitForm form="writeReview" onChange={onFormChange} /> : ''}
+        {Length ? <LengthForm form="writeReview" onChange={onFormChange} /> : ''}
+        {Quality ? <QualityForm form="writeReview" onChange={onFormChange} /> : ''}
+        {Size ? <SizeForm form="writeReview" onChange={onFormChange} /> : ''}
+        {Width ? <WidthForm form="writeReview" onChange={onFormChange} /> : ''}
 
         <h4>Review Summary</h4>
-        <ReviewSummary type="text" placeholder="Example: Best purchase ever!" maxlength="60"></ReviewSummary>
+        <ReviewSummary type="text" name="summary" placeholder="Example: Best purchase ever!" maxlength="60" onChange={onFormChange}></ReviewSummary>
 
         <h4>Review Body</h4>
-        <ReviewBody type="text" required={true} placeholder="Why did you like the product or not?" maxlength="1000" minlength="50" rows="5" />
+        <ReviewBody type="text" name="body" required={true} placeholder="Why did you like the product or not?" maxlength="1000" minlength="50" rows="5" onChange={onFormChange}/>
 
         <SubmitReviewButton type="Submit" />
       </form>
@@ -72,6 +115,7 @@ const ModalContent = styled.div`
   margin: 15% 10%;
   border: 3px solid black;
   width: 80%;
+
 `;
 
 const SubmitReviewButton = styled.input`
