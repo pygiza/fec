@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Search from './qSearch.jsx';
 import List from './qList.jsx';
-import GetData from '/client/src/components/qComponents/Data.jsx'
+import GetData from './Data.jsx'
 import styled from 'styled-components'
 
 const Wrap = styled.div`

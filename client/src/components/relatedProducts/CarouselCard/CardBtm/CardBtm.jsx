@@ -21,7 +21,7 @@ const StarRating = function(rating) {
 const CardBtm = function({ category, name, price, rating }) {
   return (
     <Btm>
-      <p style={{color: 'grey', marginBottom: '5px'}}>{category}</p>
+      <p data-testid="html-element" style={{color: 'grey', marginBottom: '5px'}}>{category}</p>
       <p style={{fontSize: '20px', fontWeight: 'bold', marginTop: '5px'}}>{name}</p>
       <p style={{position: 'absolute', left: '5px', bottom: '35px'}}>${price}</p>
       {rating ? StarRating(rating) : undefined}
