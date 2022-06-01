@@ -48,10 +48,17 @@ function App(props) {
 
   return (
     <div>
+<<<<<<< HEAD
       <Overview productId={productId} productInfo={productInfo} productStyles={productStyles} productMeta={productMeta} />
       <RelatedProductsContainer product_id={productId} renderProduct={renderProduct} productInfo={productInfo} productStyles={productStyles} />
       <Question productInfo={productInfo} />
       <RatingsReviews productId={productId} productInfo={productInfo} productMeta={productMeta} />
+=======
+      <Overview productId={productId}/>
+      <RelatedProductsContainer product_id={productId} renderProduct={renderProduct} />
+      <Question product_id={productId}/>
+      <RatingsReviews productId={productId}/>
+>>>>>>> 34e37ada27a494f51dee9b1ddf39c99ee0a75767
     </div>
   );
 }

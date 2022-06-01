@@ -17,7 +17,6 @@ const Button = styled.button`
     color: orange;
   }
 `;
-
 const Helpful = (props) => {
   if (props.isClicked) {
     return (

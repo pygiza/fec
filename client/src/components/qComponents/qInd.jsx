@@ -30,6 +30,16 @@ const Qw = styled.div`
   grid-area: qw;
   width: 100%;
 `;
+let Ad = styled(Add)`
+  border: yellow;
+  background-color: inherit;
+  float: left;
+  font-size: 15px;
+  text-decoration: underline;
+  &:hover {
+    color: orange;
+  }
+`;
 var whenClicked = (id, update) => {
   axios({
     url: `http://localhost:3000/qa/questions/${id}/helpful`,
@@ -50,7 +60,7 @@ var Ind = (props) => {
         <Button isClicked={clicked}
           whenClicked={function() { whenClicked(props.que.question_id, function() { setClicked(true); props.setData();}); }}
           count={props.que.question_helpfulness}/>
-        <Add setData={props.setData} id={props.que}/>
+        <Ad setData={props.setData} Id={props.que.question_id} value={'Answer'}/>
       </Ques>
       <Answers setData={props.setData} awn={props.que.answers}/>
   </Wraper>
