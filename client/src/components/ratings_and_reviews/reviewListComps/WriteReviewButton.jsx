@@ -11,7 +11,7 @@ function WriteReviewButton({ toggleWriteReview, displayWrite, metaData, productI
         <XOut onClick={toggleWriteReview}>
           <i  className="fa-solid fa-xmark fa-2x"/>
         </XOut>
-        <WriteReviewForm metaData={metaData} productInfo={productInfo}/>
+        <WriteReviewForm metaData={metaData} productInfo={productInfo} toggleWriteReview={toggleWriteReview}/>
       </StyledWriteReviewModal>
     </span>
   );
