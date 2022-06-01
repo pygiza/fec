@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Overview from './overview/Overview.jsx';
 import RelatedProductsContainer from './relatedProducts/RelatedProductsContainer.jsx';
 import Question from './qComponents/questions.jsx';
 import RatingsReviews from './ratings_and_reviews/RatingsReviews.jsx';
-import axios from './'
+import axios from 'axios';
 
 function App(props) {
 
   let [productId, setProductId] = useState(37311);
-  let [productInfo, setProductInfo] = useState({});
+  let [productInfo, setProduct] = useState({});
   let [productStyles, setProductStyles] = useState({});
   let [productMeta, setProductMeta] = useState({});
 
@@ -45,13 +45,13 @@ function App(props) {
     getProductInfo();
     getProductStyles();
     getProductMeta();
-  }, [productId])
+  }, [productId]);
 
   return (
     <div>
       <Overview productId={productId} productInfo={productInfo} productStyles={productStyles} productMeta={productMeta} />
       <RelatedProductsContainer product_id={productId} renderProduct={renderProduct} productInfo={productInfo} productStyles={productStyles} />
-      <Question productInfo={productInfo} productId={productId} />
+      <Question productInfo={productInfo}  productId={productId} />
       <RatingsReviews productId={productId} productInfo={productInfo} productMeta={productMeta} />
     </div>
   );

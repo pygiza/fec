@@ -67,7 +67,7 @@ function Question(props) {
   const [two, setTwo] = useState([]);
   const [colap, setColap] = useState(false);
   function set() {
-    GetData({id: props.product_id})
+    GetData({id: props.productId})
       .then(res => {
         setData(res.data.results);
         var arr = [];
