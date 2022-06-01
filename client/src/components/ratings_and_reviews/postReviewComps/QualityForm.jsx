@@ -43,7 +43,7 @@ function QualityForm ({ onChange }) {
           <ToggleLabel htmlFor="prettyGreat" id="prettyGreatLabel">Pretty Great</ToggleLabel>
         </StyledArray>
         <StyledArray>
-          <input type="radio" id="perfect4" name="125034" value={5} onChange={onCharChange}/> <br />
+          <input type="radio" id="perfect4" name="125034" value={5} onChange={onCharChange} required={true}/> <br />
           <label htmlFor="perfect4" id="perfect4Label">Perfect</label>
         </StyledArray>
       </GridContainer>

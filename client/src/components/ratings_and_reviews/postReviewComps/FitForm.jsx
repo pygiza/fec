@@ -43,7 +43,7 @@ function FitForm ({onChange}) {
           <ToggleLabel htmlFor="runsSlightlyLong" id="runsSlightlyLongLabel">Runs Slightly Long</ToggleLabel>
         </StyledArray>
         <StyledArray>
-          <input type="radio" id="runsLong" name="125031" value={5} onChange={onCharChange}/> <br />
+          <input type="radio" id="runsLong" name="125031" value={5} onChange={onCharChange} required={true}/> <br />
           <label htmlFor="runsLong" id="runsLongLabel">Runs Long</label>
         </StyledArray>
       </GridContainer>

@@ -37,7 +37,7 @@ function WriteReviewForm({ metaData }) {
   const [formData, setFormData] = useState(initialFormData);
 
   useEffect(() => {
-    setFormData({});
+    setFormData(initialFormData);
     document.getElementById('writeReview').reset();
   }, [metaData])
 
@@ -85,7 +85,7 @@ function WriteReviewForm({ metaData }) {
       <form id='writeReview' onSubmit={onSubmit}>
         {/* Overall Rating */}
         <p>Do you recommend this product?</p>
-        <input type="radio" name="recommend" value="true" id="yesRec" onChange={onFormChange}/>
+        <input type="radio" name="recommend" value="true" id="yesRec" onChange={onFormChange} required={true}/>
         <label htmlFor="yesRec">Yes</label>
         <input type="radio" name="recommend" value="false" id="noRec" onChange={onFormChange}/>
         <label htmlFor="noRec">No</label>

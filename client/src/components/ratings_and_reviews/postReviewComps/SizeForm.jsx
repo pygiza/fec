@@ -43,7 +43,7 @@ function SizeForm ({ onChange }) {
           <ToggleLabel htmlFor="halfSizeTooBig" id="halfSizeTooBigLabel">1/2 A Size Too Big</ToggleLabel>
         </StyledArray>
         <StyledArray>
-          <input type="radio" id="aSizeTooBig" name="125044" value={5} onChange={onCharChange}/> <br />
+          <input type="radio" id="aSizeTooBig" name="125044" value={5} onChange={onCharChange} required={true}/> <br />
           <label htmlFor="aSizeTooBig" id="aSizeTooBigLabel">A Size Too Big</label>
         </StyledArray>
       </GridContainer>

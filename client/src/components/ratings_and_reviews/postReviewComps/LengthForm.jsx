@@ -43,7 +43,7 @@ function LengthForm ({onChange}) {
           <ToggleLabel htmlFor="runsSlightlyLong2" id="runsSlightlyLong2Label">Runs Slightly Long</ToggleLabel>
         </StyledArray>
         <StyledArray>
-          <input type="radio" id="runsLong2" name="125032" value={5} onChange={onCharChange}/> <br />
+          <input type="radio" id="runsLong2" name="125032" value={5} onChange={onCharChange} required={true}/> <br />
           <label htmlFor="runsLong2" id="runsLong2Label">Runs Long</label>
         </StyledArray>
       </GridContainer>

@@ -27,7 +27,7 @@ function ComfortForm ({onChange}) {
       <p>Comfort:</p>
       <GridContainer>
         <StyledArray>
-          <input type="radio" id="uncomfortable" name="125033" value={1} onChange={onCharChange} /> <br />
+          <input type="radio" id="uncomfortable" name="125033" value={1} onChange={onCharChange}/> <br />
           <label htmlFor="uncomfortable" id="uncomfortableLabel">Uncomfortable</label>
         </StyledArray>
         <StyledArray>
@@ -43,7 +43,7 @@ function ComfortForm ({onChange}) {
           <ToggleLabel htmlFor="comfortable" id="comfortableLabel">Comfortable</ToggleLabel>
         </StyledArray>
         <StyledArray>
-          <input type="radio" id="perfect" name="125033" value={5} onChange={onCharChange}/> <br />
+          <input type="radio" id="perfect" name="125033" value={5} onChange={onCharChange} required={true}/> <br />
           <label htmlFor="perfect" id="perfectLabel">Perfect</label>
         </StyledArray>
       </GridContainer>

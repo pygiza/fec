@@ -43,7 +43,7 @@ function WidthForm ({ onChange }) {
           <ToggleLabel htmlFor="slightlyWide" id="slightlyWideLabel">Slightly Wide</ToggleLabel>
         </StyledArray>
         <StyledArray>
-          <input type="radio" id="tooWide" name="125045" value={5} onChange={onCharChange}/> <br />
+          <input type="radio" id="tooWide" name="125045" value={5} onChange={onCharChange} required={true}/> <br />
           <label htmlFor="tooWide" id="tooWideLabel">Too Wide</label>
         </StyledArray>
       </GridContainer>
