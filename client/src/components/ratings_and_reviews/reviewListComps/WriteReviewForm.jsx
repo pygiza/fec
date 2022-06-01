@@ -83,7 +83,14 @@ function WriteReviewForm({ metaData }) {
       <h3>Write Your Review</h3>
       <h4>About the PRODUCT NAME</h4>
       <form id='writeReview' onSubmit={onSubmit}>
-        {/* Overall Rating */}
+
+        <p>Rating:</p>
+        <i className="fa-regular fa-star fa-1x" id={1}/>
+        <i className="fa-regular fa-star fa-1x" id={2}/>
+        <i className="fa-regular fa-star fa-1x" id={3}/>
+        <i className="fa-regular fa-star fa-1x" id={4}/>
+        <i className="fa-regular fa-star fa-1x" id={5}/>
+
         <p>Do you recommend this product?</p>
         <input type="radio" name="recommend" value="true" id="yesRec" onChange={onFormChange} required={true}/>
         <label htmlFor="yesRec">Yes</label>
