@@ -42,6 +42,7 @@ function WriteReviewForm({ metaData, productInfo, toggleWriteReview }) {
   useEffect(() => {
     setFormData(initialFormData);
     document.getElementById('writeReview').reset();
+    starReset();
   }, [metaData])
 
   useEffect(() => {
@@ -73,6 +74,7 @@ function WriteReviewForm({ metaData, productInfo, toggleWriteReview }) {
       .then((res) => {
         toggleWriteReview();
         document.getElementById('writeReview').reset();
+        starReset();
       })
       .catch((err) => {
         console.log('error posting review', err);
@@ -121,6 +123,17 @@ function WriteReviewForm({ metaData, productInfo, toggleWriteReview }) {
 
   }
 
+  function starReset () {
+    for (let i = 1; i < 6; i++) {
+      let star = document.getElementById(`star${i}`);
+      let label = document.getElementById(`starLabel${i}`);
+      let classNames = star.className.split(" ");
+      classNames[0] = "fa-regular";
+      star.className = classNames.join(" ");
+      label.style.display = 'none';
+    }
+  }
+
   return (
     <ModalContent>
       <h3>Write Your Review</h3>
@@ -129,11 +142,11 @@ function WriteReviewForm({ metaData, productInfo, toggleWriteReview }) {
 
         <h4>Overall Rating*:</h4>
         <StarRating>
-          <StarIcon className="fa-regular fa-star fa-1x" id="star1" onClick={onStarClick}/>
-          <StarIcon className="fa-regular fa-star fa-1x" id="star2" onClick={onStarClick}/>
-          <StarIcon className="fa-regular fa-star fa-1x" id="star3" onClick={onStarClick}/>
-          <StarIcon className="fa-regular fa-star fa-1x" id="star4" onClick={onStarClick}/>
-          <StarIcon className="fa-regular fa-star fa-1x" id="star5" onClick={onStarClick}/>
+          <StarIcon role="button" className="fa-regular fa-star fa-1x" id="star1" onClick={onStarClick}/>
+          <StarIcon role="button" className="fa-regular fa-star fa-1x" id="star2" onClick={onStarClick}/>
+          <StarIcon role="button" className="fa-regular fa-star fa-1x" id="star3" onClick={onStarClick}/>
+          <StarIcon role="button" className="fa-regular fa-star fa-1x" id="star4" onClick={onStarClick}/>
+          <StarIcon role="button" className="fa-regular fa-star fa-1x" id="star5" onClick={onStarClick}/>
           <div><StarLabel id="starLabel1">Poor</StarLabel></div>
           <div><StarLabel id="starLabel2">Fair</StarLabel></div>
           <div><StarLabel id="starLabel3">Average</StarLabel></div>
