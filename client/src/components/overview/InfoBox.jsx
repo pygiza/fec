@@ -9,17 +9,17 @@ function InfoBox({ products }) {
   
 
   const currentRating = (product_id) => {
-    console.log('ID: ',product_id);
+    //console.log('ID: ',product_id);
     axios.get(`http://localhost:3000/reviews/meta`, { params: { product_id } })
     .then(res => {
-  
+      
       let total = 0;
       let reviews = 0;
       for (let rating in res.data.ratings) {
         total += res.data.ratings[rating] * rating;
         reviews += Number(res.data.ratings[rating]);
       }
-      let starRating = (Math.round( (total / reviews) * 4 ) / 4).toFixed(2);
+      let starRating = (Math.round( (total / reviews) * 4 ) / 4);
       //console.log(rating);
   
       setRating(starRating);
@@ -31,7 +31,7 @@ function InfoBox({ products }) {
     document.getElementById('reviews').scrollIntoView({ behavior: 'smooth' });
   }
 
-  products ? currentRating(products.id): 'waiting'
+  products.id ? currentRating(products.id): null;
   
  return (
    <Info>
