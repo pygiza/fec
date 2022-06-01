@@ -4,11 +4,12 @@ import Overview from './overview/Overview.jsx';
 import RelatedProductsContainer from './relatedProducts/RelatedProductsContainer.jsx';
 import Question from './qComponents/questions.jsx';
 import RatingsReviews from './ratings_and_reviews/RatingsReviews.jsx';
+import axios from './'
 
 function App(props) {
 
   let [productId, setProductId] = useState(37311);
-  let [product, setProduct] = useState({});
+  let [productInfo, setProductInfo] = useState({});
   let [productStyles, setProductStyles] = useState({});
   let [productMeta, setProductMeta] = useState({});
 
@@ -48,17 +49,10 @@ function App(props) {
 
   return (
     <div>
-<<<<<<< HEAD
       <Overview productId={productId} productInfo={productInfo} productStyles={productStyles} productMeta={productMeta} />
       <RelatedProductsContainer product_id={productId} renderProduct={renderProduct} productInfo={productInfo} productStyles={productStyles} />
-      <Question productInfo={productInfo} />
+      <Question productInfo={productInfo} productId={productId} />
       <RatingsReviews productId={productId} productInfo={productInfo} productMeta={productMeta} />
-=======
-      <Overview productId={productId}/>
-      <RelatedProductsContainer product_id={productId} renderProduct={renderProduct} />
-      <Question product_id={productId}/>
-      <RatingsReviews productId={productId}/>
->>>>>>> 34e37ada27a494f51dee9b1ddf39c99ee0a75767
     </div>
   );
 }
