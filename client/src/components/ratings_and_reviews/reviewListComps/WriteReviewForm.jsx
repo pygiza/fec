@@ -34,7 +34,7 @@ function WriteReviewForm({ metaData }) {
 
   const [ { Comfort, Fit, Length, Quality, Size, Width }, setCharacteristics ] = useState(initialCharacteristics);
 
-  const [formData, setFormData] = useState({...initialFormData});
+  const [formData, setFormData] = useState(initialFormData);
 
   useEffect(() => {
     setFormData({});
