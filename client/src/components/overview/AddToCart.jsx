@@ -53,16 +53,16 @@ function AddToCart({ skus }) { //sku array
         {/* <Option value={0}>Select A Size</Option> */}
       {skus ? skus.map((style, index) => {
         return (
-        <Option value={index} > {style.size}</Option>
+        <Option key={index} value={index} > {style.size}</Option>
         );
       }) : 'Waiting on Images... '}
       </Size>
 
       <Quantity onChange={quantitySetter}>
         <Option value={0}>Select</Option>
-      {quantityArr.map((num)=> {
+      {quantityArr.map((num, index)=> {
         return (
-        <Option value={num + 1}> {num + 1}</Option>
+        <Option key={index} value={num + 1}> {num + 1}</Option>
         );
       })}
       </Quantity>
@@ -75,7 +75,7 @@ function AddToCart({ skus }) { //sku array
        <CartNumber>
         {countUpdate}
       </CartNumber> 
-      <i class="fa-solid fa-cart-shopping"></i>
+      <i className="fa-solid fa-cart-shopping"></i>
       </Star>
     </CartBox>
   );

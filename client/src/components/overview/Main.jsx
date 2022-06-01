@@ -11,7 +11,7 @@ function MainBox({ image, handleClick, images, currentImageIndex, updateLocation
 
   return (
     <Main columnEnd={expandColumnEnd}>
-      <PhotoMain src={image ? image.thumbnail_url : 'Waiting for Images'} />
+      <PhotoMain src={image ? image.thumbnail_url : undefined} />
       <ThumbnailBox images={images()} updateLocation={updateLocation} currentImageIndex={currentImageIndex}/>
       <ArrowRight value="right" onClick={handleClick} />
       <ArrowLeft value="left" onClick={handleClick} />
