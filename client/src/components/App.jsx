@@ -50,7 +50,7 @@ function App(props) {
     <div>
       <Overview productId={productId} productInfo={productInfo} productStyles={productStyles} productMeta={productMeta} />
       <RelatedProductsContainer product_id={productId} renderProduct={renderProduct} productInfo={productInfo} productStyles={productStyles} />
-      <Question productInfo={productInfo} />
+      <Question productInfo={productInfo}  productId={productId} />
       <RatingsReviews productId={productId} productInfo={productInfo} productMeta={productMeta} />
     </div>
   );
