@@ -32,7 +32,7 @@ function AddToCart({ skus }) { //sku array
     for (let i = 0; i < skuQuantity; i++) {
       let newPromise = axios({
         method: 'post',
-        url: 'http://localhost:3000/cart',
+        url: '/cart',
         data: {sku_id : skus[skuIndex].id}
       });
       reqArray.push(newPromise);

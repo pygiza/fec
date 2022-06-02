@@ -42,7 +42,7 @@ let Ad = styled(Add)`
 `;
 var whenClicked = (id, update) => {
   axios({
-    url: `http://localhost:3000/qa/questions/${id}/helpful`,
+    url: `/qa/questions/${id}/helpful`,
     method: 'put'
   })
     .then(() => {
