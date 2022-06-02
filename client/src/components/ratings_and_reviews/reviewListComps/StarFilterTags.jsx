@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-function StarFilterTags({ currentFilters, filterStars }) {
+function StarFilterTags({ currentFilters, filterStars, removeFilters }) {
   return(
     <StarTagContainer>
       {currentFilters.map((filter) => (
-        <StarTag key={filter} onClick={() => filterStars(filter)}>{filter} stars <i className="fa-regular fa-circle-xmark"></i></StarTag>
+        <StarTag key={filter} onClick={() => filterStars(filter)}>{filter} star <i className="fa-regular fa-circle-xmark"></i></StarTag>
       ))}
-      {currentFilters.length ? <RemoveFilters>Remove Filters</RemoveFilters> : ""}
+      {currentFilters.length ? <RemoveFilters onClick={removeFilters}>Remove All Filters</RemoveFilters> : ""}
     </StarTagContainer>
   )
 }
@@ -16,6 +16,7 @@ function StarFilterTags({ currentFilters, filterStars }) {
 StarFilterTags.propTypes = {
   currentFilters: PropTypes.array.isRequired,
   filterStars: PropTypes.func.isRequired,
+  removeFilters: PropTypes.func.isRequired,
 }
 
 const StarTag = styled.div`
