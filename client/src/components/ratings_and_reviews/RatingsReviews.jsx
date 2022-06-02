@@ -7,7 +7,7 @@ import ReviewBreakdown from './ReviewBreakdown.jsx';
 import ReviewFilter from './reviewListComps/ReviewFilter.jsx';
 
 
-function RatingsReviews({ productId }) {
+function RatingsReviews({ productId, productInfo, productMeta }) {
   // dynamic sizing
   const [matches, setMatches] = useState(
     window.matchMedia("(min-width: 768px)").matches
@@ -37,11 +37,14 @@ function RatingsReviews({ productId }) {
   };
 
   const [reviews, setReviews] = useState([]);
-  const [metaData, setMetaData] = useState(initialMetaData);
   const [page, setPage] = useState(1);
   const [revsLeft, setRevsLeft] = useState(false);
   const [currentFilters, setCurrentFilters] = useState([]);
   const [sort, setSort] = useState('relevant');
+
+  if (!Object.keys(productMeta).length) {
+    productMeta = initialMetaData;
+  }
 
   function getReviews() {
     return getReviewsBy2(productId, 1, sort)
@@ -63,16 +66,6 @@ function RatingsReviews({ productId }) {
     getReviews();
   }, [productId, sort]);
 
-  function getMeta() {
-    getMetaData(productId)
-      .then((data) => {
-        setMetaData(data);
-      });
-  }
-
-  useEffect(() => {
-    getMeta();
-  }, [productId]);
 
   function moreReviews() {
     return getReviewsBy2(productId, page + 1, sort)
@@ -144,6 +137,11 @@ function RatingsReviews({ productId }) {
     setSort('relevant');
   }, [productId]);
 
+  function removeFilters() {
+    setCurrentFilters([]);
+    getReviews();
+  }
+
   return (
     <div id="reviews">
       <SectionTitle>RATINGS & REVIEWS</SectionTitle>
@@ -151,7 +149,7 @@ function RatingsReviews({ productId }) {
       (<OverallReviews>
         <ReviewBreakdown
           productId={productId}
-          metaData={metaData}
+          metaData={productMeta}
           filterStars={filterStars}
           getCurrentRevs={getCurrentRevs}
         />
@@ -159,7 +157,7 @@ function RatingsReviews({ productId }) {
         <ReviewList
           productId={productId}
           reviews={reviews}
-          metaData={metaData}
+          metaData={productMeta}
           page={page}
           revsLeft={revsLeft}
           getReviews={getReviews}
@@ -167,13 +165,15 @@ function RatingsReviews({ productId }) {
           onSortChange={onSortChange}
           currentFilters={currentFilters}
           filterStars={filterStars}
+          removeFilters={removeFilters}
+          productInfo={productInfo}
         />
       </OverallReviews>)}
       { !matches &&
       (<SmallScreen>
           <ReviewBreakdown
             productId={productId}
-            metaData={metaData}
+            metaData={productMeta}
             filterStars={filterStars}
             getCurrentRevs={getCurrentRevs}
           />
@@ -181,7 +181,7 @@ function RatingsReviews({ productId }) {
         <ReviewList
           productId={productId}
           reviews={reviews}
-          metaData={metaData}
+          metaData={productMeta}
           page={page}
           revsLeft={revsLeft}
           getReviews={getReviews}
@@ -189,6 +189,8 @@ function RatingsReviews({ productId }) {
           onSortChange={onSortChange}
           currentFilters={currentFilters}
           filterStars={filterStars}
+          removeFilters={removeFilters}
+          productInfo={productInfo}
         />
       </SmallScreen>)}
     </div>
@@ -216,6 +218,8 @@ const SmallScreen = styled.div`
 
 RatingsReviews.propTypes = {
   productId: PropTypes.number.isRequired,
+  productInfo: PropTypes.object.isRequired,
+  productMeta: PropTypes.object.isRequired,
 }
 
 export default RatingsReviews;

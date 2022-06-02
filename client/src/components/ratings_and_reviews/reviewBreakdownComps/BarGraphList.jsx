@@ -23,11 +23,11 @@ function BarGraphList({ ratings, count, filterStars }) {
 
   return(
     <BarGraphContainer>
-      <BarGraph star="5" percent={percentages["5"]} filterStars={filterStars}/>
-      <BarGraph star="4" percent={percentages["4"]} filterStars={filterStars}/>
-      <BarGraph star="3" percent={percentages["3"]} filterStars={filterStars}/>
-      <BarGraph star="2" percent={percentages["2"]} filterStars={filterStars}/>
-      <BarGraph star="1" percent={percentages["1"]} filterStars={filterStars}/>
+      <BarGraph star="5" percent={percentages["5"]} filterStars={filterStars} count={ratings["5"]}/>
+      <BarGraph star="4" percent={percentages["4"]} filterStars={filterStars} count={ratings["4"]}/>
+      <BarGraph star="3" percent={percentages["3"]} filterStars={filterStars} count={ratings["3"]}/>
+      <BarGraph star="2" percent={percentages["2"]} filterStars={filterStars} count={ratings["2"]}/>
+      <BarGraph star="1" percent={percentages["1"]} filterStars={filterStars} count={ratings["1"]}/>
     </BarGraphContainer>
   );
 }

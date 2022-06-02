@@ -54,6 +54,7 @@ const BaseBar = styled.div`
 const Label0 = styled.p`
   font-size: .9em;
   font-weight: bold;
+  margin: 0;
 `;
 
 const Label1 = styled.p`
