@@ -70,7 +70,7 @@ function Overview({ productId }) {
     for(let key in skuObj) {
       skuArray.push(skuObj[key])
     }
-    console.log('SKUARR: ', skuArray)
+    //console.log('SKUARR: ', skuArray)
     setSkus(skuArray);
   }
 
