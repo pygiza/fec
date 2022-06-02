@@ -23,7 +23,8 @@ const CardBtm = function({ category, name, price, rating }) {
     <Btm>
       <p style={{color: 'grey', marginBottom: '5px'}}>{category}</p>
       <p style={{fontSize: '20px', fontWeight: 'bold', marginTop: '5px'}}>{name}</p>
-      <p style={{position: 'absolute', left: '5px', bottom: '35px'}}>${price}</p>
+      <p style={{position: 'absolute', left: '5px', bottom: '35px'}}>${price.salePrice === null ? price.origPrice :
+      <><p style={{color: 'red'}}><del>{price.origPrice}</del></p>{price.salePrice}</>} </p>
       {rating ? StarRating(rating) : undefined}
     </Btm>
   )

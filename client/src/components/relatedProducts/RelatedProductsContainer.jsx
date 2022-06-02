@@ -5,7 +5,7 @@ import ComparisonModal from './ComparisonModal.jsx';
 import CarouselLabel from './CarouselLabel.jsx';
 import CarouselList from './CarouselList.jsx';
 
-const RelatedProductsContainer = function({ product_id, renderProduct }) {
+const RelatedProductsContainer = function({ product_id, renderProduct, productInfo }) {
 
   let [product, setProduct] = useState({ name: '', features: [] });
   let [compare, setCompare] = useState({ name: '', features: [] });
@@ -51,6 +51,7 @@ const RelatedProductsContainer = function({ product_id, renderProduct }) {
         return axios.get(`products/${id}/styles`)
           .then(res => {
             product.image = res.data.results[0].photos[0].url;
+            product.price = { origPrice: res.data.results[0].original_price, salePrice: res.data.results[0].sale_price }
             return product;
           })
       })

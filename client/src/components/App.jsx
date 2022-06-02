@@ -41,11 +41,11 @@ function App(props) {
       .catch(err => console.log('couldnt get product meta data', err));
   }
 
-  useEffect(() => {
-    getProductInfo();
-    getProductStyles();
-    getProductMeta();
-  }, [productId]);
+  // useEffect(() => {
+  //   getProductInfo();
+  //   getProductStyles();
+  //   getProductMeta();
+  // }, [productId]);
 
   return (
     <div>
