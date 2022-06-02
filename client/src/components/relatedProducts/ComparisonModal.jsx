@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const Modal = styled.div`
   display: ${props => props.display};
   position: fixed;
-  z-index: 1;
+  z-index: 120;
   left: 0;
   top: 0;
   width: 100%;
