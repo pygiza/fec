@@ -6,25 +6,24 @@ function StarAvg({ rating }) {
   return (
     <OuterStars>
       <InnerStars className="stars">
-        <i className="fa-regular fa-star" />
-        <i className="fa-regular fa-star" />
-        <i className="fa-regular fa-star" />
-        <i className="fa-regular fa-star" />
-        <i className="fa-regular fa-star" />
+        <i className="fa-regular fa-star fa-1x" />
+        <i className="fa-regular fa-star fa-1x" />
+        <i className="fa-regular fa-star fa-1x" />
+        <i className="fa-regular fa-star fa-1x" />
+        <i className="fa-regular fa-star fa-1x" />
       </InnerStars>
       <InnerFilled rating={rating}>
-        <i className="fa-solid fa-star" />
-        <i className="fa-solid fa-star" />
-        <i className="fa-solid fa-star" />
-        <i className="fa-solid fa-star" />
-        <i className="fa-solid fa-star" />
+        <i className="fa-solid fa-star fa-1x" />
+        <i className="fa-solid fa-star fa-1x" />
+        <i className="fa-solid fa-star fa-1x" />
+        <i className="fa-solid fa-star fa-1x" />
+        <i className="fa-solid fa-star fa-1x" />
       </InnerFilled>
     </OuterStars>
   );
 }
 
 StarAvg.propTypes = {
-  rating: PropTypes.number,
 };
 
 const InnerStars = styled.div`
@@ -57,6 +56,7 @@ const OuterStars = styled.div`
   position: relative;
   margin-bottom: 4%;
   padding-bottom: 2%;
+  font-size: 1em;
 `;
 
 const Star = styled.i`
