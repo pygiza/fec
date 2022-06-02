@@ -1,6 +1,98 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1654114314331" clover="3.2.0">
-  <project timestamp="1654114314331" name="All files">
-    <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0" elements="0" coveredelements="0" complexity="0" loc="0" ncloc="0" packages="0" files="0" classes="0"/>
+<coverage generated="1654179978922" clover="3.2.0">
+  <project timestamp="1654179978922" name="All files">
+    <metrics statements="74" coveredstatements="61" conditionals="14" coveredconditionals="8" methods="17" coveredmethods="13" elements="105" coveredelements="82" complexity="0" loc="74" ncloc="74" packages="2" files="4" classes="4"/>
+    <package name="overview">
+      <metrics statements="62" coveredstatements="51" conditionals="10" coveredconditionals="6" methods="15" coveredmethods="11"/>
+      <file name="AddToCart.jsx" path="/Users/mstrsplinter/Documents/hackreactor/fec/client/src/components/overview/AddToCart.jsx">
+        <metrics statements="37" coveredstatements="35" conditionals="6" coveredconditionals="4" methods="9" coveredmethods="8"/>
+        <line num="7" count="5" type="stmt"/>
+        <line num="8" count="5" type="stmt"/>
+        <line num="9" count="5" type="stmt"/>
+        <line num="10" count="5" type="stmt"/>
+        <line num="13" count="5" type="stmt"/>
+        <line num="14" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="17" count="5" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="19" count="1" type="stmt"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="23" count="5" type="stmt"/>
+        <line num="24" count="1" type="stmt"/>
+        <line num="25" count="1" type="stmt"/>
+        <line num="26" count="1" type="stmt"/>
+        <line num="29" count="5" type="stmt"/>
+        <line num="30" count="1" type="stmt"/>
+        <line num="31" count="1" type="stmt"/>
+        <line num="32" count="1" type="stmt"/>
+        <line num="33" count="1" type="stmt"/>
+        <line num="38" count="1" type="stmt"/>
+        <line num="41" count="1" type="stmt"/>
+        <line num="43" count="0" type="stmt"/>
+        <line num="44" count="0" type="stmt"/>
+        <line num="49" count="5" type="stmt"/>
+        <line num="53" count="1" type="stmt"/>
+        <line num="56" count="35" type="stmt"/>
+        <line num="65" count="35" type="stmt"/>
+        <line num="85" count="1" type="stmt"/>
+        <line num="95" count="1" type="stmt"/>
+        <line num="100" count="1" type="stmt"/>
+        <line num="107" count="1" type="stmt"/>
+        <line num="114" count="1" type="stmt"/>
+        <line num="120" count="1" type="stmt"/>
+        <line num="134" count="1" type="stmt"/>
+        <line num="139" count="1" type="stmt"/>
+        <line num="145" count="1" type="stmt"/>
+        <line num="155" count="1" type="stmt"/>
+      </file>
+      <file name="Footer.jsx" path="/Users/mstrsplinter/Documents/hackreactor/fec/client/src/components/overview/Footer.jsx">
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="17" count="1" type="stmt"/>
+        <line num="26" count="1" type="stmt"/>
+        <line num="35" count="1" type="stmt"/>
+      </file>
+      <file name="InfoBox.jsx" path="/Users/mstrsplinter/Documents/hackreactor/fec/client/src/components/overview/InfoBox.jsx">
+        <metrics statements="21" coveredstatements="12" conditionals="4" coveredconditionals="2" methods="5" coveredmethods="2"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="16" count="0" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="25" count="0" type="stmt"/>
+        <line num="27" count="0" type="stmt"/>
+        <line num="30" count="1" type="stmt"/>
+        <line num="31" count="0" type="stmt"/>
+        <line num="34" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="36" count="1" type="stmt"/>
+        <line num="52" count="1" type="stmt"/>
+        <line num="60" count="1" type="stmt"/>
+        <line num="66" count="1" type="stmt"/>
+        <line num="73" count="1" type="stmt"/>
+        <line num="81" count="1" type="stmt"/>
+        <line num="89" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="ratings_and_reviews.reviewEntryComps">
+      <metrics statements="12" coveredstatements="10" conditionals="4" coveredconditionals="2" methods="2" coveredmethods="2"/>
+      <file name="StarAvg.jsx" path="/Users/mstrsplinter/Documents/hackreactor/fec/client/src/components/ratings_and_reviews/reviewEntryComps/StarAvg.jsx">
+        <metrics statements="12" coveredstatements="10" conditionals="4" coveredconditionals="2" methods="2" coveredmethods="2"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="26" count="1" type="stmt"/>
+        <line num="30" count="1" type="stmt"/>
+        <line num="37" count="1" type="stmt"/>
+        <line num="43" count="1" type="stmt"/>
+        <line num="44" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="45" count="0" type="stmt"/>
+        <line num="48" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="49" count="0" type="stmt"/>
+        <line num="52" count="1" type="stmt"/>
+        <line num="56" count="1" type="stmt"/>
+        <line num="62" count="1" type="stmt"/>
+      </file>
+    </package>
   </project>
 </coverage>

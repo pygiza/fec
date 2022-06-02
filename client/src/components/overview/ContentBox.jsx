@@ -5,7 +5,7 @@ import AddToCart from './AddToCart.jsx'
 import InfoBox from './InfoBox.jsx'
 
 function Content({ products, styles, stylesClick, skus, stylesIndex }) {
-  //console.log('CONTENT BOX SKUS: ', styles)
+  //console.log('CONTENT BOX SKUS: ', skus)
   return (
     <ContentBox>
       <InfoBox products={products}/>
