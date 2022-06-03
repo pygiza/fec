@@ -13,7 +13,7 @@ const Img = styled.img`
 `;
 var whenClicked = (id, update) => {
   axios({
-    url: `http://localhost:3000/qa/answers/${id}/helpful`,
+    url: `/qa/answers/${id}/helpful`,
     method: 'put'
   })
     .then(() => {
