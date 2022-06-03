@@ -44,24 +44,37 @@ function App(props) {
 
  //api call for product info levi,yuki, sonia, jake
   const getProductInfo = function() {
-    return axios.get(`/products/${productId}`, { widget: 'App' })
-      .then(res => setProduct(res.data))
+    axios.get(`/products/${productId}`)
+      .then(res => {
+        setProduct(res.data);
+      })
+    // return axios.get(`/products/${productId}`, { widget: 'App' })
+    //   .then(res => setProduct(res.data))
       .catch(err => console.log('couldnt get product info', err));
   }
 
  //api call for product styles levi, yuki
   const getProductStyles = function() {
-    return axios.get(`/products/${productId}/styles`, { params: {widget: 'App' }})
-      .then(res => setProductStyles(res.data))
+    axios.get(`/products/${productId}/styles`)
+      .then((res) => {
+        setProductStyles(res.data);
+      })
+    // return axios.get(`/products/${productId}/styles`, { params: {widget: 'App' }})
+    //   .then(res => setProductStyles(res.data))
       .catch(err => console.log('couldnt get product styles', err));
   }
 
   //api call for product meta data levi, sonia
   const getProductMeta = function() {
-    return axios.get(`/reviews/meta`, { params: {product_id: productId, widget: 'App'}})
-      .then(res => setProductMeta(res.data))
+  axios.get(`/reviews/meta`, { params: {product_id: productId }})
+      .then(res => {
+        setProductMeta(res.data)
+      })
+    // return axios.get(`/reviews/meta`, { params: {product_id: productId, widget: 'App'}})
+    //   .then(res => setProductMeta(res.data))
       .catch(err => console.log('couldnt get product meta data', err));
   }
+
 
   useEffect(() => {
     getProductInfo();
@@ -70,12 +83,12 @@ function App(props) {
   }, [productId]);
 
   return (
-    <div>
+    <StyledApp>
       <Overview productInfo={productInfo} productStyles={productStyles} productMeta={productMeta} />
       <RelatedProductsContainer renderProduct={renderProduct} productInfo={productInfo} productStyles={productStyles} />
       <Question productInfo={productInfo} />
       <RatingsReviews productInfo={productInfo} productMeta={productMeta} />
-    </div>
+    </StyledApp>
   );
 }
 

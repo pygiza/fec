@@ -5,42 +5,22 @@ import Content from './ContentBox.jsx';
 import Footer from './Footer.jsx';
 import MainBox from './Main.jsx';
 
-function Overview({ productInfo }) {
-  const [image, setImage] = useState('');
-  const [styles, setStyles] = useState('');
+function Overview({ productId, productInfo, productStyles, productMeta }) {
   const [stylesIndex, setStylesIndex] = useState(0);
   const [skus, setSkus] = useState('');
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [products, setProducts] = useState([]);
   const [firstThumbnail, setFirstThumbnail] = useState(0);
   const [lastThumbnail, setLastThumbnail] = useState(5);
   const [thumbnailIndex, setThumbnailIndex] = useState(currentImageIndex);
 
-  const fetchStyles = (product) => {
-    axios.get(`/products/${product.id}/styles`, { params: {widget: 'Overview'}})
-      .then((data) => {
-        // console.log('Set Image to: ', data.data.results[0].photos)
-        setStyles(data.data.results);
-        setImage(data.data.results[0].photos);
-        makeSkuArray(data.data.results, 0);
-      });
-  };
-
-  const fetchData = () => {
-    axios.get(`/products/${productInfo.id}`, { params: {widget: 'Overview'}})
-      .then((data) => {
-        setProducts(data.data); //data.data is the full list of products.
-        fetchStyles(data.data);
-      }).catch((err) => {
-        console.log(err);
-      });
-  };
-
   useEffect(() => {
-    fetchData();
     setCurrentImageIndex(0);
     setThumbnailIndex(0);
-  }, [productInfo]);
+  }, [productId]);
+
+  useEffect(() => {
+    makeSkuArray((Object.keys(productStyles).length ? productStyles.results : {} ), 0);
+  }, [productStyles]);
 
   const handleImageClick = (e) => {
     e.preventDefault();
@@ -53,31 +33,34 @@ function Overview({ productInfo }) {
         setThumbnailIndex(currentImageIndex - 1);
       }
     }
-    if (currentImageIndex === image.length - 1) {
+    if (currentImageIndex === productStyles.results[currentImageIndex].photos.length - 1) {
       setCurrentImageIndex(0);
       setThumbnailIndex(0);
     }
   };
 
   const makeSkuArray = (styles, index) => { //sets skus as array
+    if(!Object.keys(styles).length) {
+      return;
+    }
     let skuArray = [{size:'Select a Size'}];
     let skuObj = styles[index].skus;
-    //add id to quantity size object
     for (let key in skuObj) {
       skuObj[key].id=key;
     }
-    //add the new object to an array for iteration
+
     for(let key in skuObj) {
       skuArray.push(skuObj[key])
     }
-    //console.log('SKUARR: ', skuArray)
     setSkus(skuArray);
   }
 
   const handleStylesClick = (e) => {
     e.preventDefault();
-    setImage(styles[Number(e.target.id)].photos);
-    makeSkuArray(styles, Number(e.target.id));
+    console.log('Handle Click Styles', productStyles.results)
+    //setImage(productStyles.results[Number(e.target.id)].photos);
+    //setCurrentImageIndex(Number(e.target.id));
+    makeSkuArray(productStyles.results, Number(e.target.id));
     setStylesIndex(Number(e.target.id));
 
     // setCurrentImageIndex(Number(e.target.id));
@@ -93,7 +76,7 @@ function Overview({ productInfo }) {
         setThumbnailIndex(currentImageIndex +1);
       }
       if (currentImageIndex >= 4) { // this is because thumbnail carousel only holds 5
-        if (lastThumbnail < image.length) {
+        if (lastThumbnail < productStyles.results[stylesIndex].photos.length) {
           setFirstThumbnail(firstThumbnail + 1);
           setLastThumbnail(lastThumbnail + 1);
           setThumbnailIndex(4); // this index need to advance based on overall images
@@ -114,15 +97,19 @@ function Overview({ productInfo }) {
           setLastThumbnail(lastThumbnail - 1);
         }
       }
-      if (currentImageIndex === image.length-1) {
+      if (currentImageIndex === productStyles.results[stylesIndex].photos.length-1) {
               setThumbnailIndex(3);
-              setCurrentImageIndex(image.length - 2)
+              setCurrentImageIndex(productStyles.results[stylesIndex].photos.length - 2)
       }
     }
   }
 
   const modifyThumbnailArray = () => {
-    return image.slice(firstThumbnail, lastThumbnail);
+    if (Object.keys(productStyles).length) {
+      return productStyles.results[stylesIndex].photos.slice(firstThumbnail, lastThumbnail);
+    } else {
+      return []
+    }
   }
 
   return (
@@ -131,7 +118,7 @@ function Overview({ productInfo }) {
         <Title>PyGiza</Title>
       </NavBar>
       <MainBox
-        image={image[currentImageIndex]}
+        image={Object.keys(productStyles).length ? productStyles.results[stylesIndex].photos[currentImageIndex] : ''}
         handleClick={handleImageClick}
         images={modifyThumbnailArray} //pass thumbnailImages
         currentImageIndex={thumbnailIndex} //was currentImageIndex
@@ -139,8 +126,8 @@ function Overview({ productInfo }) {
         lastThumbnail={lastThumbnail}
         updateLocation={updateLocation}
         />
-      <Content products={products} styles={styles} stylesClick={handleStylesClick} skus={skus} stylesIndex={stylesIndex} />
-      <Footer products={products} />
+      <Content products={productInfo} styles={productStyles} stylesClick={handleStylesClick} skus={skus} stylesIndex={stylesIndex} productMeta={productMeta} />
+      <Footer products={productInfo} />
     </Container>
   );
 }

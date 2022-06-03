@@ -5,7 +5,7 @@ function ThumbnailBox({ images, updateLocation, currentImageIndex }) {
   let row = 1;
   let column = 2;
   let borderColor = '';
-
+  //console.log("Images in Thumbnail ", images)
   return (
     <ThumbnailContainer>
       <TopArrowContainer>

@@ -14,13 +14,11 @@ function StyleList({ images, stylesClick, stylesIndex }) {
     }
   };
 
-
-  //console.log('Images In Styles',images);
   return (
 
     <Styles>
-      <StyleSelected>STYLE: {images ? images[stylesIndex].name : "Select a Style"} </StyleSelected>
-      {images ? images.map((image, index) => {
+      <StyleSelected>STYLE: {Object.keys(images).length  ? images.results[stylesIndex].name : ""} </StyleSelected>
+      {Object.keys(images).length ? images.results.map((image, index) => {
         return (
           <EachStyle
             key={index}
@@ -53,7 +51,7 @@ const StyleSelected = styled.div`
   grid-column: 1 / 5;
   grid-row: 1;
   font-size: 1.3vw;
-  margin-top: .7vw
+  margin-top: .4vw
 `;
 
 const EachStyle = styled.img`
