@@ -33,7 +33,7 @@ const RelatedProductsContainer = function({ productId, renderProduct, productInf
 
     // Add 'add' button to outfit list if product not in outfit
     let outfitIds = getOutfitIds();
-    if (!outfitIds.includes(productId)) {
+    if (!outfitIds.includes(productId) && !outfit.includes('add')) {
       setOutfit(['add'].concat(outfit));
     }
 
