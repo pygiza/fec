@@ -8,8 +8,30 @@ import axios from 'axios';
 
 function App(props) {
 
-  let [productId, setProductId] = useState(37311);
-  let [productInfo, setProduct] = useState({});
+  const defaultProduct = {
+    "id": 37311,
+    "campus": "hr-rfe",
+    "name": "Camo Onesie",
+    "slogan": "Blend in to your crowd",
+    "description": "The So Fatigues will wake you up and fit you in. This high energy camo will have you blending in to even the wildest surroundings.",
+    "category": "Jackets",
+    "default_price": "140.00",
+    "created_at": "2021-08-13T14:37:33.145Z",
+    "updated_at": "2021-08-13T14:37:33.145Z",
+    "features": [
+        {
+            "feature": "Fabric",
+            "value": "Canvas"
+        },
+        {
+            "feature": "Buttons",
+            "value": "Brass"
+        }
+    ]
+}
+
+  let [productId, setProductId] = useState(defaultProduct.id);
+  let [productInfo, setProduct] = useState(defaultProduct);
   let [productStyles, setProductStyles] = useState({});
   let [productMeta, setProductMeta] = useState({});
 
@@ -26,6 +48,8 @@ function App(props) {
       .then(res => {
         setProduct(res.data);
       })
+    // return axios.get(`/products/${productId}`, { widget: 'App' })
+    //   .then(res => setProduct(res.data))
       .catch(err => console.log('couldnt get product info', err));
   }
 
@@ -35,15 +59,19 @@ function App(props) {
       .then((res) => {
         setProductStyles(res.data);
       })
+    // return axios.get(`/products/${productId}/styles`, { params: {widget: 'App' }})
+    //   .then(res => setProductStyles(res.data))
       .catch(err => console.log('couldnt get product styles', err));
   }
 
   //api call for product meta data levi, sonia
   const getProductMeta = function() {
-   axios.get(`/reviews/meta`, { params: {product_id: productId }})
+  axios.get(`/reviews/meta`, { params: {product_id: productId }})
       .then(res => {
         setProductMeta(res.data)
       })
+    // return axios.get(`/reviews/meta`, { params: {product_id: productId, widget: 'App'}})
+    //   .then(res => setProductMeta(res.data))
       .catch(err => console.log('couldnt get product meta data', err));
   }
 
@@ -53,15 +81,19 @@ function App(props) {
     getProductStyles();
     getProductMeta();
   }, [productId]);
-  
+
   return (
-    <div>
-      <Overview productId={productId} productInfo={productInfo} productStyles={productStyles} productMeta={productMeta} />
-      <RelatedProductsContainer product_id={productId} renderProduct={renderProduct} productInfo={productInfo} productStyles={productStyles} />
-      <Question productInfo={productInfo}  productId={productId} />
-      <RatingsReviews productId={productId} productInfo={productInfo} productMeta={productMeta} />
-    </div>
+    <StyledApp>
+      <Overview productInfo={productInfo} productStyles={productStyles} productMeta={productMeta} />
+      <RelatedProductsContainer renderProduct={renderProduct} productInfo={productInfo} productStyles={productStyles} />
+      <Question productInfo={productInfo} />
+      <RatingsReviews productInfo={productInfo} productMeta={productMeta} />
+    </StyledApp>
   );
 }
+
+const StyledApp = styled.div `
+  font-family: sans-serif;
+`;
 
 export default App;

@@ -12,12 +12,12 @@ function Overview({ productId, productInfo, productStyles, productMeta }) {
   const [firstThumbnail, setFirstThumbnail] = useState(0);
   const [lastThumbnail, setLastThumbnail] = useState(5);
   const [thumbnailIndex, setThumbnailIndex] = useState(currentImageIndex);
-  
+
   useEffect(() => {
     setCurrentImageIndex(0);
     setThumbnailIndex(0);
   }, [productId]);
-  
+
   useEffect(() => {
     makeSkuArray((Object.keys(productStyles).length ? productStyles.results : {} ), 0);
   }, [productStyles]);
@@ -48,7 +48,7 @@ function Overview({ productId, productInfo, productStyles, productMeta }) {
     for (let key in skuObj) {
       skuObj[key].id=key;
     }
- 
+
     for(let key in skuObj) {
       skuArray.push(skuObj[key])
     }
@@ -97,7 +97,7 @@ function Overview({ productId, productInfo, productStyles, productMeta }) {
           setLastThumbnail(lastThumbnail - 1);
         }
       }
-      if (currentImageIndex === productStyles.results[stylesIndex].photos.length-1) { 
+      if (currentImageIndex === productStyles.results[stylesIndex].photos.length-1) {
               setThumbnailIndex(3);
               setCurrentImageIndex(productStyles.results[stylesIndex].photos.length - 2)
       }
@@ -117,9 +117,9 @@ function Overview({ productId, productInfo, productStyles, productMeta }) {
       <NavBar>
         <Title>PyGiza</Title>
       </NavBar>
-      <MainBox 
-        image={Object.keys(productStyles).length ? productStyles.results[stylesIndex].photos[currentImageIndex] : ''} 
-        handleClick={handleImageClick} 
+      <MainBox
+        image={Object.keys(productStyles).length ? productStyles.results[stylesIndex].photos[currentImageIndex] : ''}
+        handleClick={handleImageClick}
         images={modifyThumbnailArray} //pass thumbnailImages
         currentImageIndex={thumbnailIndex} //was currentImageIndex
         firstThumbnail={firstThumbnail}

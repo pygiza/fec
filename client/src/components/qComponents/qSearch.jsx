@@ -5,7 +5,7 @@ import styled from 'styled-components'
 const Bar = styled.input`
   font-size: 20px;
   margin-right: 20px;
-  width: 75%
+  width: 50%
 `
 var Search = (props) => (
   <div className={props.className}>

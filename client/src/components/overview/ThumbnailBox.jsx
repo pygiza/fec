@@ -18,7 +18,7 @@ function ThumbnailBox({ images, updateLocation, currentImageIndex }) {
           borderColor = 'black'
         }
         row += 1;
-        return(<EachStyle 
+        return(<EachStyle
           key={index}
           src={image.thumbnail_url}
           row={row}
@@ -49,11 +49,14 @@ const ArrowTop = styled.button`
   transform: rotate(-135deg);
   -webkit-transform: rotate(-135deg);
   height: 40%;
-  width: 60%; 
+  width: 60%;
   object-fit: contain;
   background: #FFE69A;
   grid-column: 2;
   grid-row: 2;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const TopArrowContainer = styled.div`
@@ -70,11 +73,14 @@ const ArrowBottom = styled.button`
   transform: rotate(45deg);
   -webkit-transform: rotate(45deg);
   height: 40%;
-  width: 60%; 
+  width: 60%;
   object-fit: contain;
   background: #FFE69A;
   grid-column: 2;
   grid-row: 3;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const BottomArrowContainer = styled.div`
@@ -87,7 +93,7 @@ const BottomArrowContainer = styled.div`
 
 const EachStyle = styled.img`
   height: 100%;
-  width: 100%; 
+  width: 100%;
   object-fit: contain;
   border: solid;
   border-width: thin;

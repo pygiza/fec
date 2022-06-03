@@ -7,7 +7,7 @@ import ReviewBreakdown from './ReviewBreakdown.jsx';
 import ReviewFilter from './reviewListComps/ReviewFilter.jsx';
 
 
-function RatingsReviews({ productId, productInfo, productMeta }) {
+function RatingsReviews({ productInfo, productMeta }) {
   // dynamic sizing
   const [matches, setMatches] = useState(
     window.matchMedia("(min-width: 768px)").matches
@@ -47,7 +47,7 @@ function RatingsReviews({ productId, productInfo, productMeta }) {
   }
 
   function getReviews() {
-    return getReviewsBy2(productId, 1, sort)
+    return getReviewsBy2(productInfo.id, 1, sort)
       .then((revs) => {
         setReviews([...revs]);
       })
@@ -55,7 +55,7 @@ function RatingsReviews({ productId, productInfo, productMeta }) {
         setPage(1);
       })
       .then(() => {
-        checkMoreRevs(productId, 2, sort)
+        checkMoreRevs(productInfo.id, 2, sort)
           .then((revsLeft) => {
             setRevsLeft(revsLeft);
           });
@@ -64,11 +64,11 @@ function RatingsReviews({ productId, productInfo, productMeta }) {
 
   useEffect(() => {
     getReviews();
-  }, [productId, sort]);
+  }, [productInfo, sort]);
 
 
   function moreReviews() {
-    return getReviewsBy2(productId, page + 1, sort)
+    return getReviewsBy2(productInfo.id, page + 1, sort)
       .then((revs) => {
         setReviews([...reviews, ...revs]);
         return revs;
@@ -79,7 +79,7 @@ function RatingsReviews({ productId, productInfo, productMeta }) {
         }
       })
       .then(() => {
-        checkMoreRevs(productId, page + 2, sort)
+        checkMoreRevs(productInfo.id, page + 2, sort)
           .then((revsLeft) => {
             setRevsLeft(revsLeft);
           });
@@ -103,7 +103,7 @@ function RatingsReviews({ productId, productInfo, productMeta }) {
       getReviews();
       return;
     }
-    getStarReviews(newFilters, productId, sort)
+    getStarReviews(newFilters, productInfo.id, sort)
       .then((data) => {
         setRevsLeft(false);
         setReviews([...data]);
@@ -111,13 +111,13 @@ function RatingsReviews({ productId, productInfo, productMeta }) {
   }
 
   function getCurrentRevs() {
-    getCurrentAmtReviews(productId, page, sort)
+    getCurrentAmtReviews(productInfo.id, page, sort)
       .then((currentRevs) => {
         setReviews([...currentRevs]);
         setCurrentFilters([]);
       })
       .then(() => {
-        checkMoreRevs(productId, page + 1, sort)
+        checkMoreRevs(productInfo.id, page + 1, sort)
           .then((revsLeft) => {
             setRevsLeft(revsLeft);
           });
@@ -126,7 +126,7 @@ function RatingsReviews({ productId, productInfo, productMeta }) {
 
   useEffect(() => {
     setCurrentFilters([]);
-  }, [productId]);
+  }, [productInfo]);
 
   function onSortChange(e) {
     setSort(e.target.value);
@@ -135,7 +135,7 @@ function RatingsReviews({ productId, productInfo, productMeta }) {
 
   useEffect(() => {
     setSort('relevant');
-  }, [productId]);
+  }, [productInfo]);
 
   function removeFilters() {
     setCurrentFilters([]);
@@ -148,14 +148,14 @@ function RatingsReviews({ productId, productInfo, productMeta }) {
       { matches &&
       (<OverallReviews>
         <ReviewBreakdown
-          productId={productId}
+          productId={productInfo.id}
           metaData={productMeta}
           filterStars={filterStars}
           getCurrentRevs={getCurrentRevs}
         />
         {/* <ReviewFilter style={{ gridColumnStart: 2, }}/> */}
         <ReviewList
-          productId={productId}
+          productId={productInfo.id}
           reviews={reviews}
           metaData={productMeta}
           page={page}
@@ -172,14 +172,14 @@ function RatingsReviews({ productId, productInfo, productMeta }) {
       { !matches &&
       (<SmallScreen>
           <ReviewBreakdown
-            productId={productId}
+            productId={productInfo.id}
             metaData={productMeta}
             filterStars={filterStars}
             getCurrentRevs={getCurrentRevs}
           />
         {/* <ReviewFilter /> */}
         <ReviewList
-          productId={productId}
+          productId={productInfo.id}
           reviews={reviews}
           metaData={productMeta}
           page={page}
@@ -217,7 +217,6 @@ const SmallScreen = styled.div`
 `;
 
 RatingsReviews.propTypes = {
-  productId: PropTypes.number.isRequired,
   productInfo: PropTypes.object.isRequired,
   productMeta: PropTypes.object.isRequired,
 }

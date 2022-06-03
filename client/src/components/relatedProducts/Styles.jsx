@@ -9,6 +9,7 @@ const Card = styled.div`
   &:hover {
     box-shadow: 3px 3px grey;
   }
+  border: 1px solid black;
 `
 
 export default Card;

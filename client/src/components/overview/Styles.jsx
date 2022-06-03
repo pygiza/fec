@@ -15,20 +15,20 @@ function StyleList({ images, stylesClick, stylesIndex }) {
   };
 
   return (
-    
+
     <Styles>
       <StyleSelected>STYLE: {Object.keys(images).length  ? images.results[stylesIndex].name : ""} </StyleSelected>
       {Object.keys(images).length ? images.results.map((image, index) => {
         return (
-          <EachStyle 
+          <EachStyle
             key={index}
-            id={index} 
-            src={image.photos[0].thumbnail_url} 
-            test={locationChange()} 
-            row={row} 
+            id={index}
+            src={image.photos[0].thumbnail_url}
+            test={locationChange()}
+            row={row}
             column={column}
             onClick={stylesClick}
-            
+
             />
         );
       }) : 'Waiting on Image'}
@@ -44,7 +44,7 @@ const Styles = styled.div`
   grid-column: 2 / 12;
   grid-row: 5 / 9;
   margin-top: 1em;
-  
+
 `;
 
 const StyleSelected = styled.div`
@@ -56,7 +56,7 @@ const StyleSelected = styled.div`
 
 const EachStyle = styled.img`
   height: 100%;
-  width: 100%; 
+  width: 100%;
   object-fit: cover;
   grid-column: ${props => props.column};
   grid-row: ${props => props.row};
@@ -64,6 +64,7 @@ const EachStyle = styled.img`
   &:hover {
     border: solid;
     border-color: white;
+    cursor: pointer;
   }
 `;
 

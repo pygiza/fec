@@ -6,9 +6,9 @@ import StarAvg from '../ratings_and_reviews/reviewEntryComps/StarAvg.jsx';
 
 function InfoBox({ products, productMeta }) {
   const [rating, setRating] = useState(0);
-  
+
   const currentRating = () => {
-      
+
       let total = 0;
       let reviews = 0;
       for (let rating in productMeta.ratings) {
@@ -16,16 +16,16 @@ function InfoBox({ products, productMeta }) {
         reviews += Number(productMeta.ratings[rating]);
       }
       let starRating = (Math.round( (total / reviews) * 4 ) / 4);
-  
+
       return starRating;
   }
 
   const handleReviewClick = () => {
     document.getElementById('reviews').scrollIntoView({ behavior: 'smooth' });
   }
-  
- return (
-   <Info>
+
+return (
+  <Info>
     <StarReviews>
       <StarAvg rating={currentRating()}>read all reviews {rating}</StarAvg>
     </StarReviews>
@@ -35,8 +35,8 @@ function InfoBox({ products, productMeta }) {
     <Price>
       ${products.default_price}
     </Price>
-   </Info>
- );
+</Info>
+);
 
 };
 
@@ -51,14 +51,18 @@ const Info = styled.div`
 const StarReviews = styled.div`
   grid-column: 1;
   grid-row: 2;
-  
+
 `;
 
 const AllReviews = styled.div`
   grid-column: 2;
+  padding-left: 20%;
   grid-row: 2;
   font-size: .9vw;
-  margin-top: .4em; 
+  margin-top: .4em;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const Category = styled.div`
