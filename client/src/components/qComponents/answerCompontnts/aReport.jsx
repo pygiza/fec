@@ -14,7 +14,7 @@ const Repor = styled.button`
 `;
 var handleClick = (id, what, final) => {
   axios({
-    url: `http://localhost:3000/qa/${what}/${id}/report`,
+    url: `/qa/${what}/${id}/report`,
     method: 'put'
   })
     .then (() => {

@@ -27,11 +27,12 @@ function AddToCart({ skus }) { //sku array
   }
 
   const addQuantityToBag = (e) => {
+    console.log('THE BUTTON CLICKED ===', e.target)
     let reqArray = [];
     for (let i = 0; i < skuQuantity; i++) {
       let newPromise = axios({
         method: 'post',
-        url: 'http://localhost:3000/cart',
+        url: '/cart',
         data: {sku_id : skus[skuIndex].id}
       });
       reqArray.push(newPromise);
@@ -49,24 +50,24 @@ function AddToCart({ skus }) { //sku array
     <CartBox>
       <Title>
       </Title>
-      <Size onChange={(e) => handleSizeClick(e)}>
+      <Size data-testid="size" onChange={(e) => handleSizeClick(e)}>
         {/* <Option value={0}>Select A Size</Option> */}
       {skus ? skus.map((style, index) => {
         return (
-        <Option key={index} value={index} > {style.size}</Option>
+        <Option key={index} data-testid='select-option' value={index} > {style.size}</Option>
         );
       }) : 'Waiting on Images... '}
       </Size>
 
-      <Quantity onChange={quantitySetter}>
+      <Quantity data-testid='quantity'onChange={quantitySetter}>
         <Option value={0}>Select</Option>
       {quantityArr.map((num, index)=> {
         return (
-        <Option key={index} value={num + 1}> {num + 1}</Option>
+        <Option data-testid='select-quantity' key={index} value={num + 1}> {num + 1}</Option>
         );
       })}
       </Quantity>
-      {skuQuantity ? <Add onClick={addQuantityToBag}>
+      {skuQuantity ? <Add data-testid='add' onClick={addQuantityToBag}>
         <BagWord>Add to Bag</BagWord>
         <Plus>+</Plus>
       </Add>
@@ -122,7 +123,7 @@ const Option = styled.option`
   font-size: 1.5vw;
 `;
 
-const Add = styled.div`
+const Add = styled.button`
   display: grid;
   grid-template-columns: 1fr 30% 10%;
   grid-template-rows: 20% 1fr 20%;

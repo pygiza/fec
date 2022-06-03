@@ -3,7 +3,7 @@ import axios from 'axios';
 
 function GetData(props) {
   return axios({
-    url: 'http://localhost:3000/qa/questions',
+    url: '/qa/questions',
     method: 'get',
     params: {
       product_id: props.id,

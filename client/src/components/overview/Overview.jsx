@@ -17,7 +17,7 @@ function Overview({ productId }) {
   const [thumbnailIndex, setThumbnailIndex] = useState(currentImageIndex);
 
   const fetchStyles = (product) => {
-    axios.get(`http://localhost:3000/products/${product.id}/styles`)
+    axios.get(`/products/${product.id}/styles`)
       .then((data) => {
         // console.log('Set Image to: ', data.data.results[0].photos)
         setStyles(data.data.results);
@@ -27,7 +27,7 @@ function Overview({ productId }) {
   };
 
   const fetchData = () => {
-    axios.get(`http://localhost:3000/products/${productId}`)
+    axios.get(`/products/${productId}`)
       .then((data) => {
         setProducts(data.data); //data.data is the full list of products.
         fetchStyles(data.data);
