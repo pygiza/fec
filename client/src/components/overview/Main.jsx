@@ -45,11 +45,14 @@ grid-column:  2;
 grid-row:  2;
 background: none;
 border: none;
+&:hover {
+  cursor: pointer;
+}
 `;
 
 const PhotoMain = styled.img`
   height: 100%;
-  width: 100%;  
+  width: 100%;
   object-fit: cover;
   grid-column: 1 / 6;
   grid-row: 1 / 4;
@@ -67,6 +70,9 @@ const ArrowRight = styled.button`
   grid-column: 4;
   grid-row: 2;
   background: #FFE69A;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const ArrowLeft = styled.button`
@@ -79,6 +85,9 @@ const ArrowLeft = styled.button`
   grid-column: 2;
   grid-row: 2;
   background: #FFE69A;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export default MainBox;

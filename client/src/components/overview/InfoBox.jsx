@@ -65,9 +65,13 @@ const StarReviews = styled.div`
 
 const AllReviews = styled.div`
   grid-column: 2;
+  padding-left: 20%;
   grid-row: 2;
   font-size: .9vw;
   margin-top: .4em;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const Category = styled.div`

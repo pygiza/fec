@@ -79,4 +79,8 @@ function App(props) {
   );
 }
 
+const StyledApp = styled.div `
+  font-family: sans-serif;
+`;
+
 export default App;

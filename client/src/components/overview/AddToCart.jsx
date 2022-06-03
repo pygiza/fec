@@ -25,7 +25,7 @@ function AddToCart({ skus }) { //sku array
     console.log('Quantity => ', e.target.value);
     setSkuQuantity(Number(e.target.value));
   }
-  
+
   const addQuantityToBag = (e) => {
     console.log('THE BUTTON CLICKED ===', e.target)
     let reqArray = [];
@@ -45,7 +45,7 @@ function AddToCart({ skus }) { //sku array
     }));
   }
 
-  
+
   return (
     <CartBox>
       <Title>
@@ -75,7 +75,7 @@ function AddToCart({ skus }) { //sku array
       <Star>
        <CartNumber>
         {countUpdate}
-      </CartNumber> 
+      </CartNumber>
       <i className="fa-solid fa-cart-shopping"></i>
       </Star>
     </CartBox>
@@ -102,6 +102,9 @@ const Size = styled.select`
   color: black;
   grid-column: 1 / 6;
   grid-row: 2 / 4;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const Quantity = styled.select`
@@ -109,7 +112,10 @@ const Quantity = styled.select`
   color: black;
   grid-column: 7 / 10;
   grid-row: 2 / 4;
-  `;
+  &:hover {
+    cursor: pointer;
+  }
+`;
 
 const Option = styled.option`
   background: white;
@@ -139,7 +145,7 @@ const BagWord = styled.p`
 const Plus = styled.div`
 grid-column: 3;
 grid-row: 2 ;
-font-size: 1.5vw
+font-size: 1.5vw;
 `;
 
 const Star = styled.button`
@@ -149,7 +155,10 @@ const Star = styled.button`
   border-width: thin;
   grid-column: 8 / 10;
   grid-row: 5 / 7 ;
-  font-size: 2vw
+  font-size: 2vw;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const CartNumber = styled.div`
