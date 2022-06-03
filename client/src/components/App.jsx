@@ -8,8 +8,30 @@ import axios from 'axios';
 
 function App(props) {
 
-  let [productId, setProductId] = useState(37311);
-  let [productInfo, setProduct] = useState({});
+  const defaultProduct = {
+    "id": 37311,
+    "campus": "hr-rfe",
+    "name": "Camo Onesie",
+    "slogan": "Blend in to your crowd",
+    "description": "The So Fatigues will wake you up and fit you in. This high energy camo will have you blending in to even the wildest surroundings.",
+    "category": "Jackets",
+    "default_price": "140.00",
+    "created_at": "2021-08-13T14:37:33.145Z",
+    "updated_at": "2021-08-13T14:37:33.145Z",
+    "features": [
+        {
+            "feature": "Fabric",
+            "value": "Canvas"
+        },
+        {
+            "feature": "Buttons",
+            "value": "Brass"
+        }
+    ]
+}
+
+  let [productId, setProductId] = useState(defaultProduct.id);
+  let [productInfo, setProduct] = useState(defaultProduct);
   let [productStyles, setProductStyles] = useState({});
   let [productMeta, setProductMeta] = useState({});
 
@@ -41,16 +63,16 @@ function App(props) {
       .catch(err => console.log('couldnt get product meta data', err));
   }
 
-  // useEffect(() => {
-  //   getProductInfo();
-  //   getProductStyles();
-  //   getProductMeta();
-  // }, [productId]);
+  useEffect(() => {
+    getProductInfo();
+    getProductStyles();
+    getProductMeta();
+  }, [productId]);
 
   return (
     <div>
       <Overview productId={productId} productInfo={productInfo} productStyles={productStyles} productMeta={productMeta} />
-      <RelatedProductsContainer product_id={productId} renderProduct={renderProduct} productInfo={productInfo} productStyles={productStyles} />
+      <RelatedProductsContainer productId={productId} renderProduct={renderProduct} productInfo={productInfo} productStyles={productStyles} />
       <Question productInfo={productInfo}  productId={productId} />
       <RatingsReviews productId={productId} productInfo={productInfo} productMeta={productMeta} />
     </div>
