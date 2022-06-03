@@ -7,7 +7,8 @@ function GetData(props) {
     method: 'get',
     params: {
       product_id: props.id,
-      count: 100
+      count: 100,
+      widget: 'Questions'
     }
   });
 }

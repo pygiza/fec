@@ -5,7 +5,7 @@ import Content from './ContentBox.jsx';
 import Footer from './Footer.jsx';
 import MainBox from './Main.jsx';
 
-function Overview({ productId }) {
+function Overview({ productInfo }) {
   const [image, setImage] = useState('');
   const [styles, setStyles] = useState('');
   const [stylesIndex, setStylesIndex] = useState(0);
@@ -17,7 +17,7 @@ function Overview({ productId }) {
   const [thumbnailIndex, setThumbnailIndex] = useState(currentImageIndex);
 
   const fetchStyles = (product) => {
-    axios.get(`/products/${product.id}/styles`)
+    axios.get(`/products/${product.id}/styles`, { params: {widget: 'Overview'}})
       .then((data) => {
         // console.log('Set Image to: ', data.data.results[0].photos)
         setStyles(data.data.results);
@@ -27,7 +27,7 @@ function Overview({ productId }) {
   };
 
   const fetchData = () => {
-    axios.get(`/products/${productId}`)
+    axios.get(`/products/${productInfo.id}`, { params: {widget: 'Overview'}})
       .then((data) => {
         setProducts(data.data); //data.data is the full list of products.
         fetchStyles(data.data);
@@ -40,7 +40,7 @@ function Overview({ productId }) {
     fetchData();
     setCurrentImageIndex(0);
     setThumbnailIndex(0);
-  }, [productId]);
+  }, [productInfo]);
 
   const handleImageClick = (e) => {
     e.preventDefault();
@@ -62,11 +62,11 @@ function Overview({ productId }) {
   const makeSkuArray = (styles, index) => { //sets skus as array
     let skuArray = [{size:'Select a Size'}];
     let skuObj = styles[index].skus;
-    //add id to quantity size object 
+    //add id to quantity size object
     for (let key in skuObj) {
       skuObj[key].id=key;
     }
-    //add the new object to an array for iteration 
+    //add the new object to an array for iteration
     for(let key in skuObj) {
       skuArray.push(skuObj[key])
     }
@@ -114,7 +114,7 @@ function Overview({ productId }) {
           setLastThumbnail(lastThumbnail - 1);
         }
       }
-      if (currentImageIndex === image.length-1) { 
+      if (currentImageIndex === image.length-1) {
               setThumbnailIndex(3);
               setCurrentImageIndex(image.length - 2)
       }
@@ -130,9 +130,9 @@ function Overview({ productId }) {
       <NavBar>
         <Title>PyGiza</Title>
       </NavBar>
-      <MainBox 
-        image={image[currentImageIndex]} 
-        handleClick={handleImageClick} 
+      <MainBox
+        image={image[currentImageIndex]}
+        handleClick={handleImageClick}
         images={modifyThumbnailArray} //pass thumbnailImages
         currentImageIndex={thumbnailIndex} //was currentImageIndex
         firstThumbnail={firstThumbnail}

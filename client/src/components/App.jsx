@@ -44,21 +44,21 @@ function App(props) {
 
  //api call for product info levi,yuki, sonia, jake
   const getProductInfo = function() {
-    return axios.get(`/products/${productId}`)
+    return axios.get(`/products/${productId}`, { widget: 'App' })
       .then(res => setProduct(res.data))
       .catch(err => console.log('couldnt get product info', err));
   }
 
  //api call for product styles levi, yuki
   const getProductStyles = function() {
-    return axios.get(`/products/${productId}/styles`)
+    return axios.get(`/products/${productId}/styles`, { params: {widget: 'App' }})
       .then(res => setProductStyles(res.data))
       .catch(err => console.log('couldnt get product styles', err));
   }
 
   //api call for product meta data levi, sonia
   const getProductMeta = function() {
-    return axios.get(`/reviews/meta`, { params: {product_id: productId }})
+    return axios.get(`/reviews/meta`, { params: {product_id: productId, widget: 'App'}})
       .then(res => setProductMeta(res.data))
       .catch(err => console.log('couldnt get product meta data', err));
   }
@@ -71,10 +71,10 @@ function App(props) {
 
   return (
     <div>
-      <Overview productId={productId} productInfo={productInfo} productStyles={productStyles} productMeta={productMeta} />
-      <RelatedProductsContainer productId={productId} renderProduct={renderProduct} productInfo={productInfo} productStyles={productStyles} />
-      <Question productInfo={productInfo}  productId={productId} />
-      <RatingsReviews productId={productId} productInfo={productInfo} productMeta={productMeta} />
+      <Overview productInfo={productInfo} productStyles={productStyles} productMeta={productMeta} />
+      <RelatedProductsContainer renderProduct={renderProduct} productInfo={productInfo} productStyles={productStyles} />
+      <Question productInfo={productInfo} />
+      <RatingsReviews productInfo={productInfo} productMeta={productMeta} />
     </div>
   );
 }

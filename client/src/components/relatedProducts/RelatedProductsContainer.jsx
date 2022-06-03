@@ -5,7 +5,7 @@ import ComparisonModal from './ComparisonModal.jsx';
 import CarouselLabel from './CarouselLabel.jsx';
 import CarouselList from './CarouselList.jsx';
 
-const RelatedProductsContainer = function({ productId, renderProduct, productInfo }) {
+const RelatedProductsContainer = function({ renderProduct, productInfo }) {
 
   let [product, setProduct] = useState({ name: '', features: [] });
   let [compare, setCompare] = useState({ name: '', features: [] });
@@ -15,14 +15,14 @@ const RelatedProductsContainer = function({ productId, renderProduct, productInf
 
   useEffect(() => {
     // Get main product info
-    // getProduct(productId)
+    // getProduct(productInfo.id)
     //   .then(product => setProduct(product))
     //   .catch(err => console.log('couldnt get main product info'));
     productInfo.price = { origPrice: productInfo.defaultPrice, salePrice: null };
     setProduct(productInfo);
 
     // Get related products info
-    axios.get(`/products/${productId}/related`)
+    axios.get(`/products/${productInfo.id}/related`, { params: {widget: 'Related'}})
       .then(res => {
         let relatedIds = res.data;
         Promise.all(relatedIds.map(id => getProduct(id)))
@@ -33,11 +33,11 @@ const RelatedProductsContainer = function({ productId, renderProduct, productInf
 
     // Add 'add' button to outfit list if product not in outfit
     let outfitIds = getOutfitIds();
-    if (!outfitIds.includes(productId) && !outfit.includes('add')) {
+    if (!outfitIds.includes(productInfo.id) && !outfit.includes('add')) {
       setOutfit(['add'].concat(outfit));
     }
 
-    }, [productId])
+    }, [productInfo.id])
 
   useEffect(() => {
     // Get outfit list info
@@ -46,21 +46,21 @@ const RelatedProductsContainer = function({ productId, renderProduct, productInf
       .then(products => products.filter(product => product !== undefined))
       .then(products => {
         let contains = products.reduce((flag, product) => {
-          return flag || product.id === productId;
+          return flag || product.id === productInfo.id;
         }, false);
 
-        setOutfit(outfitIds.includes(productId) ? products : ['add'].concat(products));
+        setOutfit(outfitIds.includes(productInfo.id) ? products : ['add'].concat(products));
       })
       .catch(err => console.log('couldnt get outfit products', err));
   }, [])
 
   const getProduct = function(id) {
-    return axios.get(`products/${id}`)
+    return axios.get(`products/${id}`, { params: {widget: 'Related'}})
       .then(res => {
         return res.data;
       })
       .then(product => {
-        return axios.get(`products/${id}/styles`)
+        return axios.get(`products/${id}/styles`, { params: {widget: 'Related'}})
           .then(res => {
             product.image = res.data.results[0].photos[0].url;
             product.price = { origPrice: res.data.results[0].original_price, salePrice: res.data.results[0].sale_price }
@@ -68,7 +68,7 @@ const RelatedProductsContainer = function({ productId, renderProduct, productInf
           })
       })
       .then(product => {
-        return axios.get(`reviews/meta`, { params: { product_id: id } })
+        return axios.get(`reviews/meta`, { params: { product_id: id, widget: 'related' } })
           .then(res => {
             product.rating = calculateAvgRating(res.data.ratings);
             return product;
@@ -96,11 +96,11 @@ const RelatedProductsContainer = function({ productId, renderProduct, productInf
 
   const addOutfit = function() {
     let oldOutfitIds = JSON.parse(localStorage.getItem('outfit'));
-    localStorage.setItem('outfit', JSON.stringify([productId].concat(oldOutfitIds)));
+    localStorage.setItem('outfit', JSON.stringify([productInfo.id].concat(oldOutfitIds)));
 
     outfit.splice(0, 1);
     setOutfit([product].concat(outfit));
-    getProduct(productId)
+    getProduct(productInfo.id)
       .then(product => setOutfit([product].concat(outfit)))
       .catch(err => console.log('couldnt add item to outfit', err));
   }
@@ -110,7 +110,7 @@ const RelatedProductsContainer = function({ productId, renderProduct, productInf
     oldOutfitIds.splice(oldOutfitIds.indexOf(id), 1);
     localStorage.setItem('outfit', JSON.stringify(oldOutfitIds));
     let newOutfit = outfit.filter(product => product.id !== id);
-    let extension = id === productId ? ['add'] : [];
+    let extension = id === productInfo.id ? ['add'] : [];
     setOutfit(extension.concat(newOutfit));
   }
 
