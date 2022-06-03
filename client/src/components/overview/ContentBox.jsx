@@ -4,11 +4,10 @@ import StyleList from './Styles.jsx'
 import AddToCart from './AddToCart.jsx'
 import InfoBox from './InfoBox.jsx'
 
-function Content({ products, styles, stylesClick, skus, stylesIndex }) {
-  //console.log('CONTENT BOX SKUS: ', skus)
+function Content({ products, styles, stylesClick, skus, stylesIndex, productMeta }) {
   return (
     <ContentBox>
-      <InfoBox products={products}/>
+      <InfoBox products={products} productMeta={productMeta}/>
       <StyleList images={styles} stylesClick={stylesClick} stylesIndex={stylesIndex}/>
       <AddToCart skus={skus}/>
     </ContentBox>

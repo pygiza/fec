@@ -51,7 +51,7 @@ function AddToCart({ skus }) { //sku array
       <Title>
       </Title>
       <Size data-testid="size" onChange={(e) => handleSizeClick(e)}>
-        {/* <Option value={0}>Select A Size</Option> */}
+        {/*<Option value={0}>Select A Size</Option> */}
       {skus ? skus.map((style, index) => {
         return (
         <Option key={index} data-testid='select-option' value={index} > {style.size}</Option>

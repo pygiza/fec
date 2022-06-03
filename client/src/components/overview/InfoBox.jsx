@@ -4,39 +4,30 @@ import styled from 'styled-components';
 import StarAvg from '../ratings_and_reviews/reviewEntryComps/StarAvg.jsx';
 
 
-function InfoBox({ products }) {
+function InfoBox({ products, productMeta }) {
   const [rating, setRating] = useState(0);
   
-
-  const currentRating = (product_id) => {
-    //console.log('ID: ',product_id);
-    axios.get(`/reviews/meta`, { params: { product_id } })
-    .then(res => {
+  const currentRating = () => {
       
       let total = 0;
       let reviews = 0;
-      for (let rating in res.data.ratings) {
-        total += res.data.ratings[rating] * rating;
-        reviews += Number(res.data.ratings[rating]);
+      for (let rating in productMeta.ratings) {
+        total += productMeta.ratings[rating] * rating;
+        reviews += Number(productMeta.ratings[rating]);
       }
       let starRating = (Math.round( (total / reviews) * 4 ) / 4);
-      //console.log(rating);
   
-      setRating(starRating);
-    })
-    .catch(err => console.log('could not grab ratings', err));
+      return starRating;
   }
 
   const handleReviewClick = () => {
     document.getElementById('reviews').scrollIntoView({ behavior: 'smooth' });
   }
-
-  products.id ? currentRating(products.id): null;
   
  return (
    <Info>
     <StarReviews>
-      <StarAvg rating={rating}>read all reviews {rating}</StarAvg>
+      <StarAvg rating={currentRating()}>read all reviews {rating}</StarAvg>
     </StarReviews>
     <AllReviews onClick={document.getElementById('reviews') ? handleReviewClick : null}>Read All Reviews</AllReviews>
     <Category>Category: {products.category}</Category>
