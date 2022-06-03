@@ -6,7 +6,6 @@ import AddOutfitCard from './CarouselCard/AddOutfitCard.jsx';
 const Carousel = styled.div`
   height: 400px;
   width: 70%;
-  background-color: lightgrey;
   display: flex;
   flex-direction: row;
   align-items: center;

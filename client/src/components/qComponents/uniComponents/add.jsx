@@ -86,7 +86,7 @@ const popHide = {
 function handleSubmit(event, tar, value, update) {
   if (value === 'Answer') {
     axios({
-      url: `http://localhost:3000/qa/questions/${tar}/answers`,
+      url: `/qa/questions/${tar}/answers`,
       method: 'post',
       data: {
         body: event.target[0].value,
@@ -101,7 +101,7 @@ function handleSubmit(event, tar, value, update) {
       });
   } else {
     axios({
-      url: `http://localhost:3000/qa/questions`,
+      url: `/qa/questions`,
       method: 'post',
       data: {
         body: event.target[0].value,
