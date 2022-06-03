@@ -68,7 +68,7 @@ function Question(props) {
   const [two, setTwo] = useState([]);
   const [colap, setColap] = useState(false);
   function set() {
-    GetData({id: props.productId})
+    GetData({id: props.productInfo.id})
       .then(res => {
         setData(res.data.results);
         var arr = [];
@@ -82,7 +82,7 @@ function Question(props) {
   }
   useEffect(() => {
     set();
-  }, [props.product_id]);
+  }, [props.productInfo]);
     return (
           <Wrap>
             <TitleWrap>

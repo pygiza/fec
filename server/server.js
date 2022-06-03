@@ -14,6 +14,8 @@ app.all('/*', (req, res) => {
   console.log(`recieved ${req.method.toLowerCase()} request from ${req.url}`);
   var url = "https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe" + req.url;
   // console.log(url);
+  console.log('the widget', req.query);
+
   axios({
     url: url,
     method: req.method.toLowerCase(),

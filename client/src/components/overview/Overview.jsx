@@ -5,7 +5,7 @@ import Content from './ContentBox.jsx';
 import Footer from './Footer.jsx';
 import MainBox from './Main.jsx';
 
-function Overview({ productId }) {
+function Overview({ productInfo }) {
   const [image, setImage] = useState('');
   const [styles, setStyles] = useState('');
   const [stylesIndex, setStylesIndex] = useState(0);
@@ -17,7 +17,7 @@ function Overview({ productId }) {
   const [thumbnailIndex, setThumbnailIndex] = useState(currentImageIndex);
 
   const fetchStyles = (product) => {
-    axios.get(`/products/${product.id}/styles`)
+    axios.get(`/products/${product.id}/styles`, { params: {widget: 'Overview'}})
       .then((data) => {
         // console.log('Set Image to: ', data.data.results[0].photos)
         setStyles(data.data.results);
@@ -27,7 +27,7 @@ function Overview({ productId }) {
   };
 
   const fetchData = () => {
-    axios.get(`/products/${productId}`)
+    axios.get(`/products/${productInfo.id}`, { params: {widget: 'Overview'}})
       .then((data) => {
         setProducts(data.data); //data.data is the full list of products.
         fetchStyles(data.data);
@@ -40,7 +40,7 @@ function Overview({ productId }) {
     fetchData();
     setCurrentImageIndex(0);
     setThumbnailIndex(0);
-  }, [productId]);
+  }, [productInfo]);
 
   const handleImageClick = (e) => {
     e.preventDefault();

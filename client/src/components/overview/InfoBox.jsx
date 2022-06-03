@@ -10,7 +10,7 @@ function InfoBox({ products }) {
 
   const currentRating = (product_id) => {
     //console.log('ID: ',product_id);
-    axios.get(`/reviews/meta`, { params: { product_id } })
+    axios.get(`/reviews/meta`, { params: { product_id, widget: 'Overview'} })
     .then(res => {
 
       let total = 0;

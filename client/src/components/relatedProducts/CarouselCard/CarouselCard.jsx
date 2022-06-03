@@ -8,7 +8,7 @@ const CarouselCard = function({ product, renderProduct, relatedButtonHandler, ou
   return (
     <Card onClick={(e) => {renderProduct(e, product.id)}} >
       <CardTop id={product.id} image={product.image} name={noName ? undefined : product.name} features={product.features} relatedButtonHandler={relatedButtonHandler} outfitButtonHandler={outfitButtonHandler} />
-      <CardBtm category={product.category} name={product.name} price={product.default_price} rating={product.rating} />
+      <CardBtm category={product.category} name={product.name} price={product.price} rating={product.rating} />
     </Card>
   )
 }

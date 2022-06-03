@@ -7,6 +7,7 @@ const getReviewsBy2 = (productId, page, sort) => (
       page: 1,
       count: 1000,
       sort,
+      widget: 'reviews'
     },
   })
     .then((res) => {
@@ -26,6 +27,7 @@ const checkMoreRevs = (productId, page, sort) => (
       page,
       count: 2,
       sort,
+      widget: 'reviews'
     },
   })
     .then((res) => {
@@ -47,6 +49,7 @@ const getCurrentAmtReviews = (productId, page, sort) => {
       page: 1,
       count: 1000,
       sort,
+      widget: 'reviews'
     },
   })
     .then(res => (res.data.results.slice(0, currentAmt)))
@@ -56,6 +59,7 @@ const getMetaData = (productId) => (
   axios.get('/reviews/meta', {
     params: {
       product_id: productId,
+      widget: 'reviews'
     },
   })
     .then((res) => {
@@ -72,6 +76,7 @@ const getStarReviews = (starFilters, productId, sort = 'relevant') => (
       product_id: productId,
       count: 10000,
       sort,
+      widget: 'reviews'
     },
   })
     .then((res) => {
