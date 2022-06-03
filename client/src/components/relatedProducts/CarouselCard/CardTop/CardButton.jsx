@@ -11,6 +11,9 @@ const Icon = styled.button`
   height: 30px;
   width: 30px;
   text-align: center;
+  &:hover {
+    cursor: pointer;
+  }
 `
 
 const CarouselButton = function({ name, features, onClick }) {

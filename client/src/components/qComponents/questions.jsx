@@ -8,7 +8,7 @@ import Add from './uniComponents/add.jsx';
 
 const Wrap = styled.div`
   display: grid;
-  color: white;
+  color: black;
   grid-template-rows: 75px 50px 600px 75px;
   grid-template-areas:
     "title title title"
@@ -22,14 +22,15 @@ const Title = styled.h1`
   margin-left: 20px
 `;
 const TitleWrap = styled.div`
-  background: #3a3a55;
+  background:  #F8F9F9;
   grid-area: title;
   text-align: justify;
 `;
 const NavBar = styled(Search)`
   grid-area: nav;
-  background: #3a3a55;
+  background:  #F8F9F9;
   text-align: right;
+  border-bottom: 2px #92B4EC solid;
 
 `;
 const ListCon = styled(List)`

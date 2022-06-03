@@ -62,11 +62,11 @@ function Overview({ productId }) {
   const makeSkuArray = (styles, index) => { //sets skus as array
     let skuArray = [{size:'Select a Size'}];
     let skuObj = styles[index].skus;
-    //add id to quantity size object 
+    //add id to quantity size object
     for (let key in skuObj) {
       skuObj[key].id=key;
     }
-    //add the new object to an array for iteration 
+    //add the new object to an array for iteration
     for(let key in skuObj) {
       skuArray.push(skuObj[key])
     }
@@ -114,7 +114,7 @@ function Overview({ productId }) {
           setLastThumbnail(lastThumbnail - 1);
         }
       }
-      if (currentImageIndex === image.length-1) { 
+      if (currentImageIndex === image.length-1) {
               setThumbnailIndex(3);
               setCurrentImageIndex(image.length - 2)
       }
@@ -130,9 +130,9 @@ function Overview({ productId }) {
       <NavBar>
         <Title>PyGiza</Title>
       </NavBar>
-      <MainBox 
-        image={image[currentImageIndex]} 
-        handleClick={handleImageClick} 
+      <MainBox
+        image={image[currentImageIndex]}
+        handleClick={handleImageClick}
         images={modifyThumbnailArray} //pass thumbnailImages
         currentImageIndex={thumbnailIndex} //was currentImageIndex
         firstThumbnail={firstThumbnail}

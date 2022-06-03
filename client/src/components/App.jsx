@@ -48,13 +48,17 @@ function App(props) {
   }, [productId]);
 
   return (
-    <div>
+    <StyledApp>
       <Overview productId={productId} productInfo={productInfo} productStyles={productStyles} productMeta={productMeta} />
       <RelatedProductsContainer product_id={productId} renderProduct={renderProduct} productInfo={productInfo} productStyles={productStyles} />
       <Question productInfo={productInfo}  productId={productId} />
       <RatingsReviews productId={productId} productInfo={productInfo} productMeta={productMeta} />
-    </div>
+    </StyledApp>
   );
 }
+
+const StyledApp = styled.div `
+  font-family: sans-serif;
+`;
 
 export default App;

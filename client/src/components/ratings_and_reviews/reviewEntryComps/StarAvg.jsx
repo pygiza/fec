@@ -54,7 +54,7 @@ const InnerFilled = styled.div`
 
 const OuterStars = styled.div`
   position: relative;
-  margin-bottom: 4%;
+  margin-bottom: 0;
   padding-bottom: 2%;
   font-size: 1em;
 `;

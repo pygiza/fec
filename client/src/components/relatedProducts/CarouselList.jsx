@@ -5,8 +5,7 @@ import AddOutfitCard from './CarouselCard/AddOutfitCard.jsx';
 
 const Carousel = styled.div`
   height: 400px;
-  width: 70%;
-  background-color: lightgrey;
+  width: 80%;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -22,6 +21,7 @@ const Arrow = styled.button`
   transition: box-shadow 0.25s;
   &:hover {
     box-shadow: 1px 1px grey;
+    cursor: pointer;
   }
   transition: background 0.25s;
 `
@@ -51,7 +51,7 @@ const CarouselList = function({ listType, related = [], outfit = [], addOutfit, 
 
   return (
     <Carousel className='carouselList'>
-      <Arrow onClick={handleMoveLeft} style={{ background: listIndex.start <= 0 ? 'lightgrey' : 'linear-gradient(to right, white, lightgrey)'}}>
+      <Arrow onClick={handleMoveLeft} style={{ background: listIndex.start <= 0 ? 'white' : 'linear-gradient(to right, white, white)'}}>
         {listIndex.start <= 0 ?
           undefined :
           <i className='fa-solid fa-caret-left' />
@@ -79,7 +79,7 @@ const CarouselList = function({ listType, related = [], outfit = [], addOutfit, 
             })}
           </> : undefined
       }
-      <Arrow onClick={handleMoveRight} style={{ background: listIndex.end >= length - 1 ? 'lightgrey' : 'linear-gradient(to left, white, lightgrey)'}}>
+      <Arrow onClick={handleMoveRight} style={{ background: listIndex.end >= length - 1 ? 'white' : 'linear-gradient(to left, white, white)'}}>
         {listIndex.end >= length - 1 ?
           undefined :
           <i className='fa-solid fa-caret-right' />

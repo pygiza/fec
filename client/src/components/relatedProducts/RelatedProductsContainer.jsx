@@ -104,7 +104,7 @@ const RelatedProductsContainer = function({ product_id, renderProduct }) {
   }
 
   return (
-    <div style={{ marginLeft: '10%' }}>
+    <div style={{ marginLeft: '15%', marginBottom: '5%' }}>
       <ComparisonModal display={modalDisplay} close={toggleModal} product={product} compare={compare} />
       <CarouselLabel label='RELATED PRODUCTS' />
       <CarouselList listType='related' related={related} renderProduct={renderProduct} relatedButtonHandler={toggleModal}/>
