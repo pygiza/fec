@@ -4,7 +4,7 @@ PyGize is an E-Commerce site that featured a dynamically rendered product page. 
 
 
 
-Authors:
+##Authors:
 Sonia Ann Friscia: Reviews
 Yuki Ogawa : Related Products
 Levi Walker: Overview
