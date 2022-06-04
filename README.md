@@ -19,8 +19,8 @@ PyGize is an E-Commerce site that featured a dynamically rendered product page. 
 ![ezgif com-gif-maker (1)](https://user-images.githubusercontent.com/76196672/172023354-1c2c43a8-7544-4291-b7d8-ac6794f24210.gif)
 
 
-## Ratings and Reviews
+### Ratings and Reviews
 
 
-### Mobile View
+#### Mobile View
 ![mobileViewSquare](https://user-images.githubusercontent.com/97041979/172023010-fb962a66-3d8e-4c4d-ad1b-c9313117b1c4.gif)
