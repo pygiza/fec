@@ -5,10 +5,10 @@ PyGize is an E-Commerce site that featured a dynamically rendered product page. 
 
 
 Authors:
-Sonia Ann Friscia: Reviews
-Yuki Ogawa : Related Products
-Levi Walker: Overview
-Jake Reid: Questions and Answers
+- Sonia Ann Friscia: Reviews
+- Yuki Ogawa : Related Products
+- Levi Walker: Overview
+- Jake Reid: Questions and Answers
 
 
 ## Related Items and Your Outfit
