@@ -22,23 +22,23 @@ PyGiza is an E-Commerce site that featured a dynamically rendered product page. 
 
 ### Ratings and Reviews
 
-### Write a Review: More Reviews. 
+### Write a Review: More Reviews
 ![moreReviews](https://user-images.githubusercontent.com/97041979/172052084-a9decade-2762-4fde-bea9-0dca5ceee4d9.gif)
 
-### Write a Review: Toggle 'See More/Less'. 
+### Write a Review: Toggle 'See More/Less'
 ![seeMore](https://user-images.githubusercontent.com/97041979/172051692-1b8ff865-6fc6-40fe-a31a-b5d0df976541.gif)
 
-### Write a Review: Vote Helpful. 
+### Write a Review: Vote Helpful
 ![voteHelpful](https://user-images.githubusercontent.com/97041979/172052079-9ed4d05b-d224-40a7-8489-5e0a9f232e5d.gif)
 
 
-### Report: Sort by Newest, Helpful, Relevance. 
+### Report: Sort by Newest, Helpful, Relevance
 ![sort](https://user-images.githubusercontent.com/97041979/172051492-edc55a4f-1b95-4040-ade4-cfa0902bb8f9.gif)
 
-### Report: Additive Star Filtration. 
+### Report: Additive Star Filtration
 ![starFiltering](https://user-images.githubusercontent.com/97041979/172051384-d11a0fc8-fac1-41f2-b26f-b10031d12aff.gif)
 
-### Report: Mobile View. 
+### Report: Mobile View
 ![mobileViewSquare](https://user-images.githubusercontent.com/97041979/172023010-fb962a66-3d8e-4c4d-ad1b-c9313117b1c4.gif)
 
 ## Installation and Development
