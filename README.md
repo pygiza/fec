@@ -16,6 +16,7 @@ PyGiza is an E-Commerce site that featured a dynamically rendered product page. 
 ## Site Features
 
 ### PRODUCT OVERVIEW
+> This is the first component rendered to the page that a user will see. The Product Overview component gives the views images for the default product as well as the product name, price, style, and sizes.
 
 ![ezgif com-gif-maker](https://user-images.githubusercontent.com/93607280/172023634-c50acbfd-c11e-43e6-9ed5-badc9f2bfacb.gif). 
 
