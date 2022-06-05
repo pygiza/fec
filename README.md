@@ -1,9 +1,9 @@
 # PyGize E-Commerce
 
-PyGiza is an E-Commerce site that featured a dynamically rendered product page. The full-page included an interface for a product overview, related products, questions and answers, and user reviews. The front-end was built for an existing back-end (Atelier API and database). Note: Access to Atelier database ends June 7th, see images below. 
+PyGiza is an E-Commerce site that featured a dynamically rendered product page. The full-page included an interface for a product overview, related products, questions and answers, and user reviews. The front-end was built for an existing back-end (Atelier API and database). Note: Access to Atelier database ends June 7th, see images below.
 
 
-
+## Tabel Of Contents
 
 
 ## OVERVIEW
@@ -37,6 +37,28 @@ PyGiza is an E-Commerce site that featured a dynamically rendered product page. 
 
 ### Mobile View
 ![mobileViewSquare](https://user-images.githubusercontent.com/97041979/172023010-fb962a66-3d8e-4c4d-ad1b-c9313117b1c4.gif)
+
+## Installation and Development
+
+### Pre Instilation Requirments
+```
+node v16.15.0
+npm v8.5.5
+```
+## Environment Variables
+PiGiza uses [dotenv](https://www.npmjs.com/package/dotenv)
+
+Update the Port and Auth variables in the `example.env`file found in the main directory. Make sure the AUTH variable is updated with your GITHUB token. When variables are updated remove example from the name and save the file as `.env`
+
+## Installation
+
+From the root directory, run the following installation and setup commands in your termanl
+1. Install dependencies"
+  `npm install`
+2. Initalize Webpack and Bundle:
+  'npm run client-dev'
+3. Start Development Server:
+  `npm run server-dev`
 
 
 ## Contributors:
