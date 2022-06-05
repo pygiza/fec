@@ -1,14 +1,9 @@
-# JUST CREATING IT FOR NOW
+# PyGize E-Commerce
 
 PyGiza is an E-Commerce site that featured a dynamically rendered product page. The full-page included an interface for a product overview, related products, questions and answers, and user reviews. The front-end was built for an existing back-end (Atelier API and database). Note: Access to Atelier database ends June 7th, see images below. 
 
 
 
-##Authors:
-Sonia Ann Friscia: Reviews
-Yuki Ogawa : Related Products
-Levi Walker: Overview
-Jake Reid: Questions and Answers
 
 
 ## OVERVIEW
@@ -42,3 +37,10 @@ Jake Reid: Questions and Answers
 
 ### Mobile View
 ![mobileViewSquare](https://user-images.githubusercontent.com/97041979/172023010-fb962a66-3d8e-4c4d-ad1b-c9313117b1c4.gif)
+
+
+## Contributors:
+- Sonia Ann Friscia: Reviews
+- Yuki Ogawa : Related Products
+- Levi Walker: Overview
+- Jake Reid: Questions and Answers
