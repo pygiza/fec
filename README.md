@@ -1,4 +1,4 @@
-# PyGize E-Commerce
+# PyGiza E-Commerce
 
 PyGiza is an E-Commerce site that featured a dynamically rendered product page. The full-page included an interface for a product overview, related products, questions and answers, and user reviews. The front-end was built for an existing back-end (Atelier API and database). Note: Access to Atelier database ends June 7th, see images below.
 
