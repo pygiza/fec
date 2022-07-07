@@ -22,24 +22,11 @@ PyGiza is an E-Commerce site that featured a dynamically rendered product page. 
 
 
 ### Ratings and Reviews
+The ratings and reviews component comes with a lot of functionality. A user can post a review, add photos, filter and sort current reviews by star amount, and by date added, relevancy or most helpful. Filters are additive, so a user can select more than one. Users can also vote reviews as helpful or report offensive/inappropriate conent which will flag the review and remove it from the stream.
 
-### Write a Review: More Reviews
-![moreReviews](https://user-images.githubusercontent.com/97041979/172052084-a9decade-2762-4fde-bea9-0dca5ceee4d9.gif)
+![ezgif com-gif-maker (1)](https://user-images.githubusercontent.com/97041979/177779528-ad333576-a568-4354-9333-532bf98c3eb8.gif)
 
-### Write a Review: Toggle 'See More/Less'
-![seeMore](https://user-images.githubusercontent.com/97041979/172051692-1b8ff865-6fc6-40fe-a31a-b5d0df976541.gif)
-
-### Write a Review: Vote Helpful
-![voteHelpful](https://user-images.githubusercontent.com/97041979/172052079-9ed4d05b-d224-40a7-8489-5e0a9f232e5d.gif)
-
-
-### Report: Sort by Newest, Helpful, Relevance
-![sort](https://user-images.githubusercontent.com/97041979/172051492-edc55a4f-1b95-4040-ade4-cfa0902bb8f9.gif)
-
-### Report: Additive Star Filtration
-![starFiltering](https://user-images.githubusercontent.com/97041979/172051384-d11a0fc8-fac1-41f2-b26f-b10031d12aff.gif)
-
-### Report: Mobile View
+#### Mobile View
 ![mobileViewSquare](https://user-images.githubusercontent.com/97041979/172023010-fb962a66-3d8e-4c4d-ad1b-c9313117b1c4.gif)
 
 ## Installation and Development
